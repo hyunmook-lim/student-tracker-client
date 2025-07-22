@@ -1,0 +1,28 @@
+{
+    "env": {
+      "browser": true,
+      "es2021": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:prettier/recommended" // prettier와 통합
+    ],
+    "plugins": ["react", "prettier"],
+    "parserOptions": {
+      "ecmaVersion": "latest",
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "prettier/prettier": "warn", // 포맷팅 관련 에러 경고로 표시
+      "react/react-in-jsx-scope": "off" // React 17+에서는 필요 없음
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+  }
