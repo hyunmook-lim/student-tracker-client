@@ -27,7 +27,7 @@
 .user-type-toggle {
   position: relative;
   display: flex;
-  background: #e2e8f0;
+  background: #cbd5e1; /* 더 어두운 회색으로 변경 */
   border-radius: 9999px;
   padding: 4px;
   margin-bottom: 28px;
@@ -45,7 +45,7 @@
   border: none;
   padding: 10px 0;
   font-weight: 600;
-  color: #475569;
+  color: #64748b; /* 중간 회색으로 변경 */
   border-radius: 9999px;
   cursor: pointer;
   transition: color 0.3s ease;
@@ -68,7 +68,6 @@
 
 .toggle-indicator.student {
   left: calc(100% - 50% - 4px); /* 전체 너비 - indicator 너비 - padding */
-
 }
 
 .user-type-toggle button:focus {
@@ -76,7 +75,7 @@
 }
 
 .user-type-toggle button:hover {
-  color: #1e293b;
+  color: #475569; /* 호버 시 더 진한 회색 */
 }
 
 .user-type-toggle .toggle-indicator + button,
@@ -92,12 +91,19 @@
   text-align: center;
 }
 
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
 .input-group label {
-  display: block;
+  display: inline-block;
   color: #475569;
   font-size: 13px;
   font-weight: 500;
-  margin-bottom: 6px;
+  margin-right: 12px;
+  min-width: 60px;
 }
 
 .input-group input {
