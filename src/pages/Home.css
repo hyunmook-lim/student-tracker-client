@@ -1,12 +1,12 @@
 .home-container {
   min-height: 100vh;
-  background: #f8fafc;
+  background: #f4f6f9;
 }
 
 .home-header {
   background: #ffffff;
   padding: 20px 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,9 +29,6 @@
   color: #64748b;
   font-size: 14px;
   font-weight: 500;
-  padding: 6px 12px;
-  background: #f1f5f9;
-  border-radius: 6px;
 }
 
 .logout-btn {
@@ -50,6 +47,37 @@
   background: #dc2626;
 }
 
+/* 네비게이션 스타일 */
+.navigation {
+  background: #ffffff;
+  padding: 0 32px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  gap: 8px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+  color: #3b82f6;
+}
+
+.nav-btn.active {
+  color: #3b82f6;
+  border-bottom-color: #3b82f6;
+}
+
+/* 메인 콘텐츠 */
 .home-main {
   padding: 32px;
   max-width: 1200px;
@@ -60,30 +88,28 @@
   background: #ffffff;
   border-radius: 12px;
   padding: 32px;
-  margin-bottom: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  text-align: center;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .welcome-title {
   color: #1e293b;
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0 0 12px 0;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
 }
 
 .welcome-message {
   color: #64748b;
   font-size: 16px;
   margin: 0;
-  line-height: 1.6;
 }
 
 .dashboard-section {
   background: #ffffff;
   border-radius: 12px;
   padding: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-title {
@@ -95,38 +121,365 @@
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
 
 .dashboard-card {
   background: #f8fafc;
   border-radius: 8px;
-  padding: 24px;
+  padding: 20px;
+  text-align: center;
   border: 1px solid #e2e8f0;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-card h4 {
-  color: #475569;
+  color: #64748b;
   font-size: 14px;
   font-weight: 500;
   margin: 0 0 8px 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .card-number {
   color: #1e293b;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
+  margin: 0;
+}
+
+/* 학생 목록 스타일 */
+.student-list {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.student-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.student-list-header h2 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.add-student-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-student-btn:hover {
+  background: #2563eb;
+}
+
+.student-table {
+  overflow-x: auto;
+}
+
+.student-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.student-table th,
+.student-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.student-table th {
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.student-table td {
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.grades-btn,
+.delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #2563eb;
+}
+
+.grades-btn {
+  background: #10b981;
+  color: white;
+}
+
+.grades-btn:hover {
+  background: #059669;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h2 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+  background: #f1f5f9;
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+/* 폼 스타일 */
+.student-form,
+.grade-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.grades-section {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+}
+
+.grades-section h3 {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.grades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.grade-summary {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.grade-summary h4 {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.summary-item.average {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 12px;
+  font-weight: 600;
+}
+
+.summary-item .subject {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.summary-item .grade {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+.submit-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.submit-btn:hover {
+  background: #2563eb;
+}
+
+/* 학생 정보 스타일 */
+.student-info {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+.student-info h3 {
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.student-info p {
+  color: #64748b;
+  font-size: 14px;
   margin: 0;
 }
 

@@ -1,33 +1,26 @@
-import { useState } from 'react';
 import './App.css';
 import Home from './pages/Home';
+import { useAuthStore } from './store';
 
 function App() {
-  const [userType, setUserType] = useState('teacher'); // 'teacher' or 'student'
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [formData, setFormData] = useState({
-    id: '',
-    password: '',
-  });
+  const {
+    userType,
+    isLoggedIn,
+    formData,
+    setUserType,
+    updateFormField,
+    login,
+  } = useAuthStore();
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
+    updateFormField(name, value);
   };
 
   const handleLogin = e => {
     e.preventDefault();
     console.log('로그인 시도:', { userType, ...formData });
-
-    // 아이디와 비밀번호가 모두 'admin'인지 확인
-    if (formData.id === 'admin' && formData.password === 'admin') {
-      setIsLoggedIn(true);
-    } else {
-      alert('아이디 또는 비밀번호가 올바르지 않습니다.');
-    }
+    login();
   };
 
   // 로그인 상태에 따라 홈화면 또는 로그인 화면 렌더링
