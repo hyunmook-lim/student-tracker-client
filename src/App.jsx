@@ -1,5 +1,6 @@
 import './App.css';
-import Home from './pages/Home';
+import TeacherHome from './pages/TeacherHome';
+import StudentHome from './pages/StudentHome';
 import { useAuthStore } from './store';
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
 
   // 로그인 상태에 따라 홈화면 또는 로그인 화면 렌더링
   if (isLoggedIn) {
-    return <Home userType={userType} />;
+    return userType === 'teacher' ? <TeacherHome /> : <StudentHome />;
   }
 
   return (

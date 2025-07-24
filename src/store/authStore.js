@@ -41,8 +41,13 @@ const useAuthStore = create((set, get) => ({
 
   login: () => {
     const { formData } = get();
-    // 아이디와 비밀번호가 모두 'admin'인지 확인
+    // 선생님 로그인: admin/admin
     if (formData.id === 'admin' && formData.password === 'admin') {
+      set({ isLoggedIn: true });
+      return true;
+    }
+    // 학생 로그인: student/student
+    else if (formData.id === 'student' && formData.password === 'student') {
       set({ isLoggedIn: true });
       return true;
     } else {

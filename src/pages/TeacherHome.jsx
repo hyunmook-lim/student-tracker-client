@@ -4,7 +4,7 @@ import { useAuthStore, useStudentsStore, useUIStore } from '../store';
 import StudentList from '../components/StudentList';
 import Modal from '../components/Modal';
 
-function Home({ userType }) {
+function TeacherHome() {
   const { logout } = useAuthStore();
   const { students } = useStudentsStore();
   const { currentView, setCurrentView } = useUIStore();
@@ -33,26 +33,7 @@ function Home({ userType }) {
         ).toFixed(1)
       : '0.0';
 
-  const myAverageGrade = userType === 'student' ? '88.5' : averageGrade;
-  const myAttendance =
-    userType === 'student'
-      ? '96'
-      : `${Math.round((todayAttendance / totalStudents) * 100)}`;
-
   const renderContent = () => {
-    if (userType === 'student') {
-      return (
-        <div className='student-dashboard'>
-          <div className='welcome-section'>
-            <h2 className='welcome-title'>내 정보</h2>
-            <p className='welcome-message'>
-              내 성적과 출석 현황을 확인할 수 있습니다.
-            </p>
-          </div>
-        </div>
-      );
-    }
-
     switch (currentView) {
       case 'students':
         return <StudentList />;
@@ -78,20 +59,20 @@ function Home({ userType }) {
 
   return (
     <div className='home-container'>
-      <header className='home-header'>
-        <h1 className='home-title'>학생 관리 시스템</h1>
+      {/* 왼쪽 사이드바 */}
+      <aside className='sidebar'>
+        <div className='sidebar-header'>
+          <h1 className='sidebar-title'>학생 관리 시스템</h1>
+        </div>
+
         <div className='user-info'>
-          <span className='user-type'>
-            {userType === 'teacher' ? '선생님' : '학생'} 모드
-          </span>
+          <span className='user-type'>선생님 모드</span>
           <button className='logout-btn' onClick={handleLogout}>
             로그아웃
           </button>
         </div>
-      </header>
 
-      {userType === 'teacher' && (
-        <nav className='navigation'>
+        <nav className='sidebar-nav'>
           <button
             className={`nav-btn ${currentView === 'dashboard' ? 'active' : ''}`}
             onClick={() => setCurrentView('dashboard')}
@@ -117,52 +98,30 @@ function Home({ userType }) {
             출석 관리
           </button>
         </nav>
-      )}
+      </aside>
 
-      <main className='home-main'>
+      {/* 메인 콘텐츠 */}
+      <main className='main-content'>
         {currentView === 'dashboard' && (
           <div className='dashboard-section'>
             <h3 className='dashboard-title'>대시보드</h3>
             <div className='dashboard-grid'>
-              {userType === 'teacher' ? (
-                <>
-                  <div className='dashboard-card'>
-                    <h4>전체 학생</h4>
-                    <p className='card-number'>{totalStudents}명</p>
-                  </div>
-                  <div className='dashboard-card'>
-                    <h4>오늘 출석</h4>
-                    <p className='card-number'>{todayAttendance}명</p>
-                  </div>
-                  <div className='dashboard-card'>
-                    <h4>평균 성적</h4>
-                    <p className='card-number'>{averageGrade}점</p>
-                  </div>
-                  <div className='dashboard-card'>
-                    <h4>미제출 과제</h4>
-                    <p className='card-number'>3건</p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className='dashboard-card'>
-                    <h4>내 평균 성적</h4>
-                    <p className='card-number'>{myAverageGrade}점</p>
-                  </div>
-                  <div className='dashboard-card'>
-                    <h4>출석률</h4>
-                    <p className='card-number'>{myAttendance}%</p>
-                  </div>
-                  <div className='dashboard-card'>
-                    <h4>완료한 과제</h4>
-                    <p className='card-number'>12개</p>
-                  </div>
-                  <div className='dashboard-card'>
-                    <h4>남은 과제</h4>
-                    <p className='card-number'>2개</p>
-                  </div>
-                </>
-              )}
+              <div className='dashboard-card'>
+                <h4>전체 학생</h4>
+                <p className='card-number'>{totalStudents}명</p>
+              </div>
+              <div className='dashboard-card'>
+                <h4>오늘 출석</h4>
+                <p className='card-number'>{todayAttendance}명</p>
+              </div>
+              <div className='dashboard-card'>
+                <h4>평균 성적</h4>
+                <p className='card-number'>{averageGrade}점</p>
+              </div>
+              <div className='dashboard-card'>
+                <h4>미제출 과제</h4>
+                <p className='card-number'>3건</p>
+              </div>
             </div>
           </div>
         )}
@@ -175,4 +134,4 @@ function Home({ userType }) {
   );
 }
 
-export default Home;
+export default TeacherHome;
