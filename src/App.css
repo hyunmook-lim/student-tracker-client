@@ -7,14 +7,55 @@
   padding: 20px;
 }
 
-.login-card {
+.card-container {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  min-height: 520px;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+}
+
+.login-card,
+.signup-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   background: #ffffff;
   border-radius: 16px;
   padding: 48px 32px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 420px;
   text-align: center;
+  backface-visibility: hidden;
+  transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.login-card {
+  transform: rotateY(0deg);
+  opacity: 1;
+  visibility: visible;
+}
+
+.signup-card {
+  transform: rotateY(180deg);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card-container.flipped .login-card {
+  transform: rotateY(-180deg);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card-container.flipped .signup-card {
+  transform: rotateY(0deg);
+  opacity: 1;
+  visibility: visible;
 }
 
 .login-title {
@@ -121,18 +162,29 @@
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-.login-btn {
-  width: 100%;
+.button-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.login-btn,
+.signup-btn,
+.signup-submit-btn,
+.back-btn {
+  flex: 1;
   padding: 14px;
-  background: #3b82f6; /* 블루 단색 */
-  color: white;
   border: none;
   border-radius: 10px;
   font-size: 17px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 12px;
+  transition: all 0.3s ease;
+}
+
+.login-btn {
+  background: #3b82f6; /* 블루 단색 */
+  color: white;
 }
 
 .login-btn:hover {
@@ -141,4 +193,43 @@
 
 .login-btn:active {
   background: #1d4ed8;
+}
+
+.signup-btn {
+  background: #10b981; /* 초록색 계열 */
+  color: white;
+}
+
+.signup-btn:hover {
+  background: #059669; /* 더 진한 초록색 */
+}
+
+.signup-btn:active {
+  background: #047857;
+}
+
+.signup-submit-btn {
+  background: #10b981; /* 초록색 계열 */
+  color: white;
+}
+
+.signup-submit-btn:hover {
+  background: #059669; /* 더 진한 초록색 */
+}
+
+.signup-submit-btn:active {
+  background: #047857;
+}
+
+.back-btn {
+  background: #6b7280; /* 회색 */
+  color: white;
+}
+
+.back-btn:hover {
+  background: #4b5563; /* 더 진한 회색 */
+}
+
+.back-btn:active {
+  background: #374151;
 }
