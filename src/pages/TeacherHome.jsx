@@ -1,7 +1,8 @@
 import React from 'react';
-import './Home.css';
+import './TeacherHome.css';
 import { useAuthStore, useStudentsStore, useUIStore } from '../store';
 import StudentList from '../components/StudentList';
+import ClassroomList from '../components/ClassroomList';
 import Modal from '../components/Modal';
 
 function TeacherHome() {
@@ -35,14 +36,22 @@ function TeacherHome() {
 
   const renderContent = () => {
     switch (currentView) {
-      case 'students':
-        return <StudentList />;
-      case 'grades':
-        return <div>성적 관리 페이지</div>;
-      case 'attendance':
-        return <div>출석 관리 페이지</div>;
-      case 'settings':
-        return <div>설정 페이지</div>;
+      case 'class-management':
+        return <ClassroomList />;
+      case 'session-management':
+        return (
+          <div className='session-management'>
+            <h3>회차 관리</h3>
+            <p>회차 관리 페이지입니다.</p>
+          </div>
+        );
+      case 'result-input':
+        return (
+          <div className='result-input'>
+            <h3>수업 결과 입력</h3>
+            <p>수업 결과 입력 페이지입니다.</p>
+          </div>
+        );
       default:
         return (
           <div className='teacher-dashboard'>
@@ -80,22 +89,22 @@ function TeacherHome() {
             대시보드
           </button>
           <button
-            className={`nav-btn ${currentView === 'students' ? 'active' : ''}`}
-            onClick={() => setCurrentView('students')}
+            className={`nav-btn ${currentView === 'class-management' ? 'active' : ''}`}
+            onClick={() => setCurrentView('class-management')}
           >
-            학생 관리
+            반 관리
           </button>
           <button
-            className={`nav-btn ${currentView === 'grades' ? 'active' : ''}`}
-            onClick={() => setCurrentView('grades')}
+            className={`nav-btn ${currentView === 'session-management' ? 'active' : ''}`}
+            onClick={() => setCurrentView('session-management')}
           >
-            성적 관리
+            회차 관리
           </button>
           <button
-            className={`nav-btn ${currentView === 'attendance' ? 'active' : ''}`}
-            onClick={() => setCurrentView('attendance')}
+            className={`nav-btn ${currentView === 'result-input' ? 'active' : ''}`}
+            onClick={() => setCurrentView('result-input')}
           >
-            출석 관리
+            수업 결과 입력
           </button>
         </nav>
       </aside>

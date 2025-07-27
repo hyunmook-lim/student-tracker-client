@@ -14,6 +14,8 @@ const useAuthStore = create((set, get) => ({
     id: '',
     password: '',
     confirmPassword: '',
+    class: '',
+    phone: '',
   },
 
   // 액션
@@ -64,9 +66,16 @@ const useAuthStore = create((set, get) => ({
       !signupData.name ||
       !signupData.id ||
       !signupData.password ||
-      !signupData.confirmPassword
+      !signupData.confirmPassword ||
+      !signupData.phone
     ) {
       alert('모든 필드를 입력해주세요.');
+      return false;
+    }
+
+    // 학생인 경우 반 선택 필수
+    if (userType === 'student' && !signupData.class) {
+      alert('반을 선택해주세요.');
       return false;
     }
 
@@ -86,7 +95,14 @@ const useAuthStore = create((set, get) => ({
     );
     set({
       isSignupMode: false,
-      signupData: { name: '', id: '', password: '', confirmPassword: '' },
+      signupData: {
+        name: '',
+        id: '',
+        password: '',
+        confirmPassword: '',
+        class: '',
+        phone: '',
+      },
     });
     return true;
   },
@@ -104,7 +120,14 @@ const useAuthStore = create((set, get) => ({
 
   resetSignupForm: () =>
     set({
-      signupData: { name: '', id: '', password: '', confirmPassword: '' },
+      signupData: {
+        name: '',
+        id: '',
+        password: '',
+        confirmPassword: '',
+        class: '',
+        phone: '',
+      },
     }),
 }));
 
