@@ -1,29 +1,11 @@
 import React from 'react';
 import './StudentHome.css';
 import { useAuthStore, useUIStore } from '../store';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Line, Bar } from 'react-chartjs-2';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+import StudentDashboard from '../components/StudentDashboard';
+import SessionInfo from '../components/SessionInfo';
+import GradeReport from '../components/GradeReport';
+import AttendanceReport from '../components/AttendanceReport';
+import WrongPattern from '../components/WrongPattern';
 
 function StudentHome() {
   const { logout } = useAuthStore();
@@ -45,6 +27,216 @@ function StudentHome() {
     totalSchoolDays: 26,
     averageScore: '88.5',
     assignmentCompletion: '92.3',
+    // 수강 중인 반 정보
+    classes: [
+      {
+        id: 1,
+        name: '수학 기초반',
+        teacher: '김수학',
+        totalSessions: 12,
+        completedSessions: 8,
+        sessions: [
+          {
+            id: 1,
+            title: '1회차 - 수와 연산',
+            date: '2024-01-15',
+            status: 'completed',
+          },
+          {
+            id: 2,
+            title: '2회차 - 분수와 소수',
+            date: '2024-01-22',
+            status: 'completed',
+          },
+          {
+            id: 3,
+            title: '3회차 - 도형의 성질',
+            date: '2024-01-29',
+            status: 'completed',
+          },
+          {
+            id: 4,
+            title: '4회차 - 측정',
+            date: '2024-02-05',
+            status: 'completed',
+          },
+          {
+            id: 5,
+            title: '5회차 - 확률과 통계',
+            date: '2024-02-12',
+            status: 'completed',
+          },
+          {
+            id: 6,
+            title: '6회차 - 문자와 식',
+            date: '2024-02-19',
+            status: 'completed',
+          },
+          {
+            id: 7,
+            title: '7회차 - 함수',
+            date: '2024-02-26',
+            status: 'completed',
+          },
+          {
+            id: 8,
+            title: '8회차 - 기하',
+            date: '2024-03-04',
+            status: 'completed',
+          },
+          {
+            id: 9,
+            title: '9회차 - 수열',
+            date: '2024-03-11',
+            status: 'upcoming',
+          },
+          {
+            id: 10,
+            title: '10회차 - 미적분',
+            date: '2024-03-18',
+            status: 'upcoming',
+          },
+          {
+            id: 11,
+            title: '11회차 - 확률',
+            date: '2024-03-25',
+            status: 'upcoming',
+          },
+          {
+            id: 12,
+            title: '12회차 - 종합평가',
+            date: '2024-04-01',
+            status: 'upcoming',
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: '영어 심화반',
+        teacher: '박영어',
+        totalSessions: 10,
+        completedSessions: 6,
+        sessions: [
+          {
+            id: 1,
+            title: '1회차 - Grammar Review',
+            date: '2024-01-16',
+            status: 'completed',
+          },
+          {
+            id: 2,
+            title: '2회차 - Reading Comprehension',
+            date: '2024-01-23',
+            status: 'completed',
+          },
+          {
+            id: 3,
+            title: '3회차 - Vocabulary Building',
+            date: '2024-01-30',
+            status: 'completed',
+          },
+          {
+            id: 4,
+            title: '4회차 - Writing Skills',
+            date: '2024-02-06',
+            status: 'completed',
+          },
+          {
+            id: 5,
+            title: '5회차 - Listening Practice',
+            date: '2024-02-13',
+            status: 'completed',
+          },
+          {
+            id: 6,
+            title: '6회차 - Speaking Practice',
+            date: '2024-02-20',
+            status: 'completed',
+          },
+          {
+            id: 7,
+            title: '7회차 - TOEIC Practice',
+            date: '2024-02-27',
+            status: 'upcoming',
+          },
+          {
+            id: 8,
+            title: '8회차 - Essay Writing',
+            date: '2024-03-05',
+            status: 'upcoming',
+          },
+          {
+            id: 9,
+            title: '9회차 - Advanced Grammar',
+            date: '2024-03-12',
+            status: 'upcoming',
+          },
+          {
+            id: 10,
+            title: '10회차 - Final Test',
+            date: '2024-03-19',
+            status: 'upcoming',
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: '과학 탐구반',
+        teacher: '이과학',
+        totalSessions: 8,
+        completedSessions: 5,
+        sessions: [
+          {
+            id: 1,
+            title: '1회차 - 물리학 기초',
+            date: '2024-01-17',
+            status: 'completed',
+          },
+          {
+            id: 2,
+            title: '2회차 - 화학 기초',
+            date: '2024-01-24',
+            status: 'completed',
+          },
+          {
+            id: 3,
+            title: '3회차 - 생물학 기초',
+            date: '2024-01-31',
+            status: 'completed',
+          },
+          {
+            id: 4,
+            title: '4회차 - 지구과학 기초',
+            date: '2024-02-07',
+            status: 'completed',
+          },
+          {
+            id: 5,
+            title: '5회차 - 실험 방법론',
+            date: '2024-02-14',
+            status: 'completed',
+          },
+          {
+            id: 6,
+            title: '6회차 - 탐구 프로젝트',
+            date: '2024-02-21',
+            status: 'upcoming',
+          },
+          {
+            id: 7,
+            title: '7회차 - 과학사',
+            date: '2024-02-28',
+            status: 'upcoming',
+          },
+          {
+            id: 8,
+            title: '8회차 - 종합 평가',
+            date: '2024-03-06',
+            status: 'upcoming',
+          },
+        ],
+      },
+    ],
     // 그래프용 데이터
     testScores: [
       { session: 1, myScore: 85, classAverage: 78 },
@@ -81,112 +273,16 @@ function StudentHome() {
     ],
   };
 
-  // 그래프 데이터 설정
-  const testChartData = {
-    labels: studentData.testScores.map(item => `${item.session}회차`),
-    datasets: [
-      {
-        label: '본인 점수',
-        data: studentData.testScores.map(item => item.myScore),
-        borderColor: '#3b82f6',
-        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-        borderWidth: 3,
-        fill: false,
-        type: 'line',
-      },
-      {
-        label: '반 평균',
-        data: studentData.testScores.map(item => item.classAverage),
-        backgroundColor: 'rgba(156, 163, 175, 0.8)',
-        borderColor: '#9ca3af',
-        borderWidth: 1,
-        type: 'bar',
-      },
-    ],
-  };
-
-  const assignmentChartData = {
-    labels: studentData.assignmentScores.map(item => `${item.session}회차`),
-    datasets: [
-      {
-        label: '본인 완성도',
-        data: studentData.assignmentScores.map(item => item.myScore),
-        borderColor: '#10b981',
-        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-        borderWidth: 3,
-        fill: false,
-        type: 'line',
-      },
-      {
-        label: '반 평균',
-        data: studentData.assignmentScores.map(item => item.classAverage),
-        backgroundColor: 'rgba(156, 163, 175, 0.8)',
-        borderColor: '#9ca3af',
-        borderWidth: 1,
-        type: 'bar',
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          usePointStyle: true,
-          padding: 20,
-        },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        max: 100,
-        ticks: {
-          callback: function (value) {
-            return value + '점';
-          },
-        },
-      },
-    },
-    animation: {
-      duration: 1200,
-      easing: 'easeOutQuart',
-    },
-  };
-
   const renderContent = () => {
     switch (currentView) {
       case 'session-info':
-        return (
-          <div className='session-info'>
-            <h3>회차별 정보</h3>
-            <p>회차별 정보 페이지입니다.</p>
-          </div>
-        );
+        return <SessionInfo studentData={studentData} />;
       case 'grade-report':
-        return (
-          <div className='grade-report'>
-            <h3>성적 확인</h3>
-            <p>성적 확인 페이지입니다.</p>
-          </div>
-        );
+        return <GradeReport />;
       case 'attendance-report':
-        return (
-          <div className='attendance-report'>
-            <h3>출석 확인</h3>
-            <p>출석 확인 페이지입니다.</p>
-          </div>
-        );
+        return <AttendanceReport />;
       case 'wrong-pattern':
-        return (
-          <div className='wrong-pattern'>
-            <h3>오답패턴 분석</h3>
-            <p>오답패턴 분석 페이지입니다.</p>
-          </div>
-        );
+        return <WrongPattern />;
       default:
         return (
           <div className='student-dashboard'>
@@ -253,66 +349,7 @@ function StudentHome() {
       {/* 메인 콘텐츠 */}
       <main className='main-content'>
         {currentView === 'dashboard' && (
-          <div className='dashboard-section'>
-            <h3 className='dashboard-title'>대시보드</h3>
-            <div className='dashboard-grid'>
-              <div className='dashboard-card'>
-                <h4>반명 / 진행된 회차</h4>
-                <p className='card-number'>{studentData.className}</p>
-                <p className='card-subtitle'>
-                  {studentData.completedSessions}/{studentData.totalSessions}
-                  회차
-                </p>
-              </div>
-              <div className='dashboard-card'>
-                <h4>출석률</h4>
-                <p className='card-number'>{studentData.attendanceRate}%</p>
-                <p className='card-subtitle'>
-                  {studentData.totalAttendanceDays}/
-                  {studentData.totalSchoolDays}일
-                </p>
-              </div>
-              <div className='dashboard-card'>
-                <h4>평균 점수</h4>
-                <p className='card-number'>{studentData.averageScore}점</p>
-              </div>
-              <div className='dashboard-card'>
-                <h4>과제 평균 완성도</h4>
-                <p className='card-number'>
-                  {studentData.assignmentCompletion}%
-                </p>
-              </div>
-            </div>
-
-            {/* 성적 분포 그래프 */}
-            <div className='charts-section'>
-              <h3 className='charts-title'>성적 분포</h3>
-
-              {/* 테스트 점수 그래프 */}
-              <div className='chart-container'>
-                <h4 className='chart-subtitle'>회차별 테스트 점수</h4>
-                <div className='chart-wrapper'>
-                  <Line
-                    key='test-chart'
-                    data={testChartData}
-                    options={chartOptions}
-                  />
-                </div>
-              </div>
-
-              {/* 과제 완성도 그래프 */}
-              <div className='chart-container'>
-                <h4 className='chart-subtitle'>회차별 과제 완성도</h4>
-                <div className='chart-wrapper'>
-                  <Line
-                    key='assignment-chart'
-                    data={assignmentChartData}
-                    options={chartOptions}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+          <StudentDashboard studentData={studentData} />
         )}
 
         {currentView !== 'dashboard' && renderContent()}
