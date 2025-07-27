@@ -3,6 +3,8 @@ import './TeacherHome.css';
 import { useAuthStore, useStudentsStore, useUIStore } from '../store';
 import StudentList from '../components/StudentList';
 import ClassroomList from '../components/ClassroomList';
+import SessionList from '../components/SessionList';
+import ResultList from '../components/ResultList';
 import Modal from '../components/Modal';
 
 function TeacherHome() {
@@ -39,19 +41,9 @@ function TeacherHome() {
       case 'class-management':
         return <ClassroomList />;
       case 'session-management':
-        return (
-          <div className='session-management'>
-            <h3>회차 관리</h3>
-            <p>회차 관리 페이지입니다.</p>
-          </div>
-        );
+        return <SessionList />;
       case 'result-input':
-        return (
-          <div className='result-input'>
-            <h3>수업 결과 입력</h3>
-            <p>수업 결과 입력 페이지입니다.</p>
-          </div>
-        );
+        return <ResultList />;
       default:
         return (
           <div className='teacher-dashboard'>

@@ -73,12 +73,6 @@ const useAuthStore = create((set, get) => ({
       return false;
     }
 
-    // 학생인 경우 반 선택 필수
-    if (userType === 'student' && !signupData.class) {
-      alert('반을 선택해주세요.');
-      return false;
-    }
-
     if (signupData.password !== signupData.confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
       return false;

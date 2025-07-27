@@ -174,29 +174,6 @@ function App() {
               />
             </div>
 
-            {userType === 'student' && (
-              <div className='input-group'>
-                <select
-                  id='signup-class'
-                  name='class'
-                  value={signupData.class}
-                  onChange={handleSignupInputChange}
-                  required
-                >
-                  <option value=''>반을 선택하세요</option>
-                  <option value='1-1'>1학년 1반</option>
-                  <option value='1-2'>1학년 2반</option>
-                  <option value='1-3'>1학년 3반</option>
-                  <option value='2-1'>2학년 1반</option>
-                  <option value='2-2'>2학년 2반</option>
-                  <option value='2-3'>2학년 3반</option>
-                  <option value='3-1'>3학년 1반</option>
-                  <option value='3-2'>3학년 2반</option>
-                  <option value='3-3'>3학년 3반</option>
-                </select>
-              </div>
-            )}
-
             <div className='button-group'>
               <button
                 type='button'
@@ -206,7 +183,7 @@ function App() {
                 뒤로가기
               </button>
               <button type='submit' className='signup-submit-btn'>
-                {userType === 'teacher' ? '회원가입' : '회원가입 신청'}
+                회원가입
               </button>
             </div>
           </form>

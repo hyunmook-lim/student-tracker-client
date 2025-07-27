@@ -249,17 +249,27 @@
 }
 
 .classroom-header-row {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr auto;
-  gap: 20px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 20px 32px;
-  cursor: pointer;
   transition: background 0.2s ease;
 }
 
-.classroom-header-row:hover {
+.classroom-info {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+}
+
+.classroom-info:hover {
   background: #f8fafc;
+  border-radius: 8px;
+  padding: 8px;
+  margin: -8px;
 }
 
 .classroom-name {
@@ -280,11 +290,25 @@
   text-align: center;
 }
 
-.classroom-expand-icon {
-  color: #64748b;
+.delete-class-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
   font-size: 12px;
-  width: 20px;
-  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+}
+
+.delete-class-btn:hover {
+  background: #dc2626;
 }
 
 .students-list {
@@ -295,7 +319,7 @@
 
 .students-header {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto;
   gap: 20px;
   padding: 16px 32px;
   background: #e2e8f0;
@@ -306,11 +330,12 @@
 
 .student-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto;
   gap: 20px;
   padding: 12px 32px;
   border-bottom: 1px solid #e2e8f0;
   transition: background 0.2s ease;
+  align-items: center;
 }
 
 .student-item:hover {
@@ -333,6 +358,549 @@
   font-weight: 500;
 }
 
+.student-action {
+  display: flex;
+  justify-content: center;
+}
+
+.student-delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+}
+
+.student-delete-btn:hover {
+  background: #dc2626;
+}
+
+.student-approve-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+  text-align: center;
+}
+
+.student-approve-btn:hover {
+  background: #059669;
+}
+
+.student-completed-btn {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+  text-align: center;
+}
+
+.student-completed-btn:hover {
+  background: #ef4444;
+}
+
+.student-completed-btn:hover {
+  background: #ef4444;
+}
+
+.student-completed-btn:hover::after {
+  content: '삭제';
+}
+
+.student-completed-btn:hover span {
+  display: none;
+}
+
+/* 회차 관리 스타일 */
+.session-list {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.session-header h3 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.session-container {
+  padding: 0;
+}
+
+.session-item {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.session-item:last-child {
+  border-bottom: none;
+}
+
+.session-header-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 32px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.session-header-row:hover {
+  background: #f8fafc;
+}
+
+.session-name {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.session-description {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.session-student-count {
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.add-session-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+}
+
+.add-session-btn:hover {
+  background: #059669;
+}
+
+.sessions-list {
+  background: #f8fafc;
+  animation: slideDown 0.3s ease;
+}
+
+.sessions-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 80px;
+  gap: 20px;
+  padding: 16px 32px;
+  background: #e2e8f0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #475569;
+}
+
+.session-detail-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 80px;
+  gap: 20px;
+  padding: 12px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background 0.2s ease;
+  align-items: center;
+}
+
+.session-detail-item:hover {
+  background: #f1f5f9;
+}
+
+.session-detail-item:last-child {
+  border-bottom: none;
+}
+
+.session-title {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.session-desc {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.session-date {
+  color: #64748b;
+  font-size: 14px;
+  font-family: monospace;
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: slideIn 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.modal-body {
+  padding: 24px 32px;
+}
+
+.modal-body .input-group {
+  margin-bottom: 20px;
+}
+
+.modal-body .input-group:last-child {
+  margin-bottom: 0;
+}
+
+.modal-body .input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.modal-body .input-group input,
+.modal-body .input-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.modal-body .input-group input:focus,
+.modal-body .input-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.modal-body .input-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 24px 32px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.modal-cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-cancel-btn:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.modal-submit-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-submit-btn:hover {
+  background: #2563eb;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 문제 입력 모달 스타일 */
+.question-modal {
+  max-width: 800px;
+  max-height: 80vh;
+}
+
+.question-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.question-header h4 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.add-question-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-question-btn:hover {
+  background: #2563eb;
+}
+
+.questions-table {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+}
+
+.questions-header {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr 1fr 80px 80px;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 14px;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+  min-width: 0;
+}
+
+.question-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 1fr 1fr 80px 80px;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  align-items: center;
+  min-width: 0;
+}
+
+.question-row:last-child {
+  border-bottom: none;
+}
+
+.question-row:hover {
+  background: #f8fafc;
+}
+
+.question-number {
+  color: #64748b;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.question-row input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.question-row input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.question-row input[type='number'] {
+  text-align: center;
+}
+
+.question-row select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  background: white;
+  cursor: pointer;
+}
+
+.question-row select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.delete-question-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+}
+
+.delete-question-btn:hover {
+  background: #dc2626;
+}
+
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -342,4 +910,70 @@
     opacity: 1;
     max-height: 500px;
   }
+}
+
+/* ResultList 컴포넌트 스타일 */
+.result-list {
+  padding: 20px;
+}
+
+.result-list h3 {
+  margin-bottom: 20px;
+  color: #1f2937;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* 결과 입력 버튼 스타일 */
+.result-action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+  position: relative;
+}
+
+.result-action-btn.result-completed {
+  background: #9ca3af;
+  color: white;
+}
+
+.result-action-btn.result-completed:hover {
+  background: #3b82f6;
+}
+
+.result-action-btn.result-completed:hover::after {
+  content: '수정';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #3b82f6;
+  color: white;
+  border-radius: 4px;
+}
+
+.result-action-btn.result-completed:hover span {
+  display: none;
+}
+
+.result-action-btn.result-input {
+  background: #10b981;
+  color: white;
+}
+
+.result-action-btn.result-input:hover {
+  background: #059669;
 }
