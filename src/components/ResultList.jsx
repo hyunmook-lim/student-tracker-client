@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ResultList.css';
 
 function ResultList() {
   const [expandedClass, setExpandedClass] = useState(null);

@@ -1,0 +1,251 @@
+/* ClassroomList 컴포넌트 스타일 */
+.classroom-list {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.classroom-header h3 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.add-class-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.add-class-btn:hover {
+  background: #2563eb;
+}
+
+.classroom-container {
+  padding: 0;
+}
+
+.classroom-item {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.classroom-item:last-child {
+  border-bottom: none;
+}
+
+.classroom-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  transition: background 0.2s ease;
+}
+
+.classroom-info {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  align-items: center;
+  flex: 1;
+  cursor: pointer;
+}
+
+.classroom-info:hover {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 8px;
+  margin: -8px;
+}
+
+.classroom-name {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.classroom-description {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.classroom-student-count {
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.delete-class-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+}
+
+.delete-class-btn:hover {
+  background: #dc2626;
+}
+
+.students-list {
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  animation: slideDown 0.3s ease-out;
+}
+
+.students-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 20px;
+  padding: 16px 32px;
+  background: #e2e8f0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #475569;
+}
+
+.student-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 20px;
+  padding: 12px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background 0.2s ease;
+  align-items: center;
+}
+
+.student-item:hover {
+  background: #f1f5f9;
+}
+
+.student-item:last-child {
+  border-bottom: none;
+}
+
+.student-id {
+  color: #64748b;
+  font-size: 14px;
+  font-family: monospace;
+}
+
+.student-name {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.student-action {
+  display: flex;
+  justify-content: center;
+}
+
+.student-delete-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+}
+
+.student-delete-btn:hover {
+  background: #dc2626;
+}
+
+.student-approve-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+  text-align: center;
+}
+
+.student-approve-btn:hover {
+  background: #059669;
+}
+
+.student-completed-btn {
+  background: #6b7280;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  width: 50px;
+  text-align: center;
+}
+
+.student-completed-btn:hover {
+  background: #ef4444;
+}
+
+.student-completed-btn:hover::after {
+  content: '삭제';
+}
+
+.student-completed-btn:hover span {
+  display: none;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}

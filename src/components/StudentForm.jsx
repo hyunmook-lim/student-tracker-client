@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStudentsStore, useUIStore } from '../store';
+import './StudentForm.css';
 
 function StudentForm() {
   const { addStudent, updateStudent } = useStudentsStore();

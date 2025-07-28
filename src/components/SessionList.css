@@ -1,0 +1,151 @@
+/* SessionList 컴포넌트 스타일 */
+.session-list {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.session-header h3 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.session-container {
+  padding: 0;
+}
+
+.session-item {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.session-item:last-child {
+  border-bottom: none;
+}
+
+.session-header-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px 32px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.session-header-row:hover {
+  background: #f8fafc;
+}
+
+.session-name {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.session-description {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.session-student-count {
+  color: #3b82f6;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.add-session-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+}
+
+.add-session-btn:hover {
+  background: #059669;
+}
+
+.sessions-list {
+  background: #f8fafc;
+  animation: slideDown 0.3s ease;
+}
+
+.sessions-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 80px;
+  gap: 20px;
+  padding: 16px 32px;
+  background: #e2e8f0;
+  font-weight: 600;
+  font-size: 14px;
+  color: #475569;
+}
+
+.session-detail-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 80px;
+  gap: 20px;
+  padding: 12px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  transition: background 0.2s ease;
+  align-items: center;
+}
+
+.session-detail-item:hover {
+  background: #f1f5f9;
+}
+
+.session-detail-item:last-child {
+  border-bottom: none;
+}
+
+.session-title {
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.session-desc {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.session-date {
+  color: #64748b;
+  font-size: 14px;
+  font-family: monospace;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}

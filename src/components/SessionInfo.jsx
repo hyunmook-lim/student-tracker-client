@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SessionDetailModal from './SessionDetailModal';
+import './SessionInfo.css';
 
 function SessionInfo({ studentData }) {
   const [expandedClasses, setExpandedClasses] = useState(new Set());

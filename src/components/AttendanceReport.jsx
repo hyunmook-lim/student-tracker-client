@@ -1,4 +1,5 @@
 import React from 'react';
+import './AttendanceReport.css';
 
 function AttendanceReport() {
   return (

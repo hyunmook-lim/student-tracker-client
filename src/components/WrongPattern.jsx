@@ -1,4 +1,5 @@
 import React from 'react';
+import './WrongPattern.css';
 
 function WrongPattern() {
   return (

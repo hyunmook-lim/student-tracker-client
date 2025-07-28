@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStudentsStore, useUIStore } from '../store';
+import './StudentList.css';
 
 function StudentList() {
   const { students, deleteStudent } = useStudentsStore();

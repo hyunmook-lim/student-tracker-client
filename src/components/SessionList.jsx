@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SessionList.css';
 
 function SessionList() {
   const [expandedClass, setExpandedClass] = useState(null);

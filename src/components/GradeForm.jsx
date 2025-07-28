@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useStudentsStore, useUIStore } from '../store';
+import './GradeForm.css';
 
 function GradeForm() {
   const { updateStudentGrade, selectedStudent } = useStudentsStore();

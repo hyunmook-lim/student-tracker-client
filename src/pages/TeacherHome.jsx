@@ -1,5 +1,5 @@
 import React from 'react';
-import './TeacherHome.css';
+import '../components/TeacherHome.css';
 import { useAuthStore, useStudentsStore, useUIStore } from '../store';
 import StudentList from '../components/StudentList';
 import ClassroomList from '../components/ClassroomList';

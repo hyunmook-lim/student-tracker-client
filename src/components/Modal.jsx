@@ -1,4 +1,5 @@
 import React from 'react';
+import './Modal.css';
 import { useUIStore } from '../store';
 import StudentForm from './StudentForm';
 import GradeForm from './GradeForm';
