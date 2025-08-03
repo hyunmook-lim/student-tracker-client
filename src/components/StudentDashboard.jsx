@@ -30,20 +30,24 @@ function StudentDashboard({ studentData }) {
     labels: studentData.testScores.map(item => `${item.session}회차`),
     datasets: [
       {
-        label: '본인 점수',
-        data: studentData.testScores.map(item => item.myScore),
-        borderColor: '#3b82f6',
-        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-        borderWidth: 3,
-        fill: false,
-        type: 'line',
-      },
-      {
         label: '반 평균',
         data: studentData.testScores.map(item => item.classAverage),
-        backgroundColor: 'rgba(156, 163, 175, 0.8)',
-        borderColor: '#9ca3af',
-        borderWidth: 1,
+        borderColor: '#374151',
+        backgroundColor: 'rgba(55, 65, 81, 0.1)',
+        borderWidth: 4,
+        fill: false,
+        type: 'line',
+        pointRadius: 6,
+        pointBackgroundColor: '#374151',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2,
+      },
+      {
+        label: '본인 점수',
+        data: studentData.testScores.map(item => item.myScore),
+        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+        borderColor: '#3b82f6',
+        borderWidth: 2,
         type: 'bar',
       },
     ],
@@ -53,20 +57,24 @@ function StudentDashboard({ studentData }) {
     labels: studentData.assignmentScores.map(item => `${item.session}회차`),
     datasets: [
       {
-        label: '본인 완성도',
-        data: studentData.assignmentScores.map(item => item.myScore),
-        borderColor: '#10b981',
-        backgroundColor: 'rgba(16, 185, 129, 0.1)',
-        borderWidth: 3,
-        fill: false,
-        type: 'line',
-      },
-      {
         label: '반 평균',
         data: studentData.assignmentScores.map(item => item.classAverage),
-        backgroundColor: 'rgba(156, 163, 175, 0.8)',
-        borderColor: '#9ca3af',
-        borderWidth: 1,
+        borderColor: '#374151',
+        backgroundColor: 'rgba(55, 65, 81, 0.1)',
+        borderWidth: 4,
+        fill: false,
+        type: 'line',
+        pointRadius: 6,
+        pointBackgroundColor: '#374151',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 2,
+      },
+      {
+        label: '본인 완성도',
+        data: studentData.assignmentScores.map(item => item.myScore),
+        backgroundColor: 'rgba(16, 185, 129, 0.8)',
+        borderColor: '#10b981',
+        borderWidth: 2,
         type: 'bar',
       },
     ],
@@ -138,11 +146,7 @@ function StudentDashboard({ studentData }) {
         <div className='chart-container'>
           <h4 className='chart-subtitle'>회차별 테스트 점수</h4>
           <div className='chart-wrapper'>
-            <Line
-              key='test-chart'
-              data={testChartData}
-              options={chartOptions}
-            />
+            <Bar key='test-chart' data={testChartData} options={chartOptions} />
           </div>
         </div>
 
@@ -150,7 +154,7 @@ function StudentDashboard({ studentData }) {
         <div className='chart-container'>
           <h4 className='chart-subtitle'>회차별 과제 완성도</h4>
           <div className='chart-wrapper'>
-            <Line
+            <Bar
               key='assignment-chart'
               data={assignmentChartData}
               options={chartOptions}
