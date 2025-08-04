@@ -1,0 +1,301 @@
+/* AttendanceCheck 컴포넌트 스타일 */
+.attendance-check {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.attendance-header {
+  margin-bottom: 24px;
+}
+
+.attendance-header h3 {
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.attendance-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.attendance-item {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-header-row {
+  display: flex;
+  align-items: center;
+  padding: 20px 24px;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.attendance-header-row:hover {
+  background: #f1f5f9;
+}
+
+.class-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  flex: 1;
+}
+
+.class-description {
+  color: #64748b;
+  font-size: 14px;
+  margin-right: 16px;
+}
+
+.class-student-count {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 회차 리스트 */
+.sessions-list {
+  padding: 0;
+}
+
+.sessions-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+}
+
+.session-detail-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr;
+  gap: 16px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+}
+
+.session-detail-item:last-child {
+  border-bottom: none;
+}
+
+.session-title {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.session-date {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.attendance-stats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.stat.present {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.stat.late {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.stat.absent {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.view-detail-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.view-detail-btn:hover {
+  background: #2563eb;
+}
+
+/* 상세 출석 정보 */
+.attendance-detail {
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.detail-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.detail-header h4 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.attendance-table {
+  padding: 0 24px 24px 24px;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 60px 2fr 1fr 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 2px solid #e2e8f0;
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 60px 2fr 1fr 1fr;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row.present {
+  background: #f0fdf4;
+}
+
+.table-row.late {
+  background: #fffbeb;
+}
+
+.table-row.absent {
+  background: #fef2f2;
+}
+
+.student-number {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.student-name {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.status-badge.present {
+  background: #10b981;
+  color: white;
+}
+
+.status-badge.late {
+  background: #f59e0b;
+  color: white;
+}
+
+.status-badge.absent {
+  background: #ef4444;
+  color: white;
+}
+
+.attendance-time {
+  color: #64748b;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .attendance-check {
+    padding: 16px;
+  }
+
+  .attendance-header-row {
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .class-name {
+    font-size: 16px;
+  }
+
+  .sessions-header {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px 20px;
+  }
+
+  .session-detail-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 12px 20px;
+  }
+
+  .attendance-stats {
+    justify-content: center;
+  }
+
+  .table-header {
+    grid-template-columns: 50px 1fr 1fr 1fr;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .table-row {
+    grid-template-columns: 50px 1fr 1fr 1fr;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .detail-header {
+    padding: 12px 20px;
+  }
+
+  .attendance-table {
+    padding: 0 20px 20px 20px;
+  }
+}

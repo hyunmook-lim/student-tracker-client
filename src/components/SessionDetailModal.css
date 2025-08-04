@@ -89,32 +89,36 @@
 /* 출결 및 과제 카드 */
 .attendance-assignment-display {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  min-height: 120px;
 }
 
 .info-section {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.info-section:last-child {
-  border-bottom: none;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 20px;
+  height: 100%;
 }
 
 .info-label {
   color: #64748b;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .status-display {
-  padding: 4px 12px;
+  padding: 8px 20px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -130,9 +134,9 @@
 }
 
 .grade-display {
-  padding: 4px 12px;
+  padding: 8px 20px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
 }

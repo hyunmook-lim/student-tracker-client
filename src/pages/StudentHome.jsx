@@ -4,7 +4,7 @@ import { useAuthStore, useUIStore } from '../store';
 import StudentDashboard from '../components/StudentDashboard';
 import SessionInfo from '../components/SessionInfo';
 import GradeReport from '../components/GradeReport';
-import AttendanceReport from '../components/AttendanceReport';
+import StudentAttendanceCheck from '../components/StudentAttendanceCheck';
 import WrongPattern from '../components/WrongPattern';
 
 function StudentHome() {
@@ -280,7 +280,7 @@ function StudentHome() {
       case 'grade-report':
         return <GradeReport />;
       case 'attendance-report':
-        return <AttendanceReport />;
+        return <StudentAttendanceCheck />;
       case 'wrong-pattern':
         return <WrongPattern />;
       default:
