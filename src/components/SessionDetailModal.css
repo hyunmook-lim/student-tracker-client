@@ -231,6 +231,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 24px;
+  height: 600px; /* 전체 하단 영역의 높이 설정 */
 }
 
 .problems-list-card {
@@ -239,14 +240,18 @@
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 100%; /* 부모 컨테이너의 전체 높이 차지 */
+  display: flex;
+  flex-direction: column;
 }
 
 .problems-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 400px;
+  flex: 1; /* 부모 컨테이너에서 남은 공간을 모두 차지 */
   overflow-y: auto;
+  min-height: 0; /* flex 아이템에서 스크롤이 제대로 작동하도록 */
 }
 
 .problem-item {
@@ -322,6 +327,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  min-height: 600px; /* 차트 컬럼의 최소 높이 설정 */
 }
 
 .chart-card {
@@ -332,18 +338,20 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  min-height: 280px;
+  min-height: 350px; /* 적절한 고정 최소값 */
+  flex: 1; /* 부모에서 남은 공간을 균등하게 차지 */
 }
 
 .chart-container {
   flex: 1;
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 80%; /* 부모 높이의 80% */
   margin-top: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible; /* 원그래프가 잘리지 않도록 visible로 변경 */
 }
 
 @keyframes fadeIn {
@@ -389,21 +397,26 @@
   .bottom-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+    height: auto; /* 모바일에서는 자동 높이 */
   }
 
   .problems-list {
-    max-height: 300px;
+    max-height: 300px; /* 모바일에서는 최대 높이 제한 */
+    flex: none; /* 모바일에서는 flex 해제 */
   }
 
   .charts-column {
     gap: 16px;
+    min-height: 500px; /* 모바일에서 차트 컬럼 높이 */
   }
 
   .chart-card {
-    min-height: 250px;
+    min-height: 300px; /* 모바일에서 적절한 최소 높이 */
+    flex: 1;
   }
 
   .chart-container {
-    height: 180px;
+    height: 75%; /* 모바일에서 부모 높이의 75% */
+    overflow: visible;
   }
 }

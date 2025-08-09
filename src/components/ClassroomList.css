@@ -1,5 +1,5 @@
 /* ClassroomList 컴포넌트 스타일 */
-.classroom-list {
+.classroom-list-container {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-.classroom-header {
+.classroom-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,30 +16,33 @@
   background: #f8fafc;
 }
 
-.classroom-header h3 {
+.classroom-list-header h2 {
   color: #1e293b;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 24px;
+  font-weight: 700;
   margin: 0;
 }
 
-.add-class-btn {
+.add-classroom-btn {
   background: #3b82f6;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.add-class-btn:hover {
+.add-classroom-btn:hover {
   background: #2563eb;
 }
 
-.classroom-container {
+.classroom-grid {
   padding: 0;
 }
 
@@ -51,192 +54,288 @@
   border-bottom: none;
 }
 
-.classroom-header-row {
+.classroom-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 32px;
   transition: background 0.2s ease;
-}
-
-.classroom-info {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  gap: 20px;
-  align-items: center;
-  flex: 1;
   cursor: pointer;
 }
 
-.classroom-info:hover {
+.classroom-header:hover {
   background: #f8fafc;
-  border-radius: 8px;
-  padding: 8px;
-  margin: -8px;
 }
 
-.classroom-name {
+.classroom-info h3 {
   color: #1e293b;
+  font-size: 18px;
   font-weight: 600;
-  font-size: 16px;
+  margin: 0 0 4px 0;
 }
 
-.classroom-description {
+.classroom-info p {
   color: #64748b;
   font-size: 14px;
+  margin: 0 0 4px 0;
 }
 
-.classroom-student-count {
+.student-count {
   color: #3b82f6;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-}
-
-.delete-class-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
   font-size: 12px;
   font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  margin-left: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 50px;
 }
 
-.delete-class-btn:hover {
-  background: #dc2626;
+.expand-icon {
+  color: #64748b;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.students-section {
+  background: #f8fafc;
+  padding: 20px 32px;
+  animation: slideDown 0.3s ease;
+}
+
+.students-header h4 {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
 }
 
 .students-list {
-  background: #f8fafc;
-  border-top: 1px solid #e2e8f0;
-  animation: slideDown 0.3s ease-out;
-}
-
-.students-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 20px;
-  padding: 16px 32px;
-  background: #e2e8f0;
-  font-weight: 600;
-  font-size: 14px;
-  color: #475569;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .student-item {
-  display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  gap: 20px;
-  padding: 12px 32px;
-  border-bottom: 1px solid #e2e8f0;
-  transition: background 0.2s ease;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  transition: box-shadow 0.2s ease;
 }
 
 .student-item:hover {
-  background: #f1f5f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.student-item:last-child {
-  border-bottom: none;
-}
-
-.student-id {
-  color: #64748b;
-  font-size: 14px;
-  font-family: monospace;
+.student-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .student-name {
   color: #1e293b;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.student-action {
+.student-id {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.student-status {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
-.student-delete-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.status-badge.approved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.rejected {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.approve-btn,
+.reject-btn {
   padding: 6px 12px;
+  border: none;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 50px;
-  width: 50px;
+  transition: background 0.2s ease;
 }
 
-.student-delete-btn:hover {
-  background: #dc2626;
-}
-
-.student-approve-btn {
+.approve-btn {
   background: #10b981;
   color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 50px;
-  width: 50px;
-  text-align: center;
 }
 
-.student-approve-btn:hover {
+.approve-btn:hover {
   background: #059669;
 }
 
-.student-completed-btn {
-  background: #6b7280;
+.reject-btn {
+  background: #ef4444;
   color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+}
+
+.reject-btn:hover {
+  background: #dc2626;
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 50px;
-  width: 50px;
-  text-align: center;
+  z-index: 1000;
 }
 
-.student-completed-btn:hover {
-  background: #ef4444;
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.student-completed-btn:hover::after {
-  content: '삭제';
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.student-completed-btn:hover span {
-  display: none;
+.modal-header h3 {
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #f1f5f9;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding: 20px 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.cancel-btn:hover {
+  background: #e5e7eb;
+}
+
+.save-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #2563eb;
 }
 
 @keyframes slideDown {
@@ -247,5 +346,37 @@
   to {
     opacity: 1;
     max-height: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .classroom-list-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .classroom-header {
+    padding: 16px 20px;
+  }
+
+  .students-section {
+    padding: 16px 20px;
+  }
+
+  .student-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .student-status {
+    justify-content: space-between;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 20px;
   }
 }

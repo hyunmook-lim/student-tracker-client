@@ -1,59 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useStudentsStore, useUIStore } from '../store';
 import './StudentForm.css';
 
 function StudentForm() {
   const { addStudent, updateStudent } = useStudentsStore();
-  const { modalType, selectedStudent, closeModal } = useUIStore();
-
-  const [formData, setFormData] = useState({
-    name: '',
-    grade: 1,
-    class: 1,
-    studentNumber: '',
-    attendance: 100,
-    grades: {
-      korean: 0,
-      math: 0,
-      english: 0,
-      science: 0,
-      social: 0,
-    },
-  });
+  const {
+    modalType,
+    selectedStudent,
+    closeModal,
+    studentFormData,
+    updateStudentFormData,
+    updateStudentFormGrades,
+  } = useUIStore();
 
   const isEditMode = modalType === 'editStudent';
 
-  useEffect(() => {
-    if (isEditMode && selectedStudent) {
-      setFormData(selectedStudent);
-    }
-  }, [isEditMode, selectedStudent]);
-
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
+    updateStudentFormData(name, value);
   };
 
   const handleGradeChange = (subject, value) => {
-    setFormData(prev => ({
-      ...prev,
-      grades: {
-        ...prev.grades,
-        [subject]: parseInt(value) || 0,
-      },
-    }));
+    updateStudentFormGrades(subject, value);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
 
     if (isEditMode) {
-      updateStudent(selectedStudent.id, formData);
+      updateStudent(selectedStudent.id, studentFormData);
     } else {
-      addStudent(formData);
+      addStudent(studentFormData);
     }
 
     closeModal();
@@ -61,99 +38,160 @@ function StudentForm() {
 
   return (
     <form onSubmit={handleSubmit} className='student-form'>
-      <div className='form-group'>
-        <label htmlFor='name'>이름</label>
-        <input
-          type='text'
-          id='name'
-          name='name'
-          value={formData.name}
-          onChange={handleInputChange}
-          required
-        />
+      <div className='form-header'>
+        <h3>{isEditMode ? '학생 정보 수정' : '새 학생 추가'}</h3>
       </div>
 
-      <div className='form-row'>
-        <div className='form-group'>
-          <label htmlFor='grade'>학년</label>
-          <select
-            id='grade'
-            name='grade'
-            value={formData.grade}
-            onChange={handleInputChange}
-            required
-          >
-            <option value={1}>1학년</option>
-            <option value={2}>2학년</option>
-            <option value={3}>3학년</option>
-          </select>
-        </div>
-
-        <div className='form-group'>
-          <label htmlFor='class'>반</label>
-          <select
-            id='class'
-            name='class'
-            value={formData.class}
-            onChange={handleInputChange}
-            required
-          >
-            <option value={1}>1반</option>
-            <option value={2}>2반</option>
-            <option value={3}>3반</option>
-            <option value={4}>4반</option>
-          </select>
-        </div>
-      </div>
-
-      <div className='form-group'>
-        <label htmlFor='studentNumber'>학번</label>
-        <input
-          type='text'
-          id='studentNumber'
-          name='studentNumber'
-          value={formData.studentNumber}
-          onChange={handleInputChange}
-          required
-        />
-      </div>
-
-      <div className='form-group'>
-        <label htmlFor='attendance'>출석률 (%)</label>
-        <input
-          type='number'
-          id='attendance'
-          name='attendance'
-          value={formData.attendance}
-          onChange={handleInputChange}
-          min='0'
-          max='100'
-          required
-        />
-      </div>
-
-      <div className='grades-section'>
-        <h3>성적</h3>
-        <div className='grades-grid'>
-          {Object.entries(formData.grades).map(([subject, grade]) => (
-            <div key={subject} className='form-group'>
-              <label htmlFor={subject}>{getSubjectName(subject)}</label>
+      <div className='form-body'>
+        <div className='form-section'>
+          <h4>기본 정보</h4>
+          <div className='form-grid'>
+            <div className='form-group'>
+              <label htmlFor='name'>이름</label>
               <input
-                type='number'
-                id={subject}
-                value={grade}
-                onChange={e => handleGradeChange(subject, e.target.value)}
-                min='0'
-                max='100'
+                type='text'
+                id='name'
+                name='name'
+                value={studentFormData.name}
+                onChange={handleInputChange}
+                placeholder='학생 이름'
                 required
               />
             </div>
-          ))}
+
+            <div className='form-group'>
+              <label htmlFor='studentNumber'>학번</label>
+              <input
+                type='text'
+                id='studentNumber'
+                name='studentNumber'
+                value={studentFormData.studentNumber}
+                onChange={handleInputChange}
+                placeholder='학번'
+                required
+              />
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='grade'>학년</label>
+              <select
+                id='grade'
+                name='grade'
+                value={studentFormData.grade}
+                onChange={handleInputChange}
+                required
+              >
+                <option value={1}>1학년</option>
+                <option value={2}>2학년</option>
+                <option value={3}>3학년</option>
+              </select>
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='class'>반</label>
+              <select
+                id='class'
+                name='class'
+                value={studentFormData.class}
+                onChange={handleInputChange}
+                required
+              >
+                <option value={1}>1반</option>
+                <option value={2}>2반</option>
+                <option value={3}>3반</option>
+                <option value={4}>4반</option>
+              </select>
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='attendance'>출석률 (%)</label>
+              <input
+                type='number'
+                id='attendance'
+                name='attendance'
+                value={studentFormData.attendance}
+                onChange={handleInputChange}
+                min='0'
+                max='100'
+                placeholder='출석률'
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className='form-section'>
+          <h4>성적 정보</h4>
+          <div className='grades-grid'>
+            <div className='form-group'>
+              <label htmlFor='korean'>국어</label>
+              <input
+                type='number'
+                id='korean'
+                value={studentFormData.grades.korean}
+                onChange={e => handleGradeChange('korean', e.target.value)}
+                min='0'
+                max='100'
+                placeholder='0-100'
+              />
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='math'>수학</label>
+              <input
+                type='number'
+                id='math'
+                value={studentFormData.grades.math}
+                onChange={e => handleGradeChange('math', e.target.value)}
+                min='0'
+                max='100'
+                placeholder='0-100'
+              />
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='english'>영어</label>
+              <input
+                type='number'
+                id='english'
+                value={studentFormData.grades.english}
+                onChange={e => handleGradeChange('english', e.target.value)}
+                min='0'
+                max='100'
+                placeholder='0-100'
+              />
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='science'>과학</label>
+              <input
+                type='number'
+                id='science'
+                value={studentFormData.grades.science}
+                onChange={e => handleGradeChange('science', e.target.value)}
+                min='0'
+                max='100'
+                placeholder='0-100'
+              />
+            </div>
+
+            <div className='form-group'>
+              <label htmlFor='social'>사회</label>
+              <input
+                type='number'
+                id='social'
+                value={studentFormData.grades.social}
+                onChange={e => handleGradeChange('social', e.target.value)}
+                min='0'
+                max='100'
+                placeholder='0-100'
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className='form-actions'>
-        <button type='button' onClick={closeModal} className='cancel-btn'>
+        <button type='button' className='cancel-btn' onClick={closeModal}>
           취소
         </button>
         <button type='submit' className='submit-btn'>
@@ -162,17 +200,6 @@ function StudentForm() {
       </div>
     </form>
   );
-}
-
-function getSubjectName(subject) {
-  const subjectNames = {
-    korean: '국어',
-    math: '수학',
-    english: '영어',
-    science: '과학',
-    social: '사회',
-  };
-  return subjectNames[subject] || subject;
 }
 
 export default StudentForm;

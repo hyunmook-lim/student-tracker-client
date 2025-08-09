@@ -1,96 +1,81 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSessionStore, useClassroomStore } from '../store';
 import SessionDetailModal from './SessionDetailModal';
 import './SessionInfo.css';
 
-function SessionInfo({ studentData }) {
-  const [expandedClasses, setExpandedClasses] = useState(new Set());
-  const [selectedSession, setSelectedSession] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+function SessionInfo() {
+  const {
+    expandedClasses,
+    toggleClassExpansion,
+    selectedSession,
+    setSelectedSession,
+    getSessionsByClassroom,
+  } = useSessionStore();
 
-  const toggleClassExpansion = classId => {
-    setExpandedClasses(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(classId)) {
-        newSet.delete(classId);
-      } else {
-        newSet.add(classId);
-      }
-      return newSet;
-    });
-  };
+  const { classrooms } = useClassroomStore();
 
-  const openSessionModal = session => {
+  const handleSessionClick = session => {
     setSelectedSession(session);
-    setIsModalOpen(true);
   };
 
-  const closeSessionModal = () => {
-    setIsModalOpen(false);
+  const handleCloseModal = () => {
     setSelectedSession(null);
   };
 
   return (
-    <div className='session-info'>
-      <h3 className='session-info-title'>회차별 정보</h3>
-      <div className='classes-container'>
-        {studentData.classes.map(classItem => {
-          const isExpanded = expandedClasses.has(classItem.id);
-          return (
-            <div key={classItem.id} className='class-card'>
-              <div
-                className='class-header clickable'
-                onClick={() => toggleClassExpansion(classItem.id)}
-              >
-                <div className='class-header-content'>
-                  <h4 className='class-name'>{classItem.name}</h4>
-                  <div className='class-progress'>
-                    <span className='progress-text'>
-                      {classItem.completedSessions}/{classItem.totalSessions}
-                      회차 완료
-                    </span>
-                    <div className='progress-bar'>
-                      <div
-                        className='progress-fill'
-                        style={{
-                          width: `${(classItem.completedSessions / classItem.totalSessions) * 100}%`,
-                        }}
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-                <div className={`expand-icon ${isExpanded ? 'expanded' : ''}`}>
-                  ▼
-                </div>
-              </div>
-              {isExpanded && (
-                <div className='sessions-grid'>
-                  {classItem.sessions.map(session => (
-                    <div
-                      key={session.id}
-                      className={`session-card ${session.status}`}
-                      onClick={() => openSessionModal(session)}
-                    >
-                      <div className='session-header'>
-                        <span className='session-number'>{session.id}회차</span>
-                        <span className={`session-status ${session.status}`}>
-                          {session.status === 'completed' ? '완료' : '예정'}
-                        </span>
-                      </div>
-                      <h5 className='session-title'>{session.title}</h5>
-                      <p className='session-date'>{session.date}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
+    <div className='session-info-container'>
+      <div className='session-info-header'>
+        <h2>수업 정보</h2>
       </div>
 
+      <div className='classrooms-list'>
+        {classrooms.map(classroom => (
+          <div key={classroom.id} className='classroom-section'>
+            <div
+              className='classroom-header'
+              onClick={() => toggleClassExpansion(classroom.id)}
+            >
+              <div className='classroom-info'>
+                <h3>{classroom.name}</h3>
+                <p>{classroom.description}</p>
+                <span>학생 수: {classroom.studentCount}명</span>
+              </div>
+              <div className='expand-icon'>
+                {expandedClasses.has(classroom.id) ? '▼' : '▶'}
+              </div>
+            </div>
+
+            {expandedClasses.has(classroom.id) && (
+              <div className='sessions-grid'>
+                {getSessionsByClassroom(classroom.id).map(session => (
+                  <div
+                    key={session.id}
+                    className='session-card'
+                    onClick={() => handleSessionClick(session)}
+                  >
+                    <div className='session-header'>
+                      <h4>{session.title}</h4>
+                      <span className='session-date'>{session.date}</span>
+                    </div>
+                    <div className='session-content'>
+                      <p>{session.description}</p>
+                    </div>
+                    <div className='session-actions'>
+                      <button className='view-detail-btn'>자세히 보기</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* 세션 상세 모달 */}
       <SessionDetailModal
         session={selectedSession}
-        isOpen={isModalOpen}
-        onClose={closeSessionModal}
+        isOpen={!!selectedSession}
+        onClose={handleCloseModal}
       />
     </div>
   );

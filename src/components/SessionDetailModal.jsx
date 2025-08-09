@@ -146,6 +146,19 @@ function SessionDetailModal({ session, isOpen, onClose }) {
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
+      },
+    },
+    elements: {
+      arc: {
+        borderWidth: 2,
+      },
+    },
     plugins: {
       legend: {
         position: 'bottom',
