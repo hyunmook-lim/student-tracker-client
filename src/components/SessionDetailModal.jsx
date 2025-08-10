@@ -38,60 +38,110 @@ function SessionDetailModal({ session, isOpen, onClose }) {
     },
     // 푼 문제 리스트
     solvedProblems: [
-      { id: 1, title: '수와 연산 - 덧셈', status: 'correct', time: '2분 30초' },
-      { id: 2, title: '수와 연산 - 뺄셈', status: 'correct', time: '1분 45초' },
-      { id: 3, title: '수와 연산 - 곱셈', status: 'wrong', time: '3분 20초' },
+      {
+        id: 1,
+        majorUnit: '수와 연산',
+        minorUnit: '덧셈',
+        difficulty: '중',
+        status: 'correct',
+      },
+      {
+        id: 2,
+        majorUnit: '수와 연산',
+        minorUnit: '뺄셈',
+        difficulty: '중',
+        status: 'correct',
+      },
+      {
+        id: 3,
+        majorUnit: '수와 연산',
+        minorUnit: '곱셈',
+        difficulty: '중상',
+        status: 'wrong',
+      },
       {
         id: 4,
-        title: '수와 연산 - 나눗셈',
+        majorUnit: '수와 연산',
+        minorUnit: '나눗셈',
+        difficulty: '중상',
         status: 'correct',
-        time: '2분 15초',
       },
       {
         id: 5,
-        title: '분수와 소수 - 분수 비교',
+        majorUnit: '분수와 소수',
+        minorUnit: '분수 비교',
+        difficulty: '상',
         status: 'wrong',
-        time: '4분 10초',
       },
       {
         id: 6,
-        title: '분수와 소수 - 소수 계산',
+        majorUnit: '분수와 소수',
+        minorUnit: '소수 계산',
+        difficulty: '중상',
         status: 'correct',
-        time: '2분 50초',
       },
       {
         id: 7,
-        title: '도형의 성질 - 삼각형',
+        majorUnit: '도형의 성질',
+        minorUnit: '삼각형',
+        difficulty: '중',
         status: 'correct',
-        time: '3분 5초',
       },
       {
         id: 8,
-        title: '도형의 성질 - 사각형',
+        majorUnit: '도형의 성질',
+        minorUnit: '사각형',
+        difficulty: '상',
         status: 'wrong',
-        time: '5분 30초',
       },
-      { id: 9, title: '도형의 성질 - 원', status: 'correct', time: '2분 40초' },
-      { id: 10, title: '측정 - 길이', status: 'correct', time: '1분 55초' },
-      { id: 11, title: '측정 - 무게', status: 'wrong', time: '3분 45초' },
-      { id: 12, title: '측정 - 부피', status: 'correct', time: '2분 20초' },
+      {
+        id: 9,
+        majorUnit: '도형의 성질',
+        minorUnit: '원',
+        difficulty: '중',
+        status: 'correct',
+      },
+      {
+        id: 10,
+        majorUnit: '측정',
+        minorUnit: '길이',
+        difficulty: '중',
+        status: 'correct',
+      },
+      {
+        id: 11,
+        majorUnit: '측정',
+        minorUnit: '무게',
+        difficulty: '중상',
+        status: 'wrong',
+      },
+      {
+        id: 12,
+        majorUnit: '측정',
+        minorUnit: '부피',
+        difficulty: '최상',
+        status: 'correct',
+      },
       {
         id: 13,
-        title: '확률과 통계 - 확률',
+        majorUnit: '확률과 통계',
+        minorUnit: '확률',
+        difficulty: '상',
         status: 'correct',
-        time: '2분 10초',
       },
       {
         id: 14,
-        title: '확률과 통계 - 통계',
+        majorUnit: '확률과 통계',
+        minorUnit: '통계',
+        difficulty: '최상',
         status: 'wrong',
-        time: '4분 25초',
       },
       {
         id: 15,
-        title: '문자와 식 - 방정식',
+        majorUnit: '문자와 식',
+        minorUnit: '방정식',
+        difficulty: '최상',
         status: 'correct',
-        time: '3분 15초',
       },
     ],
     // 오답 단원 분포 데이터
@@ -147,35 +197,26 @@ function SessionDetailModal({ session, isOpen, onClose }) {
     responsive: true,
     maintainAspectRatio: false,
     layout: {
-      padding: {
-        top: 20,
-        bottom: 20,
-        left: 20,
-        right: 20,
-      },
+      padding: 0,
     },
     elements: {
       arc: {
-        borderWidth: 2,
+        borderWidth: 1,
       },
     },
     plugins: {
       legend: {
-        position: 'bottom',
-        labels: {
-          usePointStyle: true,
-          padding: 15,
-          font: {
-            size: 12,
-          },
-        },
+        display: false, // 기본 범례 숨김
       },
     },
   };
 
   return (
-    <div className='modal-overlay' onClick={onClose}>
-      <div className='session-detail-modal' onClick={e => e.stopPropagation()}>
+    <div className='session-detail-modal-overlay' onClick={onClose}>
+      <div
+        className='session-detail-modal-content'
+        onClick={e => e.stopPropagation()}
+      >
         <div className='modal-header'>
           <h2 className='session-title'>{session.title}</h2>
           <button className='close-btn' onClick={onClose}>
@@ -253,15 +294,27 @@ function SessionDetailModal({ session, isOpen, onClose }) {
                     key={problem.id}
                     className={`problem-item ${problem.status}`}
                   >
-                    <div className='problem-info'>
+                    <div className='problem-left'>
+                      <div
+                        className={`problem-status-badge ${problem.status}`}
+                      ></div>
                       <span className='problem-number'>{problem.id}.</span>
-                      <span className='problem-title'>{problem.title}</span>
+                      <span className='problem-major-unit'>
+                        {problem.majorUnit}
+                      </span>
+                      <span className='problem-minor-unit'>
+                        {problem.minorUnit}
+                      </span>
                     </div>
-                    <div className='problem-details'>
+                    <div className='problem-right'>
+                      <span
+                        className={`difficulty-badge ${problem.difficulty}`}
+                      >
+                        {problem.difficulty}
+                      </span>
                       <span className={`status-badge ${problem.status}`}>
                         {problem.status === 'correct' ? '정답' : '오답'}
                       </span>
-                      <span className='problem-time'>{problem.time}</span>
                     </div>
                   </div>
                 ))}
@@ -273,16 +326,58 @@ function SessionDetailModal({ session, isOpen, onClose }) {
               {/* 오답 단원 분포 그래프 */}
               <div className='detail-card chart-card'>
                 <h3 className='section-title'>오답 단원 분포</h3>
-                <div className='chart-container'>
-                  <Doughnut data={wrongUnitChartData} options={chartOptions} />
+                <div className='chart-content'>
+                  <div className='chart-container'>
+                    <Doughnut
+                      data={wrongUnitChartData}
+                      options={chartOptions}
+                    />
+                    <div className='chart-legend'>
+                      {wrongUnitChartData.labels.map((label, index) => (
+                        <div key={label} className='legend-item'>
+                          <div
+                            className='legend-color'
+                            style={{
+                              backgroundColor:
+                                wrongUnitChartData.datasets[0].backgroundColor[
+                                  index
+                                ],
+                            }}
+                          ></div>
+                          <span className='legend-label'>{label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* 난이도별 오답 그래프 */}
               <div className='detail-card chart-card'>
                 <h3 className='section-title'>난이도별 오답</h3>
-                <div className='chart-container'>
-                  <Doughnut data={difficultyChartData} options={chartOptions} />
+                <div className='chart-content'>
+                  <div className='chart-container'>
+                    <Doughnut
+                      data={difficultyChartData}
+                      options={chartOptions}
+                    />
+                    <div className='chart-legend'>
+                      {difficultyChartData.labels.map((label, index) => (
+                        <div key={label} className='legend-item'>
+                          <div
+                            className='legend-color'
+                            style={{
+                              backgroundColor:
+                                difficultyChartData.datasets[0].backgroundColor[
+                                  index
+                                ],
+                            }}
+                          ></div>
+                          <span className='legend-label'>{label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

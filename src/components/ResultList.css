@@ -7,32 +7,32 @@
   overflow: hidden;
 }
 
-.result-list-header {
+.result-list-container .result-list-header {
   padding: 24px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
 }
 
-.result-list-header h2 {
+.result-list-container .result-list-header h2 {
   color: #1e293b;
   font-size: 24px;
   font-weight: 700;
   margin: 0;
 }
 
-.classroom-results {
+.result-list-container .classroom-results {
   padding: 0;
 }
 
-.classroom-result-item {
+.result-list-container .classroom-result-item {
   border-bottom: 1px solid #e2e8f0;
 }
 
-.classroom-result-item:last-child {
+.result-list-container .classroom-result-item:last-child {
   border-bottom: none;
 }
 
-.classroom-header {
+.result-list-container .classroom-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,43 +41,43 @@
   cursor: pointer;
 }
 
-.classroom-header:hover {
+.result-list-container .classroom-header:hover {
   background: #f8fafc;
 }
 
-.classroom-info h3 {
+.result-list-container .classroom-info h3 {
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 4px 0;
 }
 
-.classroom-info p {
+.result-list-container .classroom-info p {
   color: #64748b;
   font-size: 14px;
   margin: 0 0 4px 0;
 }
 
-.classroom-info span {
+.result-list-container .classroom-info span {
   color: #3b82f6;
   font-size: 12px;
   font-weight: 500;
 }
 
-.expand-icon {
+.result-list-container .expand-icon {
   color: #64748b;
   font-size: 18px;
   font-weight: bold;
   transition: transform 0.2s ease;
 }
 
-.results-section {
+.result-list-container .results-section {
   background: #f8fafc;
   padding: 20px 32px;
   animation: slideDown 0.3s ease;
 }
 
-.session-result {
+.result-list-container .session-result {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -85,33 +85,33 @@
   margin-bottom: 20px;
 }
 
-.session-result:last-child {
+.result-list-container .session-result:last-child {
   margin-bottom: 0;
 }
 
-.session-info {
+.result-list-container .session-info {
   margin-bottom: 16px;
   padding-bottom: 12px;
   border-bottom: 1px solid #f1f5f9;
 }
 
-.session-info h4 {
+.result-list-container .session-info h4 {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
   margin: 0 0 4px 0;
 }
 
-.session-info span {
+.result-list-container .session-info span {
   color: #6b7280;
   font-size: 12px;
 }
 
-.results-table {
+.result-list-container .results-table {
   overflow-x: auto;
 }
 
-.table-header {
+.result-list-container .table-header {
   display: grid;
   grid-template-columns: 60px 1fr 80px 60px 60px;
   gap: 12px;
@@ -123,7 +123,7 @@
   text-align: center;
 }
 
-.table-row {
+.result-list-container .table-row {
   display: grid;
   grid-template-columns: 60px 1fr 80px 60px 60px;
   gap: 12px;
@@ -133,42 +133,42 @@
   transition: background 0.2s ease;
 }
 
-.table-row:last-child {
+.result-list-container .table-row:last-child {
   border-bottom: none;
 }
 
-.table-row:hover {
+.result-list-container .table-row:hover {
   background: #f8fafc;
 }
 
-.rank {
+.result-list-container .rank {
   color: #1e293b;
   font-weight: 600;
   font-size: 14px;
   text-align: center;
 }
 
-.name {
+.result-list-container .name {
   color: #1e293b;
   font-weight: 500;
   font-size: 14px;
   text-align: left;
 }
 
-.score {
+.result-list-container .score {
   color: #1e293b;
   font-weight: 600;
   font-size: 14px;
   text-align: center;
 }
 
-.total {
+.result-list-container .total {
   color: #64748b;
   font-size: 13px;
   text-align: center;
 }
 
-.grade {
+.result-list-container .grade {
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 11px;
@@ -177,22 +177,22 @@
   text-transform: uppercase;
 }
 
-.grade.excellent {
+.result-list-container .grade.excellent {
   background: #dcfce7;
   color: #166534;
 }
 
-.grade.good {
+.result-list-container .grade.good {
   background: #dbeafe;
   color: #1d4ed8;
 }
 
-.grade.average {
+.result-list-container .grade.average {
   background: #fef3c7;
   color: #92400e;
 }
 
-.grade.poor {
+.result-list-container .grade.poor {
   background: #fef2f2;
   color: #dc2626;
 }
@@ -209,26 +209,26 @@
 }
 
 @media (max-width: 768px) {
-  .result-list-header {
+  .result-list-container .result-list-header {
     padding: 16px 20px;
   }
 
-  .classroom-header {
+  .result-list-container .classroom-header {
     padding: 16px 20px;
   }
 
-  .results-section {
+  .result-list-container .results-section {
     padding: 16px 20px;
   }
 
-  .table-header,
-  .table-row {
+  .result-list-container .table-header,
+  .result-list-container .table-row {
     grid-template-columns: 50px 1fr 60px 50px;
     gap: 8px;
     font-size: 12px;
   }
 
-  .total {
+  .result-list-container .total {
     display: none;
   }
 }

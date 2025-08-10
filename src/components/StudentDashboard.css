@@ -7,7 +7,7 @@
   border: 1px solid #e2e8f0;
 }
 
-.dashboard-title {
+.dashboard-section .dashboard-title {
   color: #1e293b;
   font-size: 24px;
   font-weight: 700;
@@ -15,14 +15,14 @@
   text-align: center;
 }
 
-.dashboard-grid {
+.dashboard-section .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 32px;
 }
 
-.dashboard-card {
+.dashboard-section .dashboard-card {
   background: white;
   padding: 20px;
   border-radius: 8px;
@@ -31,34 +31,34 @@
   text-align: center;
 }
 
-.dashboard-card h4 {
+.dashboard-section .dashboard-card h4 {
   color: #64748b;
   font-size: 14px;
   font-weight: 500;
   margin: 0 0 8px 0;
 }
 
-.card-number {
+.dashboard-section .card-number {
   color: #1e293b;
   font-size: 24px;
   font-weight: 700;
   margin: 0 0 4px 0;
 }
 
-.card-subtitle {
+.dashboard-section .card-subtitle {
   color: #64748b;
   font-size: 12px;
   margin: 0;
 }
 
 /* 차트 섹션 */
-.charts-section {
+.dashboard-section .charts-section {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-.charts-title {
+.dashboard-section .charts-title {
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
@@ -66,7 +66,7 @@
   text-align: center;
 }
 
-.chart-container {
+.dashboard-section .chart-container {
   background: white;
   border-radius: 12px;
   padding: 24px;
@@ -79,7 +79,7 @@
   min-height: 350px;
 }
 
-.chart-subtitle {
+.dashboard-section .chart-subtitle {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
@@ -89,7 +89,7 @@
   flex-shrink: 0;
 }
 
-.chart-wrapper {
+.dashboard-section .chart-wrapper {
   position: relative;
   height: 300px;
   width: 100%;
@@ -103,22 +103,22 @@
     padding: 16px;
   }
 
-  .dashboard-grid {
+  .dashboard-section .dashboard-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 12px;
   }
 
-  .chart-container {
+  .dashboard-section .chart-container {
     padding: 16px;
     margin-bottom: 16px;
     min-height: 300px;
   }
 
-  .chart-wrapper {
+  .dashboard-section .chart-wrapper {
     height: 250px;
   }
 
-  .charts-section {
+  .dashboard-section .charts-section {
     gap: 24px;
   }
 }

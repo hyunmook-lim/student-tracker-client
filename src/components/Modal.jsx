@@ -37,15 +37,15 @@ function Modal() {
   };
 
   return (
-    <div className='modal-overlay' onClick={closeModal}>
-      <div className='modal-content' onClick={e => e.stopPropagation()}>
-        <div className='modal-header'>
+    <div className='app-modal-overlay' onClick={closeModal}>
+      <div className='app-modal-content' onClick={e => e.stopPropagation()}>
+        <div className='app-modal-header'>
           <h2>{getModalTitle()}</h2>
-          <button className='modal-close' onClick={closeModal}>
+          <button className='app-modal-close' onClick={closeModal}>
             ×
           </button>
         </div>
-        <div className='modal-body'>{renderModalContent()}</div>
+        <div className='app-modal-body'>{renderModalContent()}</div>
       </div>
     </div>
   );

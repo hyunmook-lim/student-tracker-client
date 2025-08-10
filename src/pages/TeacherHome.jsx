@@ -59,7 +59,7 @@ function TeacherHome() {
   };
 
   return (
-    <div className='home-container'>
+    <div className='teacher-home-container'>
       {/* 왼쪽 사이드바 */}
       <aside className='sidebar'>
         <div className='sidebar-header'>

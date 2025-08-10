@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-.session-list-header {
+.session-list-container .session-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,14 +16,14 @@
   background: #f8fafc;
 }
 
-.session-list-header h2 {
+.session-list-container .session-list-header h2 {
   color: #1e293b;
   font-size: 24px;
   font-weight: 700;
   margin: 0;
 }
 
-.add-session-btn {
+.session-list-container .add-session-btn {
   background: #10b981;
   color: white;
   border: none;
@@ -38,23 +38,23 @@
   gap: 8px;
 }
 
-.add-session-btn:hover {
+.session-list-container .add-session-btn:hover {
   background: #059669;
 }
 
-.classroom-list {
+.session-list-container .classroom-list {
   padding: 0;
 }
 
-.classroom-item {
+.session-list-container .classroom-item {
   border-bottom: 1px solid #e2e8f0;
 }
 
-.classroom-item:last-child {
+.session-list-container .classroom-item:last-child {
   border-bottom: none;
 }
 
-.classroom-header {
+.session-list-container .classroom-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,86 +63,87 @@
   cursor: pointer;
 }
 
-.classroom-header:hover {
+.session-list-container .classroom-header:hover {
   background: #f8fafc;
 }
 
-.classroom-info h3 {
+.session-list-container .classroom-info h3 {
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 4px 0;
 }
 
-.classroom-info p {
+.session-list-container .classroom-info p {
   color: #64748b;
   font-size: 14px;
   margin: 0 0 4px 0;
 }
 
-.classroom-info span {
+.session-list-container .classroom-info span {
   color: #3b82f6;
   font-size: 12px;
   font-weight: 500;
 }
 
-.expand-icon {
+.session-list-container .expand-icon {
   color: #64748b;
   font-size: 18px;
   font-weight: bold;
   transition: transform 0.2s ease;
 }
 
-.sessions-grid {
+.session-list-container .sessions-grid {
   background: #f8fafc;
   padding: 20px 32px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 16px;
+  gap: 20px;
   animation: slideDown 0.3s ease;
 }
 
-.session-item {
+.session-list-container .session-item {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 16px;
+  padding: 20px;
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
-.session-item:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+.session-list-container .session-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
 }
 
-.session-info h4 {
+.session-list-container .session-info h4 {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
   margin: 0 0 8px 0;
 }
 
-.session-info p {
+.session-list-container .session-info p {
   color: #64748b;
   font-size: 14px;
   margin: 0 0 8px 0;
 }
 
-.session-date {
-  color: #6b7280;
+.session-list-container .session-date {
+  color: #3b82f6;
   font-size: 12px;
-  font-family: monospace;
+  font-weight: 500;
 }
 
-.session-actions {
+.session-list-container .session-actions {
   display: flex;
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
-.edit-btn,
-.delete-btn {
+.session-list-container .edit-btn,
+.session-list-container .delete-btn,
+.session-list-container .question-btn {
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
@@ -152,26 +153,25 @@
   transition: background 0.2s ease;
 }
 
-.edit-btn {
+.session-list-container .edit-btn {
   background: #3b82f6;
   color: white;
 }
 
-.edit-btn:hover {
+.session-list-container .edit-btn:hover {
   background: #2563eb;
 }
 
-.delete-btn {
+.session-list-container .delete-btn {
   background: #ef4444;
   color: white;
 }
 
-.delete-btn:hover {
+.session-list-container .delete-btn:hover {
   background: #dc2626;
 }
 
-/* 모달 스타일 */
-.modal-overlay {
+.session-list-container .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -184,32 +184,32 @@
   z-index: 1000;
 }
 
-.modal-content {
+.session-list-container .modal-content {
   background: white;
   border-radius: 12px;
   width: 90%;
-  max-width: 600px;
+  max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.modal-header {
+.session-list-container .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 24px;
+  padding: 24px 32px;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.modal-header h3 {
+.session-list-container .modal-header h3 {
   color: #1e293b;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
-.close-btn {
+.session-list-container .close-btn {
   background: none;
   border: none;
   font-size: 24px;
@@ -221,114 +221,113 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background 0.2s ease;
 }
 
-.close-btn:hover {
+.session-list-container .close-btn:hover {
   background: #f1f5f9;
+  color: #1e293b;
 }
 
-.modal-body {
-  padding: 24px;
+.session-list-container .modal-body {
+  padding: 24px 32px;
 }
 
-.form-group {
-  margin-bottom: 16px;
+.session-list-container .form-group {
+  margin-bottom: 20px;
 }
 
-.form-group label {
+.session-list-container .form-group label {
   display: block;
+  margin-bottom: 8px;
   color: #374151;
-  font-size: 14px;
   font-weight: 500;
-  margin-bottom: 6px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
   font-size: 14px;
-  transition: border-color 0.2s ease;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.session-list-container .form-group input,
+.session-list-container .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.session-list-container .form-group input:focus,
+.session-list-container .form-group textarea:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.modal-actions {
+.session-list-container .modal-actions {
   display: flex;
-  gap: 12px;
   justify-content: flex-end;
-  padding: 20px 24px;
+  gap: 12px;
+  padding: 24px 32px;
   border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
 }
 
-.cancel-btn,
-.save-btn,
-.question-btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
+.session-list-container .cancel-btn,
+.session-list-container .save-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.cancel-btn {
+.session-list-container .cancel-btn {
   background: #f3f4f6;
   color: #374151;
+  border: 1px solid #d1d5db;
 }
 
-.cancel-btn:hover {
+.session-list-container .cancel-btn:hover {
   background: #e5e7eb;
+  border-color: #9ca3af;
 }
 
-.save-btn {
-  background: #10b981;
-  color: white;
-}
-
-.save-btn:hover {
-  background: #059669;
-}
-
-.question-btn {
+.session-list-container .save-btn {
   background: #3b82f6;
   color: white;
+  border: none;
 }
 
-.question-btn:hover {
+.session-list-container .save-btn:hover {
   background: #2563eb;
 }
 
-/* 문제 모달 스타일 */
-.question-modal-content {
+.session-list-container .question-btn {
+  background: #f59e0b;
+  color: white;
+}
+
+.session-list-container .question-btn:hover {
+  background: #d97706;
+}
+
+.session-list-container .question-modal-content {
   background: white;
   border-radius: 12px;
-  width: 95%;
+  width: 90%;
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.questions-container {
-  padding: 24px;
-  max-height: 60vh;
-  overflow-y: auto;
+.session-list-container .questions-container {
+  padding: 24px 32px;
 }
 
-.question-form {
+.session-list-container .question-form {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -336,132 +335,134 @@
   margin-bottom: 16px;
 }
 
-.question-header {
+.session-list-container .question-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 }
 
-.question-header h4 {
+.session-list-container .question-header h4 {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
 
-.remove-question-btn {
+.session-list-container .remove-question-btn {
   background: #ef4444;
   color: white;
   border: none;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
-.remove-question-btn:hover {
+.session-list-container .remove-question-btn:hover {
   background: #dc2626;
 }
 
-.question-fields {
+.session-list-container .question-fields {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
+  gap: 16px;
 }
 
-.field-group {
+.session-list-container .field-group {
   display: flex;
   flex-direction: column;
 }
 
-.field-group label {
+.session-list-container .field-group label {
   color: #374151;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
-.field-group input,
-.field-group select {
-  padding: 6px 8px;
+.session-list-container .field-group input,
+.session-list-container .field-group select {
+  padding: 8px 12px;
   border: 1px solid #d1d5db;
-  border-radius: 4px;
-  font-size: 13px;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
 }
 
-.question-actions {
+.session-list-container .question-actions {
   display: flex;
   gap: 12px;
-  justify-content: space-between;
-  padding: 20px 24px;
+  justify-content: flex-end;
+  padding: 20px 32px;
   border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
 }
 
-.add-question-btn,
-.save-questions-btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
+.session-list-container .add-question-btn,
+.session-list-container .save-questions-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s ease;
+  border: none;
 }
 
-.add-question-btn {
-  background: #6366f1;
-  color: white;
-}
-
-.add-question-btn:hover {
-  background: #4f46e5;
-}
-
-.save-questions-btn {
+.session-list-container .add-question-btn {
   background: #10b981;
   color: white;
 }
 
-.save-questions-btn:hover {
+.session-list-container .add-question-btn:hover {
   background: #059669;
+}
+
+.session-list-container .save-questions-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.session-list-container .save-questions-btn:hover {
+  background: #2563eb;
 }
 
 @keyframes slideDown {
   from {
     opacity: 0;
-    max-height: 0;
+    transform: translateY(-10px);
   }
   to {
     opacity: 1;
-    max-height: 1000px;
+    transform: translateY(0);
   }
 }
 
 @media (max-width: 768px) {
-  .session-list-header {
-    padding: 16px 20px;
+  .session-list-container .session-list-header {
+    padding: 20px 24px;
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
   }
 
-  .classroom-header {
-    padding: 16px 20px;
+  .session-list-container .classroom-header {
+    padding: 16px 24px;
   }
 
-  .sessions-grid {
-    padding: 16px 20px;
+  .session-list-container .sessions-grid {
     grid-template-columns: 1fr;
+    padding: 16px 24px;
   }
 
-  .modal-content {
+  .session-list-container .modal-content {
     width: 95%;
     margin: 20px;
   }
 
-  .question-fields {
+  .session-list-container .question-fields {
     grid-template-columns: 1fr;
   }
 }

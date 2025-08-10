@@ -1,22 +1,198 @@
 /* GradeReport 컴포넌트 스타일 */
-.grade-report {
-  padding: 24px;
+.grade-report-container {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   border: 1px solid #e2e8f0;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
-.grade-report h3 {
+.grade-report-container .grade-report-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.grade-report-container .grade-report-header h2 {
   color: #1e293b;
-  font-size: 20px;
-  font-weight: 600;
-  margin: 0 0 16px 0;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
 }
 
-.grade-report p {
+.grade-report-container .classes-list {
+  padding: 0;
+}
+
+.grade-report-container .class-section {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.grade-report-container .class-section:last-child {
+  border-bottom: none;
+}
+
+.grade-report-container .class-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.grade-report-container .class-header:hover {
+  background: #f8fafc;
+}
+
+.grade-report-container .class-info h3 {
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.grade-report-container .class-info p {
   color: #64748b;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+.grade-report-container .class-info span {
+  color: #3b82f6;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.grade-report-container .expand-icon {
+  color: #64748b;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.grade-report-container .grade-cards-grid {
+  background: #f8fafc;
+  padding: 20px 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  animation: slideDown 0.3s ease;
+}
+
+.grade-report-container .grade-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.grade-report-container .grade-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+}
+
+.grade-report-container .grade-header {
+  margin-bottom: 12px;
+}
+
+.grade-report-container .grade-header h4 {
+  color: #1e293b;
   font-size: 16px;
-  margin: 0;
-  line-height: 1.6;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.grade-report-container .grade-subject {
+  color: #3b82f6;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.grade-report-container .grade-content {
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.grade-report-container .grade-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.grade-report-container .summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.grade-report-container .summary-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.grade-report-container .summary-value {
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.grade-report-container .grade-actions {
+  margin-top: auto;
+}
+
+.grade-report-container .view-detail-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.grade-report-container .view-detail-btn:hover {
+  background: #2563eb;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grade-report-container .grade-report-header {
+    padding: 16px 20px;
+  }
+
+  .grade-report-container .class-header {
+    padding: 16px 20px;
+  }
+
+  .grade-report-container .grade-cards-grid {
+    padding: 16px 20px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .grade-report-container .grade-card {
+    padding: 16px;
+  }
 }

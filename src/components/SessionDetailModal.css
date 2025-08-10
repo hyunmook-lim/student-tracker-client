@@ -1,48 +1,57 @@
 /* SessionDetailModal 컴포넌트 스타일 */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.session-detail-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  z-index: 1000;
+  z-index: 99999 !important;
   animation: fadeIn 0.2s ease;
+  padding-top: 20px;
+  width: 100vw !important;
+  height: 100vh !important;
 }
 
-.session-detail-modal {
+.session-detail-modal-content {
   background: white;
   border-radius: 12px;
-  width: 90%;
-  max-width: 1200px;
-  max-height: 90vh;
-  overflow-y: auto;
+  width: 95%;
+  height: 90vh;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
   box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
   animation: slideIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  z-index: 100000 !important;
+  position: relative !important;
 }
 
-.modal-header {
+.session-detail-modal-content .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 32px;
+  padding: 20px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
+  flex-shrink: 0;
 }
 
-.session-title {
+.session-detail-modal-content .session-title {
   margin: 0;
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
 }
 
-.close-btn {
+.session-detail-modal-content .close-btn {
   background: none;
   border: none;
   font-size: 24px;
@@ -58,64 +67,65 @@
   transition: background 0.2s ease;
 }
 
-.close-btn:hover {
+.session-detail-modal-content .close-btn:hover {
   background: #f1f5f9;
   color: #1e293b;
 }
 
-.session-detail-grid {
-  padding: 24px 32px;
+.session-detail-modal-content .session-detail-grid {
+  padding: 20px 32px 16px 32px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  flex-shrink: 0;
 }
 
-.detail-card {
+.session-detail-modal-content .detail-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.section-title {
+.session-detail-modal-content .section-title {
   color: #1e293b;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0;
 }
 
 /* 출결 및 과제 카드 */
-.attendance-assignment-display {
+.session-detail-modal-content .attendance-assignment-display {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 16px;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
-  min-height: 120px;
+  flex: 1;
 }
 
-.info-section {
+.session-detail-modal-content .info-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   flex: 1;
-  padding: 20px;
-  height: 100%;
+  padding: 12px;
 }
 
-.info-label {
+.session-detail-modal-content .info-label {
   color: #64748b;
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 12px;
 }
 
-.status-display {
+.session-detail-modal-content .status-display {
   padding: 8px 20px;
   border-radius: 20px;
   font-size: 18px;
@@ -123,17 +133,17 @@
   text-transform: uppercase;
 }
 
-.status-display.present {
+.session-detail-modal-content .status-display.present {
   background: #dcfce7;
   color: #166534;
 }
 
-.status-display.absent {
+.session-detail-modal-content .status-display.absent {
   background: #fef2f2;
   color: #dc2626;
 }
 
-.grade-display {
+.session-detail-modal-content .grade-display {
   padding: 8px 20px;
   border-radius: 20px;
   font-size: 18px;
@@ -141,217 +151,316 @@
   text-transform: uppercase;
 }
 
-.grade-display.A {
+.session-detail-modal-content .grade-display.A {
   background: #dcfce7;
   color: #166534;
 }
 
-.grade-display.B {
+.session-detail-modal-content .grade-display.B {
   background: #fef3c7;
   color: #92400e;
 }
 
-.grade-display.C {
+.session-detail-modal-content .grade-display.C {
   background: #fef2f2;
   color: #dc2626;
 }
 
 /* 테스트 결과 카드 */
-.test-score-display {
+.session-detail-modal-content .test-score-display {
   text-align: center;
 }
 
-.main-score {
+.session-detail-modal-content .main-score {
   display: flex;
   align-items: baseline;
   justify-content: center;
   margin-bottom: 16px;
 }
 
-.score-number {
+.session-detail-modal-content .score-number {
   font-size: 48px;
   font-weight: 700;
   color: #1e293b;
 }
 
-.score-unit {
+.session-detail-modal-content .score-unit {
   font-size: 18px;
   color: #64748b;
   margin-left: 4px;
 }
 
-.score-details {
+.session-detail-modal-content .score-details {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.info-item {
+.session-detail-modal-content .info-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
 }
 
-.info-item .label {
+.session-detail-modal-content .info-item .label {
   color: #64748b;
 }
 
-.info-item .rank {
+.session-detail-modal-content .info-item .rank {
   color: #1e293b;
   font-weight: 600;
 }
 
 /* 숙제 카드 */
-.homework-list {
+.session-detail-modal-content .homework-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.homework-item {
+.session-detail-modal-content .homework-item {
   padding: 12px;
   background: #f8fafc;
   border-radius: 6px;
   border: 1px solid #e2e8f0;
 }
 
-.homework-title {
+.session-detail-modal-content .homework-title {
   color: #1e293b;
   font-size: 14px;
   font-weight: 500;
 }
 
 /* 하단 섹션 */
-.session-detail-bottom {
-  padding: 0 32px 24px 32px;
+.session-detail-modal-content .session-detail-bottom {
+  padding: 16px 32px 20px 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
-.bottom-grid {
+.session-detail-modal-content .bottom-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 24px;
-  height: 600px; /* 전체 하단 영역의 높이 설정 */
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
 }
 
-.problems-list-card {
+.session-detail-modal-content .problems-list-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 20px;
+  padding: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: 100%; /* 부모 컨테이너의 전체 높이 차지 */
+  height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 0;
 }
 
-.problems-list {
+.session-detail-modal-content .problems-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  flex: 1; /* 부모 컨테이너에서 남은 공간을 모두 차지 */
+  gap: 4px;
+  flex: 1;
   overflow-y: auto;
-  min-height: 0; /* flex 아이템에서 스크롤이 제대로 작동하도록 */
+  min-height: 0;
 }
 
-.problem-item {
+.session-detail-modal-content .problem-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  border: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  border: none;
   border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+.session-detail-modal-content .problem-item:hover {
   background: #f8fafc;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
-.problem-item.correct {
-  border-color: #10b981;
-  background: #f0fdf4;
-}
-
-.problem-item.wrong {
-  border-color: #ef4444;
-  background: #fef2f2;
-}
-
-.problem-info {
+.session-detail-modal-content .problem-left {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   flex: 1;
 }
 
-.problem-number {
-  color: #64748b;
-  font-size: 12px;
-  font-weight: 500;
-  min-width: 20px;
+.session-detail-modal-content .problem-status-badge {
+  width: 6px;
+  height: 24px;
+  border-radius: 3px;
+  flex-shrink: 0;
 }
 
-.problem-title {
+.session-detail-modal-content .problem-status-badge.correct {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.session-detail-modal-content .problem-status-badge.wrong {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.session-detail-modal-content .problem-number {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 25px;
+}
+
+.session-detail-modal-content .problem-major-unit {
   color: #1e293b;
   font-size: 14px;
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.session-detail-modal-content .problem-minor-unit {
+  color: #475569;
+  font-size: 13px;
   font-weight: 500;
 }
 
-.problem-details {
+.session-detail-modal-content .problem-right {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.status-badge {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
+.session-detail-modal-content .difficulty-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 45px;
+  text-align: center;
 }
 
-.status-badge.correct {
+.session-detail-modal-content .difficulty-badge.중 {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.session-detail-modal-content .difficulty-badge.중상 {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.session-detail-modal-content .difficulty-badge.상 {
+  background: #fed7aa;
+  color: #c2410c;
+}
+
+.session-detail-modal-content .difficulty-badge.최상 {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.session-detail-modal-content .status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  min-width: 40px;
+  text-align: center;
+}
+
+.session-detail-modal-content .status-badge.correct {
   background: #10b981;
   color: white;
 }
 
-.status-badge.wrong {
+.session-detail-modal-content .status-badge.wrong {
   background: #ef4444;
   color: white;
 }
 
-.problem-time {
-  color: #64748b;
-  font-size: 12px;
-}
-
 /* 차트 섹션 */
-.charts-column {
+.session-detail-modal-content .charts-column {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-height: 600px; /* 차트 컬럼의 최소 높이 설정 */
+  gap: 16px;
+  height: 100%;
+  min-height: 0;
 }
 
-.chart-card {
+.session-detail-modal-content .chart-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: none;
   border-radius: 8px;
-  padding: 20px;
+  padding: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  min-height: 350px; /* 적절한 고정 최소값 */
-  flex: 1; /* 부모에서 남은 공간을 균등하게 차지 */
+  justify-content: space-between;
+  flex: 1;
+  min-height: 0;
 }
 
-.chart-container {
+.session-detail-modal-content .chart-content {
+  display: flex;
   flex: 1;
+  gap: 12px;
+  min-height: 0;
+}
+
+.session-detail-modal-content .chart-container {
+  flex: 2;
   position: relative;
-  width: 100%;
-  height: 80%; /* 부모 높이의 80% */
-  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  overflow: visible;
+  min-height: 0;
+  gap: 8px;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.session-detail-modal-content .chart-container canvas {
+  max-width: 70%;
+  height: auto;
+}
+
+.session-detail-modal-content .chart-legend {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  min-width: 100px;
+}
+
+.session-detail-modal-content .legend-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  overflow: visible; /* 원그래프가 잘리지 않도록 visible로 변경 */
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.session-detail-modal-content .legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.session-detail-modal-content .legend-label {
+  color: #374151;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
 @keyframes fadeIn {
@@ -375,48 +484,82 @@
 }
 
 @media (max-width: 768px) {
-  .session-detail-modal {
-    width: 95%;
-    max-height: 95vh;
+  .session-detail-modal-content {
+    width: 98%;
+    height: 95vh;
   }
 
-  .modal-header {
+  .session-detail-modal-content .modal-header {
     padding: 16px 20px;
   }
 
-  .session-detail-grid {
+  .session-detail-modal-content .session-detail-grid {
     padding: 16px 20px;
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
-  .session-detail-bottom {
+  .session-detail-modal-content .session-detail-bottom {
     padding: 0 20px 16px 20px;
   }
 
-  .bottom-grid {
+  .session-detail-modal-content .bottom-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
-    height: auto; /* 모바일에서는 자동 높이 */
+    gap: 12px;
   }
 
-  .problems-list {
-    max-height: 300px; /* 모바일에서는 최대 높이 제한 */
-    flex: none; /* 모바일에서는 flex 해제 */
+  .session-detail-modal-content .problem-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 8px;
   }
 
-  .charts-column {
-    gap: 16px;
-    min-height: 500px; /* 모바일에서 차트 컬럼 높이 */
+  .session-detail-modal-content .problem-left {
+    gap: 6px;
+    width: 100%;
   }
 
-  .chart-card {
-    min-height: 300px; /* 모바일에서 적절한 최소 높이 */
-    flex: 1;
+  .session-detail-modal-content .problem-status-badge {
+    width: 4px;
+    height: 20px;
   }
 
-  .chart-container {
-    height: 75%; /* 모바일에서 부모 높이의 75% */
-    overflow: visible;
+  .session-detail-modal-content .problem-major-unit {
+    min-width: auto;
+  }
+
+  .session-detail-modal-content .problem-right {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .session-detail-modal-content .difficulty-badge,
+  .session-detail-modal-content .status-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    min-width: 35px;
+  }
+
+  .session-detail-modal-content .chart-content {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .session-detail-modal-content .chart-container {
+    aspect-ratio: 1;
+  }
+
+  .session-detail-modal-content .chart-legend {
+    padding-left: 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .session-detail-modal-content .legend-item {
+    margin-bottom: 4px;
+    margin-right: 12px;
   }
 }

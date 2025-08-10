@@ -1,5 +1,5 @@
 /* Modal 컴포넌트 스타일 */
-.modal-overlay {
+.app-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   animation: fadeIn 0.2s ease;
 }
 
-.modal-content {
+.app-modal-content {
   background: white;
   border-radius: 12px;
   width: 90%;
@@ -26,7 +26,7 @@
   animation: slideIn 0.3s ease;
 }
 
-.modal-header {
+.app-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,14 +34,14 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.modal-header h3 {
+.app-modal-header h3 {
   margin: 0;
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
 }
 
-.modal-close-btn {
+.app-modal-close {
   background: none;
   border: none;
   font-size: 24px;
@@ -57,24 +57,24 @@
   transition: background 0.2s ease;
 }
 
-.modal-close-btn:hover {
+.app-modal-close:hover {
   background: #f1f5f9;
   color: #1e293b;
 }
 
-.modal-body {
+.app-modal-body {
   padding: 24px 32px;
 }
 
-.modal-body .input-group {
+.app-modal-body .input-group {
   margin-bottom: 20px;
 }
 
-.modal-body .input-group:last-child {
+.app-modal-body .input-group:last-child {
   margin-bottom: 0;
 }
 
-.modal-body .input-group label {
+.app-modal-body .input-group label {
   display: block;
   margin-bottom: 8px;
   color: #374151;
@@ -82,8 +82,8 @@
   font-size: 14px;
 }
 
-.modal-body .input-group input,
-.modal-body .input-group textarea {
+.app-modal-body .input-group input,
+.app-modal-body .input-group textarea {
   width: 100%;
   padding: 12px 16px;
   border: 1px solid #d1d5db;
@@ -95,19 +95,19 @@
   box-sizing: border-box;
 }
 
-.modal-body .input-group input:focus,
-.modal-body .input-group textarea:focus {
+.app-modal-body .input-group input:focus,
+.app-modal-body .input-group textarea:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.modal-body .input-group textarea {
+.app-modal-body .input-group textarea {
   resize: vertical;
   min-height: 80px;
 }
 
-.modal-footer {
+.app-modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
@@ -116,7 +116,7 @@
   background: #f8fafc;
 }
 
-.modal-cancel-btn {
+.app-modal-cancel-btn {
   background: #f3f4f6;
   color: #374151;
   border: 1px solid #d1d5db;
@@ -128,12 +128,12 @@
   transition: all 0.2s ease;
 }
 
-.modal-cancel-btn:hover {
+.app-modal-cancel-btn:hover {
   background: #e5e7eb;
   border-color: #9ca3af;
 }
 
-.modal-submit-btn {
+.app-modal-submit-btn {
   background: #3b82f6;
   color: white;
   border: none;
@@ -145,17 +145,17 @@
   transition: background 0.2s ease;
 }
 
-.modal-submit-btn:hover {
+.app-modal-submit-btn:hover {
   background: #2563eb;
 }
 
 /* 문제 입력 모달 스타일 */
-.question-modal {
+.app-question-modal {
   max-width: 800px;
   max-height: 80vh;
 }
 
-.question-header {
+.app-question-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -164,14 +164,14 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.question-header h4 {
+.app-question-header h4 {
   margin: 0;
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
 }
 
-.add-question-btn {
+.app-add-question-btn {
   background: #3b82f6;
   color: white;
   border: none;
@@ -183,11 +183,11 @@
   transition: background 0.2s ease;
 }
 
-.add-question-btn:hover {
+.app-add-question-btn:hover {
   background: #2563eb;
 }
 
-.questions-table {
+.app-questions-table {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   overflow: hidden;
@@ -195,7 +195,7 @@
   min-width: 0;
 }
 
-.questions-header {
+.app-questions-header {
   display: grid;
   grid-template-columns: 60px 1fr 1fr 1fr 1fr 80px 80px;
   gap: 8px;
@@ -208,7 +208,7 @@
   min-width: 0;
 }
 
-.question-row {
+.app-question-row {
   display: grid;
   grid-template-columns: 60px 1fr 1fr 1fr 1fr 80px 80px;
   gap: 8px;
@@ -218,15 +218,15 @@
   min-width: 0;
 }
 
-.question-row:last-child {
+.app-question-row:last-child {
   border-bottom: none;
 }
 
-.question-row:hover {
+.app-question-row:hover {
   background: #f8fafc;
 }
 
-.question-number {
+.app-question-number {
   color: #64748b;
   font-weight: 600;
   font-size: 14px;

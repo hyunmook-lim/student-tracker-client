@@ -5,34 +5,36 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   border: 1px solid #e2e8f0;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
-.session-info-header {
+.session-info-container .session-info-header {
   padding: 24px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
 }
 
-.session-info-header h2 {
+.session-info-container .session-info-header h2 {
   color: #1e293b;
   font-size: 24px;
   font-weight: 700;
   margin: 0;
 }
 
-.classrooms-list {
+.session-info-container .classrooms-list {
   padding: 0;
 }
 
-.classroom-section {
+.session-info-container .classroom-section {
   border-bottom: 1px solid #e2e8f0;
 }
 
-.classroom-section:last-child {
+.session-info-container .classroom-section:last-child {
   border-bottom: none;
 }
 
-.classroom-header {
+.session-info-container .classroom-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,37 +43,37 @@
   cursor: pointer;
 }
 
-.classroom-header:hover {
+.session-info-container .classroom-header:hover {
   background: #f8fafc;
 }
 
-.classroom-info h3 {
+.session-info-container .classroom-info h3 {
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 4px 0;
 }
 
-.classroom-info p {
+.session-info-container .classroom-info p {
   color: #64748b;
   font-size: 14px;
   margin: 0 0 4px 0;
 }
 
-.classroom-info span {
+.session-info-container .classroom-info span {
   color: #3b82f6;
   font-size: 12px;
   font-weight: 500;
 }
 
-.expand-icon {
+.session-info-container .expand-icon {
   color: #64748b;
   font-size: 18px;
   font-weight: bold;
   transition: transform 0.2s ease;
 }
 
-.sessions-grid {
+.session-info-container .sessions-grid {
   background: #f8fafc;
   padding: 20px 32px;
   display: grid;
@@ -80,7 +82,7 @@
   animation: slideDown 0.3s ease;
 }
 
-.session-card {
+.session-info-container .session-card {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
@@ -92,46 +94,46 @@
   height: 100%;
 }
 
-.session-card:hover {
+.session-info-container .session-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
   border-color: #3b82f6;
 }
 
-.session-header {
+.session-info-container .session-header {
   margin-bottom: 12px;
 }
 
-.session-header h4 {
+.session-info-container .session-header h4 {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
   margin: 0 0 4px 0;
 }
 
-.session-date {
+.session-info-container .session-date {
   color: #6b7280;
   font-size: 12px;
   font-family: monospace;
 }
 
-.session-content {
+.session-info-container .session-content {
   flex: 1;
   margin-bottom: 16px;
 }
 
-.session-content p {
+.session-info-container .session-content p {
   color: #64748b;
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
 }
 
-.session-actions {
+.session-info-container .session-actions {
   margin-top: auto;
 }
 
-.view-detail-btn {
+.session-info-container .view-detail-btn {
   background: #3b82f6;
   color: white;
   border: none;
@@ -144,7 +146,7 @@
   width: 100%;
 }
 
-.view-detail-btn:hover {
+.session-info-container .view-detail-btn:hover {
   background: #2563eb;
 }
 
@@ -160,21 +162,21 @@
 }
 
 @media (max-width: 768px) {
-  .session-info-header {
+  .session-info-container .session-info-header {
     padding: 16px 20px;
   }
 
-  .classroom-header {
+  .session-info-container .classroom-header {
     padding: 16px 20px;
   }
 
-  .sessions-grid {
+  .session-info-container .sessions-grid {
     padding: 16px 20px;
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .session-card {
+  .session-info-container .session-card {
     padding: 16px;
   }
 }

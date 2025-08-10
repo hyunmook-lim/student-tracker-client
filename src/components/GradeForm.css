@@ -5,43 +5,43 @@
   overflow: hidden;
 }
 
-.form-header {
+.grade-form .form-header {
   background: #f8fafc;
   padding: 20px 24px;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.form-header h3 {
+.grade-form .form-header h3 {
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
   margin: 0;
 }
 
-.form-body {
+.grade-form .form-body {
   padding: 24px;
 }
 
-.grade-grid {
+.grade-form .grade-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-bottom: 24px;
 }
 
-.grade-item {
+.grade-form .grade-item {
   display: flex;
   flex-direction: column;
 }
 
-.grade-item label {
+.grade-form .grade-item label {
   color: #374151;
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 6px;
 }
 
-.grade-item input {
+.grade-form .grade-item input {
   padding: 8px 12px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
@@ -49,13 +49,13 @@
   transition: border-color 0.2s ease;
 }
 
-.grade-item input:focus {
+.grade-form .grade-item input:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.grade-summary {
+.grade-form .grade-summary {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 6px;
@@ -63,26 +63,26 @@
   text-align: center;
 }
 
-.average-display {
+.grade-form .average-display {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-.average-label {
+.grade-form .average-label {
   color: #64748b;
   font-size: 14px;
   font-weight: 500;
 }
 
-.average-value {
+.grade-form .average-value {
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
 }
 
-.form-actions {
+.grade-form .form-actions {
   display: flex;
   gap: 12px;
   justify-content: flex-end;
@@ -91,8 +91,8 @@
   background: #f8fafc;
 }
 
-.cancel-btn,
-.submit-btn {
+.grade-form .cancel-btn,
+.grade-form .submit-btn {
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
@@ -102,37 +102,37 @@
   transition: background 0.2s ease;
 }
 
-.cancel-btn {
+.grade-form .cancel-btn {
   background: #f3f4f6;
   color: #374151;
 }
 
-.cancel-btn:hover {
+.grade-form .cancel-btn:hover {
   background: #e5e7eb;
 }
 
-.submit-btn {
+.grade-form .submit-btn {
   background: #10b981;
   color: white;
 }
 
-.submit-btn:hover {
+.grade-form .submit-btn:hover {
   background: #059669;
 }
 
 @media (max-width: 768px) {
-  .grade-grid {
+  .grade-form .grade-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .form-actions {
+  .grade-form .form-actions {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .cancel-btn,
-  .submit-btn {
+  .grade-form .cancel-btn,
+  .grade-form .submit-btn {
     width: 100%;
   }
 }

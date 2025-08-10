@@ -7,7 +7,7 @@
   overflow: hidden;
 }
 
-.student-list-header {
+.student-list .student-list-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,14 +16,14 @@
   background: #f8fafc;
 }
 
-.student-list-header h2 {
+.student-list .student-list-header h2 {
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
-.add-student-btn {
+.student-list .add-student-btn {
   background: #3b82f6;
   color: white;
   border: none;
@@ -35,25 +35,25 @@
   transition: background 0.2s ease;
 }
 
-.add-student-btn:hover {
+.student-list .add-student-btn:hover {
   background: #2563eb;
 }
 
-.student-table {
+.student-list .student-table {
   overflow-x: auto;
 }
 
-.student-table table {
+.student-list .student-table table {
   width: 100%;
   border-collapse: collapse;
   min-width: 800px;
 }
 
-.student-table thead {
+.student-list .student-table thead {
   background: #f8fafc;
 }
 
-.student-table th {
+.student-list .student-table th {
   padding: 16px 12px;
   text-align: left;
   font-weight: 600;
@@ -62,26 +62,26 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.student-table td {
+.student-list .student-table td {
   padding: 16px 12px;
   border-bottom: 1px solid #e2e8f0;
   font-size: 14px;
   color: #374151;
 }
 
-.student-table tbody tr:hover {
+.student-list .student-table tbody tr:hover {
   background: #f8fafc;
 }
 
-.action-buttons {
+.student-list .action-buttons {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.edit-btn,
-.grades-btn,
-.delete-btn {
+.student-list .edit-btn,
+.student-list .grades-btn,
+.student-list .delete-btn {
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
@@ -92,58 +92,58 @@
   min-width: 50px;
 }
 
-.edit-btn {
+.student-list .edit-btn {
   background: #3b82f6;
   color: white;
 }
 
-.edit-btn:hover {
+.student-list .edit-btn:hover {
   background: #2563eb;
 }
 
-.grades-btn {
+.student-list .grades-btn {
   background: #10b981;
   color: white;
 }
 
-.grades-btn:hover {
+.student-list .grades-btn:hover {
   background: #059669;
 }
 
-.delete-btn {
+.student-list .delete-btn {
   background: #ef4444;
   color: white;
 }
 
-.delete-btn:hover {
+.student-list .delete-btn:hover {
   background: #dc2626;
 }
 
 @media (max-width: 768px) {
-  .student-list-header {
+  .student-list .student-list-header {
     padding: 16px 20px;
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
   }
 
-  .student-table {
+  .student-list .student-table {
     font-size: 12px;
   }
 
-  .student-table th,
-  .student-table td {
+  .student-list .student-table th,
+  .student-list .student-table td {
     padding: 12px 8px;
   }
 
-  .action-buttons {
+  .student-list .action-buttons {
     flex-direction: column;
     gap: 4px;
   }
 
-  .edit-btn,
-  .grades-btn,
-  .delete-btn {
+  .student-list .edit-btn,
+  .student-list .grades-btn,
+  .student-list .delete-btn {
     padding: 4px 8px;
     font-size: 11px;
   }

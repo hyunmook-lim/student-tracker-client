@@ -5,32 +5,32 @@
   overflow: hidden;
 }
 
-.form-header {
+.student-form .form-header {
   background: #f8fafc;
   padding: 20px 24px;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.form-header h3 {
+.student-form .form-header h3 {
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
   margin: 0;
 }
 
-.form-body {
+.student-form .form-body {
   padding: 24px;
 }
 
-.form-section {
+.student-form .form-section {
   margin-bottom: 32px;
 }
 
-.form-section:last-child {
+.student-form .form-section:last-child {
   margin-bottom: 0;
 }
 
-.form-section h4 {
+.student-form .form-section h4 {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
@@ -39,32 +39,32 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.form-grid {
+.student-form .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
 }
 
-.grades-grid {
+.student-form .grades-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
 }
 
-.form-group {
+.student-form .form-group {
   display: flex;
   flex-direction: column;
 }
 
-.form-group label {
+.student-form .form-group label {
   color: #374151;
   font-size: 14px;
   font-weight: 500;
   margin-bottom: 6px;
 }
 
-.form-group input,
-.form-group select {
+.student-form .form-group input,
+.student-form .form-group select {
   padding: 8px 12px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
@@ -73,18 +73,18 @@
   font-family: inherit;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.student-form .form-group input:focus,
+.student-form .form-group select:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.form-group input[type='number'] {
+.student-form .form-group input[type='number'] {
   text-align: center;
 }
 
-.form-actions {
+.student-form .form-actions {
   display: flex;
   gap: 12px;
   justify-content: flex-end;
@@ -93,8 +93,8 @@
   background: #f8fafc;
 }
 
-.cancel-btn,
-.submit-btn {
+.student-form .cancel-btn,
+.student-form .submit-btn {
   padding: 8px 16px;
   border: none;
   border-radius: 6px;
@@ -104,38 +104,38 @@
   transition: background 0.2s ease;
 }
 
-.cancel-btn {
+.student-form .cancel-btn {
   background: #f3f4f6;
   color: #374151;
 }
 
-.cancel-btn:hover {
+.student-form .cancel-btn:hover {
   background: #e5e7eb;
 }
 
-.submit-btn {
+.student-form .submit-btn {
   background: #3b82f6;
   color: white;
 }
 
-.submit-btn:hover {
+.student-form .submit-btn:hover {
   background: #2563eb;
 }
 
 @media (max-width: 768px) {
-  .form-grid,
-  .grades-grid {
+  .student-form .form-grid,
+  .student-form .grades-grid {
     grid-template-columns: 1fr;
     gap: 12px;
   }
 
-  .form-actions {
+  .student-form .form-actions {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .cancel-btn,
-  .submit-btn {
+  .student-form .cancel-btn,
+  .student-form .submit-btn {
     width: 100%;
   }
 }
