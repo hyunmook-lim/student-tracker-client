@@ -13,6 +13,9 @@
   padding: 24px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .session-info-container .session-info-header h2 {
@@ -20,6 +23,31 @@
   font-size: 24px;
   font-weight: 700;
   margin: 0;
+}
+
+.session-info-container .add-classroom-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.session-info-container .add-classroom-btn:hover {
+  background: #2563eb;
+}
+
+.session-info-container .add-classroom-btn::before {
+  content: '+';
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .session-info-container .classrooms-list {
@@ -164,6 +192,14 @@
 @media (max-width: 768px) {
   .session-info-container .session-info-header {
     padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .session-info-container .add-classroom-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .session-info-container .classroom-header {

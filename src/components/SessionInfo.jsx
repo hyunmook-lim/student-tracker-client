@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSessionStore, useClassroomStore } from '../store';
 import SessionDetailModal from './SessionDetailModal';
+import ClassroomEnrollmentModal from './ClassroomEnrollmentModal';
 import './SessionInfo.css';
 
 function SessionInfo() {
@@ -13,6 +14,8 @@ function SessionInfo() {
   } = useSessionStore();
 
   const { classrooms } = useClassroomStore();
+  
+  const [isEnrollmentModalOpen, setIsEnrollmentModalOpen] = useState(false);
 
   const handleSessionClick = session => {
     setSelectedSession(session);
@@ -22,11 +25,22 @@ function SessionInfo() {
     setSelectedSession(null);
   };
 
+  const handleOpenEnrollmentModal = () => {
+    setIsEnrollmentModalOpen(true);
+  };
+
+  const handleCloseEnrollmentModal = () => {
+    setIsEnrollmentModalOpen(false);
+  };
+
   return (
     <>
       <div className='session-info-container'>
         <div className='session-info-header'>
           <h2>수업 정보</h2>
+          <button className='add-classroom-btn' onClick={handleOpenEnrollmentModal}>
+            수업 추가
+          </button>
         </div>
 
         <div className='classrooms-list'>
@@ -78,6 +92,12 @@ function SessionInfo() {
         session={selectedSession}
         isOpen={!!selectedSession}
         onClose={handleCloseModal}
+      />
+
+      {/* 수업 참여 신청 모달 */}
+      <ClassroomEnrollmentModal
+        isOpen={isEnrollmentModalOpen}
+        onClose={handleCloseEnrollmentModal}
       />
     </>
   );
