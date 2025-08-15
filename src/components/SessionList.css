@@ -116,67 +116,111 @@
   transition: transform 0.2s ease;
 }
 
-.session-list-container .sessions-grid {
+/* 회차별 섹션 스타일 */
+.session-list-container .sessions-section {
   background: #f8fafc;
   padding: 20px 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
   animation: slideDown 0.3s ease;
+}
+
+.session-list-container .sessions-header {
+  margin-bottom: 16px;
+}
+
+.session-list-container .sessions-header h4 {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.session-list-container .sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .session-list-container .session-item {
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 20px;
-  transition: all 0.2s ease;
-  cursor: pointer;
+  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
+  align-items: center;
+  transition: all 0.2s ease;
 }
 
 .session-list-container .session-item:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
 }
 
 .session-list-container .session-info {
-  flex: 1;
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.session-list-container .session-info h4 {
-  color: #1e293b;
-  font-size: 16px;
-  font-weight: 600;
-  margin: 0;
   flex: 1;
 }
 
-.session-list-container .session-info p {
-  color: #64748b;
-  font-size: 14px;
-  margin: 0;
-  flex: 2;
+.session-list-container .session-title h5 {
+  color: #1e293b;
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
 }
 
 .session-list-container .session-date {
-  color: #3b82f6;
+  color: #6b7280;
   font-size: 12px;
-  font-weight: 500;
-  flex-shrink: 0;
-  min-width: 80px;
+}
+
+.session-list-container .session-status .status {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.session-list-container .session-status .status.completed {
+  background: #dcfce7;
+  color: #166534;
 }
 
 .session-list-container .session-actions {
   display: flex;
   gap: 8px;
-  flex-shrink: 0;
+}
+
+/* 버튼 스타일 */
+.session-list-container .btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.session-list-container .btn-edit {
+  background: #3b82f6;
+  color: white;
+}
+
+.session-list-container .btn-edit:hover {
+  background: #2563eb;
+}
+
+.session-list-container .btn-delete {
+  background: #ef4444;
+  color: white;
+}
+
+.session-list-container .btn-delete:hover {
+  background: #dc2626;
 }
 
 .session-list-container .edit-btn,
@@ -581,9 +625,24 @@
     padding: 16px 24px;
   }
 
-  .session-list-container .sessions-grid {
-    grid-template-columns: 1fr;
+  .session-list-container .sessions-section {
     padding: 16px 24px;
+  }
+
+  .session-list-container .session-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .session-list-container .session-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .session-list-container .session-actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 
   .session-list-container .modal-content {

@@ -89,20 +89,29 @@ function SessionList() {
             </div>
 
             {expandedClasses.has(classroom.id) && (
-              <div className='sessions-list'>
-                {getSessionsByClassroom(classroom.id).map(session => (
-                  <div key={session.id} className='session-item'>
-                    <div className='session-info'>
-                      <span className='session-date'>{session.date}</span>
-                      <h4>{session.title}</h4>
-                      <p>{session.description}</p>
+              <div className='sessions-section'>
+                <div className='sessions-header'>
+                  <h4>회차별 수업 관리</h4>
+                </div>
+                <div className='sessions-list'>
+                  {getSessionsByClassroom(classroom.id).map(session => (
+                    <div key={session.id} className='session-item'>
+                      <div className='session-info'>
+                        <div className='session-title'>
+                          <h5>{session.title}</h5>
+                          <span className='session-date'>{session.date}</span>
+                        </div>
+                        <div className='session-status'>
+                          <span className='status completed'>완료</span>
+                        </div>
+                      </div>
+                      <div className='session-actions'>
+                        <button className='btn btn-edit'>수정</button>
+                        <button className='btn btn-delete'>삭제</button>
+                      </div>
                     </div>
-                    <div className='session-actions'>
-                      <button className='edit-btn'>수정</button>
-                      <button className='delete-btn'>삭제</button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
           </div>
