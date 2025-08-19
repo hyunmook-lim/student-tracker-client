@@ -24,7 +24,7 @@
 }
 
 .classroom-list-container .add-classroom-btn {
-  background: #3b82f6;
+  background: #10b981;
   color: white;
   border: none;
   padding: 12px 20px;
@@ -39,7 +39,7 @@
 }
 
 .classroom-list-container .add-classroom-btn:hover {
-  background: #2563eb;
+  background: #059669;
 }
 
 .classroom-list-container .classroom-grid {
@@ -86,11 +86,117 @@
   font-weight: 500;
 }
 
-.classroom-list-container .expand-icon {
-  color: #64748b;
-  font-size: 18px;
-  font-weight: bold;
-  transition: transform 0.2s ease;
+/* 수정 폼 스타일 */
+.classroom-list-container .edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.classroom-list-container .edit-input,
+.classroom-list-container .edit-textarea {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.classroom-list-container .edit-input:focus,
+.classroom-list-container .edit-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.classroom-list-container .edit-input {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.classroom-list-container .edit-textarea {
+  resize: vertical;
+  min-height: 60px;
+  font-size: 14px;
+}
+
+/* 액션 버튼 스타일 */
+.classroom-list-container .classroom-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.classroom-list-container .action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.classroom-list-container .edit-btn,
+.classroom-list-container .delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.classroom-list-container .edit-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.classroom-list-container .edit-btn:hover {
+  background: #2563eb;
+}
+
+.classroom-list-container .delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.classroom-list-container .delete-btn:hover {
+  background: #dc2626;
+}
+
+/* 수정 모드 액션 버튼 */
+.classroom-list-container .edit-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.classroom-list-container .edit-actions .save-btn,
+.classroom-list-container .edit-actions .cancel-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.classroom-list-container .edit-actions .save-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.classroom-list-container .edit-actions .save-btn:hover {
+  background: #2563eb;
+}
+
+.classroom-list-container .edit-actions .cancel-btn {
+  background: #6b7280;
+  color: white;
+}
+
+.classroom-list-container .edit-actions .cancel-btn:hover {
+  background: #4b5563;
 }
 
 .classroom-list-container .students-section {
@@ -290,7 +396,9 @@
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 14px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
   box-sizing: border-box;
 }
 
@@ -382,5 +490,16 @@
   .classroom-list-container .modal-content {
     width: 95%;
     margin: 20px;
+  }
+
+  .classroom-list-container .classroom-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .classroom-list-container .action-buttons,
+  .classroom-list-container .edit-actions {
+    flex-direction: column;
+    gap: 6px;
   }
 }

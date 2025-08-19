@@ -9,8 +9,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  padding: 20px;
+  z-index: 99999;
+  padding: 2%;
 }
 
 .wrong-pattern-modal {
@@ -19,35 +19,36 @@
   box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 95%;
   max-width: 1200px;
-  width: 100%;
   max-height: 90vh;
-  overflow-y: auto;
+  overflow: hidden;
   position: relative;
+  z-index: 100000;
 }
 
 /* 모달 헤더 */
-.modal-header {
+.wrong-pattern-modal .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 32px;
+  padding: 2% 3%;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
   border-radius: 16px 16px 0 0;
 }
 
-.modal-header h2 {
+.wrong-pattern-modal .modal-header h2 {
   color: #1e293b;
-  font-size: 24px;
+  font-size: clamp(18px, 2.5vw, 24px);
   font-weight: 700;
   margin: 0;
 }
 
-.close-button {
+.wrong-pattern-modal .close-button {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: clamp(18px, 2.5vw, 24px);
   color: #64748b;
   cursor: pointer;
   padding: 8px;
@@ -60,89 +61,103 @@
   height: 40px;
 }
 
-.close-button:hover {
+.wrong-pattern-modal .close-button:hover {
   background: #e2e8f0;
   color: #1e293b;
 }
 
 /* 모달 콘텐츠 */
-.modal-content {
-  padding: 32px;
+.wrong-pattern-modal .modal-content {
+  padding: 3%;
+  overflow-y: auto;
+  max-height: calc(90vh - 80px);
 }
 
 /* 레이아웃 */
-.content-layout {
+.wrong-pattern-modal .content-layout {
   display: flex;
-  gap: 32px;
+  gap: 3%;
   align-items: start;
 }
 
 /* 왼쪽 섹션 */
-.left-section {
+.wrong-pattern-modal .left-section {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 3%;
+  padding: 2% 1.5%;
 }
 
 /* 전체 통계 */
-.overall-stats {
+.wrong-pattern-modal .overall-stats {
   display: flex;
-  gap: 16px;
+  gap: 1.5%;
+  margin-bottom: 2%;
 }
 
-.stat-card {
+.wrong-pattern-modal .stat-card {
   flex: 1;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 20px;
+  padding: 2%;
   text-align: center;
   transition: all 0.2s ease;
 }
 
-.stat-card:hover {
+.wrong-pattern-modal .stat-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
-.stat-number {
-  font-size: 28px;
+.wrong-pattern-modal .stat-number {
+  font-size: clamp(20px, 3vw, 28px);
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 8px;
 }
 
-.stat-number.wrong {
+.wrong-pattern-modal .stat-number.wrong {
   color: #ef4444;
 }
 
-.stat-label {
+.wrong-pattern-modal .stat-label {
   color: #64748b;
-  font-size: 14px;
+  font-size: clamp(12px, 1.5vw, 14px);
   font-weight: 500;
 }
 
 /* 오답률 top3 섹션 */
-.top3-section h3 {
-  color: #1e293b;
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0 0 16px 0;
+.wrong-pattern-modal .top3-section {
+  padding: 2% 0;
 }
 
-.top3-cards {
+.wrong-pattern-modal .top3-section h3 {
+  color: #1e293b;
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 600;
+  margin: 0 0 2% 0;
+}
+
+.wrong-pattern-modal .top3-cards {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 3%;
+  padding: 1% 0;
 }
 
-.top3-card {
-  height: 120px;
+.wrong-pattern-modal .top3-card {
+  height: clamp(80px, 12vh, 120px);
   perspective: 1000px;
+  margin-bottom: 2%;
 }
 
-.card-inner {
+.wrong-pattern-modal .top3-card:last-child {
+  margin-bottom: 0;
+}
+
+.wrong-pattern-modal .card-inner {
   position: relative;
   width: 100%;
   height: 100%;
@@ -151,46 +166,46 @@
   transform-style: preserve-3d;
 }
 
-.top3-card:hover .card-inner {
+.wrong-pattern-modal .top3-card:hover .card-inner {
   transform: rotateX(180deg);
 }
 
-.card-front,
-.card-back {
+.wrong-pattern-modal .card-front,
+.wrong-pattern-modal .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   border-radius: 12px;
-  padding: 16px;
+  padding: 1.5%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.card-front {
+.wrong-pattern-modal .card-front {
   background: #ffffff;
   border: 1px solid #e2e8f0;
 }
 
-.front-content {
+.wrong-pattern-modal .front-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  gap: 12px;
+  gap: 1.2%;
 }
 
-.card-back {
+.wrong-pattern-modal .card-back {
   background: #1e293b;
   color: white;
   transform: rotateX(180deg);
 }
 
-.rank-badge {
-  width: 32px;
-  height: 32px;
+.wrong-pattern-modal .rank-badge {
+  width: clamp(28px, 4vw, 32px);
+  height: clamp(28px, 4vw, 32px);
   border-radius: 50%;
   background: #1e293b;
   color: white;
@@ -198,44 +213,43 @@
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 14px;
+  font-size: clamp(12px, 1.5vw, 14px);
   flex-shrink: 0;
 }
 
-.top3-card:nth-child(1) .rank-badge {
+.wrong-pattern-modal .top3-card:nth-child(1) .rank-badge {
   background: #ef4444;
 }
 
-.top3-card:nth-child(2) .rank-badge {
+.wrong-pattern-modal .top3-card:nth-child(2) .rank-badge {
   background: #f59e0b;
 }
 
-.top3-card:nth-child(3) .rank-badge {
+.wrong-pattern-modal .top3-card:nth-child(3) .rank-badge {
   background: #10b981;
 }
 
-.unit-name {
+.wrong-pattern-modal .unit-name {
   font-weight: 500;
   color: #1e293b;
-  font-size: 14px;
+  font-size: clamp(12px, 1.5vw, 14px);
   flex: 1;
 }
 
-.unit-wrong-rate {
+.wrong-pattern-modal .unit-wrong-rate {
   font-weight: 700;
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vw, 16px);
 }
 
 /* 카드 뒤면 스타일 */
-
-.sub-units-list {
+.wrong-pattern-modal .sub-units-list {
   display: flex;
   flex-direction: column;
   gap: 6px;
   width: 100%;
 }
 
-.sub-unit-item {
+.wrong-pattern-modal .sub-unit-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -243,118 +257,121 @@
   border-bottom: 1px solid #334155;
 }
 
-.sub-unit-item:last-child {
+.wrong-pattern-modal .sub-unit-item:last-child {
   border-bottom: none;
 }
 
-.sub-unit-name {
-  font-size: 11px;
+.wrong-pattern-modal .sub-unit-name {
+  font-size: clamp(9px, 1.2vw, 11px);
   color: #e2e8f0;
   text-align: left;
 }
 
-.sub-unit-rate {
-  font-size: 11px;
+.wrong-pattern-modal .sub-unit-rate {
+  font-size: clamp(9px, 1.2vw, 11px);
   font-weight: 600;
 }
 
 /* 오른쪽 섹션 */
-.right-section {
+.wrong-pattern-modal .right-section {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 3%;
+  padding: 2% 1.5%;
 }
 
 /* 히트맵 섹션 */
-.heatmap-section {
-  margin-bottom: 0;
+.wrong-pattern-modal .heatmap-section {
+  margin-bottom: 3%;
+  padding: 2% 0;
 }
 
-.heatmap-section h3 {
+.wrong-pattern-modal .heatmap-section h3 {
   color: #1e293b;
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0 0 2% 0;
 }
 
-.heatmap-container {
+.wrong-pattern-modal .heatmap-container {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 16px;
+  margin-bottom: 1.5%;
+  width: 100%;
 }
 
-.heatmap-header {
+.wrong-pattern-modal .heatmap-header {
   display: grid;
-  grid-template-columns: 150px repeat(4, 1fr);
+  grid-template-columns: 20% repeat(4, 1fr);
   background: #f8fafc;
   border-bottom: 1px solid #e2e8f0;
 }
 
-.heatmap-corner {
-  padding: 12px;
+.wrong-pattern-modal .heatmap-corner {
+  padding: 1.2%;
   border-right: 1px solid #e2e8f0;
   font-weight: 600;
   color: #1e293b;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
 }
 
-.heatmap-header-cell {
-  padding: 12px;
+.wrong-pattern-modal .heatmap-header-cell {
+  padding: 1.2%;
   text-align: center;
   font-weight: 600;
   color: #1e293b;
   border-right: 1px solid #e2e8f0;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
 }
 
-.heatmap-header-cell:last-child {
+.wrong-pattern-modal .heatmap-header-cell:last-child {
   border-right: none;
 }
 
-.heatmap-body {
+.wrong-pattern-modal .heatmap-body {
   display: flex;
   flex-direction: column;
 }
 
-.heatmap-row {
+.wrong-pattern-modal .heatmap-row {
   display: grid;
-  grid-template-columns: 150px repeat(4, 1fr);
+  grid-template-columns: 20% repeat(4, 1fr);
   border-bottom: 1px solid #e2e8f0;
 }
 
-.heatmap-row:last-child {
+.wrong-pattern-modal .heatmap-row:last-child {
   border-bottom: none;
 }
 
-.heatmap-row-header {
-  padding: 12px;
+.wrong-pattern-modal .heatmap-row-header {
+  padding: 1.2%;
   background: #f8fafc;
   border-right: 1px solid #e2e8f0;
   font-weight: 500;
   color: #1e293b;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
 }
 
-.heatmap-cell {
-  padding: 12px;
+.wrong-pattern-modal .heatmap-cell {
+  padding: 1.2%;
   text-align: center;
   font-weight: 600;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
   border-right: 1px solid #e2e8f0;
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
-.heatmap-cell:last-child {
+.wrong-pattern-modal .heatmap-cell:last-child {
   border-right: none;
 }
 
-.heatmap-cell:hover {
+.wrong-pattern-modal .heatmap-cell:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 10;
@@ -362,265 +379,319 @@
 }
 
 /* 히트맵 범례 */
-.heatmap-legend {
+.wrong-pattern-modal .heatmap-legend {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 1.5%;
   flex-wrap: wrap;
-  padding: 12px;
+  padding: 1.2%;
   background: #f8fafc;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
 }
 
-.legend-item {
+.wrong-pattern-modal .legend-item {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: clamp(10px, 1.2vw, 12px);
   color: #64748b;
 }
 
-.legend-color {
-  width: 12px;
-  height: 12px;
+.wrong-pattern-modal .legend-color {
+  width: clamp(10px, 1.2vw, 12px);
+  height: clamp(10px, 1.2vw, 12px);
   border-radius: 4px;
   flex-shrink: 0;
 }
 
 /* 트리맵 섹션 */
-.treemap-section {
+.wrong-pattern-modal .treemap-section {
   margin-bottom: 0;
+  padding: 2% 0;
 }
 
-.treemap-section h3 {
+.wrong-pattern-modal .treemap-section h3 {
   color: #1e293b;
-  font-size: 18px;
+  font-size: clamp(16px, 2vw, 18px);
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0 0 2% 0;
 }
 
-.treemap-container {
+.wrong-pattern-modal .treemap-container {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 16px;
-  height: 340px;
+  padding: 1.5%;
+  margin-bottom: 1.5%;
+  height: clamp(280px, 40vh, 340px);
+  width: 100%;
+  overflow: hidden;
 }
 
 /* 트리맵 범례 */
-.treemap-legend {
+.wrong-pattern-modal .treemap-legend {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 1.5%;
   flex-wrap: wrap;
-  padding: 12px;
+  padding: 1.2%;
   background: #f8fafc;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
 }
 
-.treemap-legend .legend-color.high {
+.wrong-pattern-modal .treemap-legend .legend-color.high {
   background-color: #dc2626;
 }
 
-.treemap-legend .legend-color.medium {
+.wrong-pattern-modal .treemap-legend .legend-color.medium {
   background-color: #f59e0b;
 }
 
-.treemap-legend .legend-color.low {
+.wrong-pattern-modal .treemap-legend .legend-color.low {
   background-color: #10b981;
 }
 
 /* 커스텀 툴팁 */
-.custom-tooltip {
+.wrong-pattern-modal .custom-tooltip {
   background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 12px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: clamp(12px, 1.5vw, 14px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.tooltip-label {
+.wrong-pattern-modal .tooltip-label {
   font-weight: 600;
   margin: 0 0 8px 0;
   color: #fbbf24;
 }
 
-.tooltip-content {
+.wrong-pattern-modal .tooltip-content {
   margin: 4px 0;
   color: #e5e7eb;
 }
 
 /* 반응형 디자인 */
 @media (max-width: 1024px) {
-  .content-layout {
+  .wrong-pattern-modal .content-layout {
     flex-direction: column;
-    gap: 24px;
+    gap: 3%;
   }
 
-  .overall-stats {
-    gap: 12px;
+  .wrong-pattern-modal .left-section,
+  .wrong-pattern-modal .right-section {
+    padding: 2% 1%;
   }
 
-  .top3-card {
-    height: 100px;
+  .wrong-pattern-modal .overall-stats {
+    gap: 1.2%;
+    margin-bottom: 2%;
+  }
+
+  .wrong-pattern-modal .top3-card {
+    height: clamp(70px, 10vh, 100px);
   }
 }
 
 @media (max-width: 768px) {
+  .wrong-pattern-modal {
+    width: 98%;
+    max-width: none;
+  }
+
   .wrong-pattern-modal-overlay {
-    padding: 16px;
+    padding: 1.5%;
   }
 
-  .modal-header {
-    padding: 20px 24px;
+  .wrong-pattern-modal .modal-header {
+    padding: 2% 2.5%;
   }
 
-  .modal-header h2 {
-    font-size: 20px;
+  .wrong-pattern-modal .modal-header h2 {
+    font-size: clamp(16px, 2.5vw, 20px);
   }
 
-  .modal-content {
-    padding: 24px;
+  .wrong-pattern-modal .modal-content {
+    padding: 2.5%;
   }
 
-  .overall-stats {
+  .wrong-pattern-modal .left-section,
+  .wrong-pattern-modal .right-section {
+    padding: 1.5% 1%;
+    gap: 2.5%;
+  }
+
+  .wrong-pattern-modal .overall-stats {
     flex-direction: column;
-    gap: 12px;
+    gap: 1.2%;
+    margin-bottom: 2%;
   }
 
-  .stat-card {
-    padding: 16px;
+  .wrong-pattern-modal .stat-card {
+    padding: 1.5%;
   }
 
-  .stat-number {
-    font-size: 24px;
+  .wrong-pattern-modal .stat-number {
+    font-size: clamp(18px, 3vw, 24px);
   }
 
-  .top3-cards {
-    gap: 8px;
+  .wrong-pattern-modal .top3-section,
+  .wrong-pattern-modal .heatmap-section,
+  .wrong-pattern-modal .treemap-section {
+    padding: 1.5% 0;
   }
 
-  .top3-card {
+  .wrong-pattern-modal .top3-cards {
+    gap: 1.5%;
+  }
+
+  .wrong-pattern-modal .top3-card {
     flex-direction: row;
     text-align: left;
-    gap: 12px;
-    padding: 12px;
+    gap: 1.2%;
+    padding: 1.2%;
+    margin-bottom: 1%;
   }
 
-  .heatmap-header {
-    grid-template-columns: 120px repeat(4, 1fr);
+  .wrong-pattern-modal .top3-card:last-child {
+    margin-bottom: 0;
   }
 
-  .heatmap-row {
-    grid-template-columns: 120px repeat(4, 1fr);
+  .wrong-pattern-modal .heatmap-header {
+    grid-template-columns: 25% repeat(4, 1fr);
   }
 
-  .heatmap-corner,
-  .heatmap-header-cell,
-  .heatmap-row-header,
-  .heatmap-cell {
-    padding: 8px;
-    font-size: 10px;
+  .wrong-pattern-modal .heatmap-row {
+    grid-template-columns: 25% repeat(4, 1fr);
   }
 
-  .heatmap-legend {
-    gap: 12px;
-    padding: 10px;
+  .wrong-pattern-modal .heatmap-corner,
+  .wrong-pattern-modal .heatmap-header-cell,
+  .wrong-pattern-modal .heatmap-row-header,
+  .wrong-pattern-modal .heatmap-cell {
+    padding: 1%;
+    font-size: clamp(8px, 1vw, 10px);
   }
 
-  .legend-item {
-    font-size: 11px;
+  .wrong-pattern-modal .heatmap-legend {
+    gap: 1.2%;
+    padding: 1%;
   }
 
-  .treemap-container {
-    height: 280px;
-    padding: 12px;
+  .wrong-pattern-modal .legend-item {
+    font-size: clamp(9px, 1.1vw, 11px);
   }
 
-  .treemap-legend {
-    gap: 12px;
-    padding: 10px;
+  .wrong-pattern-modal .treemap-container {
+    height: clamp(240px, 35vh, 280px);
+    padding: 1.2%;
+  }
+
+  .wrong-pattern-modal .treemap-legend {
+    gap: 1.2%;
+    padding: 1%;
   }
 }
 
 @media (max-width: 480px) {
+  .wrong-pattern-modal {
+    width: 99%;
+    max-width: none;
+  }
+
   .wrong-pattern-modal-overlay {
-    padding: 12px;
+    padding: 1%;
   }
 
-  .modal-header {
-    padding: 16px 20px;
+  .wrong-pattern-modal .modal-header {
+    padding: 1.5% 2%;
   }
 
-  .modal-content {
-    padding: 20px;
+  .wrong-pattern-modal .modal-content {
+    padding: 2%;
   }
 
-  .stat-card {
-    padding: 12px;
+  .wrong-pattern-modal .left-section,
+  .wrong-pattern-modal .right-section {
+    padding: 1% 0.5%;
+    gap: 2%;
   }
 
-  .stat-number {
-    font-size: 20px;
+  .wrong-pattern-modal .stat-card {
+    padding: 1.2%;
   }
 
-  .top3-card {
-    padding: 10px;
+  .wrong-pattern-modal .stat-number {
+    font-size: clamp(16px, 2.5vw, 20px);
   }
 
-  .rank-badge {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
+  .wrong-pattern-modal .top3-section,
+  .wrong-pattern-modal .heatmap-section,
+  .wrong-pattern-modal .treemap-section {
+    padding: 1% 0;
   }
 
-  .unit-name {
-    font-size: 13px;
+  .wrong-pattern-modal .top3-card {
+    padding: 1%;
+    margin-bottom: 1%;
   }
 
-  .unit-wrong-rate {
-    font-size: 14px;
+  .wrong-pattern-modal .top3-card:last-child {
+    margin-bottom: 0;
   }
 
-  .heatmap-header {
-    grid-template-columns: 100px repeat(4, 1fr);
+  .wrong-pattern-modal .rank-badge {
+    width: clamp(24px, 4vw, 28px);
+    height: clamp(24px, 4vw, 28px);
+    font-size: clamp(10px, 1.5vw, 12px);
   }
 
-  .heatmap-row {
-    grid-template-columns: 100px repeat(4, 1fr);
+  .wrong-pattern-modal .unit-name {
+    font-size: clamp(11px, 1.5vw, 13px);
   }
 
-  .heatmap-corner,
-  .heatmap-header-cell,
-  .heatmap-row-header,
-  .heatmap-cell {
-    padding: 6px;
-    font-size: 9px;
+  .wrong-pattern-modal .unit-wrong-rate {
+    font-size: clamp(12px, 1.8vw, 14px);
   }
 
-  .heatmap-legend {
-    gap: 8px;
-    padding: 8px;
+  .wrong-pattern-modal .heatmap-header {
+    grid-template-columns: 30% repeat(4, 1fr);
+  }
+
+  .wrong-pattern-modal .heatmap-row {
+    grid-template-columns: 30% repeat(4, 1fr);
+  }
+
+  .wrong-pattern-modal .heatmap-corner,
+  .wrong-pattern-modal .heatmap-header-cell,
+  .wrong-pattern-modal .heatmap-row-header,
+  .wrong-pattern-modal .heatmap-cell {
+    padding: 0.8%;
+    font-size: clamp(7px, 1vw, 9px);
+  }
+
+  .wrong-pattern-modal .heatmap-legend {
+    gap: 1%;
+    padding: 0.8%;
     flex-direction: column;
     align-items: center;
   }
 
-  .legend-item {
-    font-size: 10px;
+  .wrong-pattern-modal .legend-item {
+    font-size: clamp(8px, 1.2vw, 10px);
   }
 
-  .treemap-container {
-    height: 240px;
-    padding: 8px;
+  .wrong-pattern-modal .treemap-container {
+    height: clamp(200px, 30vh, 240px);
+    padding: 0.8%;
   }
 
-  .treemap-legend {
-    gap: 8px;
-    padding: 8px;
+  .wrong-pattern-modal .treemap-legend {
+    gap: 1%;
+    padding: 0.8%;
     flex-direction: column;
     align-items: center;
   }

@@ -409,7 +409,7 @@ function WrongPatternModal({ classData, isOpen, onClose }) {
               <div className='treemap-section'>
                 <h3>대단원별 오답률 분석</h3>
                 <div className='treemap-container'>
-                  <ResponsiveContainer width='100%' height={300}>
+                  <ResponsiveContainer width='100%' height='100%'>
                     <Treemap
                       data={treemapData}
                       dataKey='size'

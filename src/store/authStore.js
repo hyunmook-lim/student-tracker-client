@@ -11,7 +11,7 @@ const useAuthStore = create((set, get) => ({
   },
   signupData: {
     name: '',
-    id: '',
+    loginId: '',
     password: '',
     confirmPassword: '',
     class: '',
@@ -41,21 +41,66 @@ const useAuthStore = create((set, get) => ({
 
   toggleSignupMode: () => set(state => ({ isSignupMode: !state.isSignupMode })),
 
-  login: () => {
-    const { formData } = get();
-    // 선생님 로그인: admin/admin
-    if (formData.id === 'admin' && formData.password === 'admin') {
-      set({ isLoggedIn: true });
-      return true;
+  login: (apiResult = null) => {
+    const { formData, userType } = get();
+
+    // 교사 모드이고 API 검증 결과가 있는 경우
+    if (userType === 'teacher' && apiResult) {
+      if (apiResult.success) {
+        set({
+          isLoggedIn: true,
+          // 로그인된 교사 정보 저장
+          currentUser: {
+            type: 'teacher',
+            ...apiResult.data,
+          },
+        });
+        return true;
+      } else {
+        alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+        return false;
+      }
     }
-    // 학생 로그인: student/student
-    else if (formData.id === 'student' && formData.password === 'student') {
-      set({ isLoggedIn: true });
-      return true;
-    } else {
-      alert('아이디 또는 비밀번호가 올바르지 않습니다.');
-      return false;
+
+    // 학생 모드이거나 기존 로직 (임시)
+    if (userType === 'student') {
+      // 학생 로그인: student/student
+      if (formData.id === 'student' && formData.password === 'student') {
+        set({
+          isLoggedIn: true,
+          currentUser: {
+            type: 'student',
+            id: 'student',
+            name: '학생',
+          },
+        });
+        return true;
+      } else {
+        alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+        return false;
+      }
     }
+
+    // 교사 모드이지만 API 검증 결과가 없는 경우 (임시)
+    if (userType === 'teacher') {
+      // 선생님 로그인: admin/admin (임시)
+      if (formData.id === 'admin' && formData.password === 'admin') {
+        set({
+          isLoggedIn: true,
+          currentUser: {
+            type: 'teacher',
+            id: 'admin',
+            name: '관리자',
+          },
+        });
+        return true;
+      } else {
+        alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+        return false;
+      }
+    }
+
+    return false;
   },
 
   signup: () => {
@@ -64,7 +109,7 @@ const useAuthStore = create((set, get) => ({
     // 유효성 검사
     if (
       !signupData.name ||
-      !signupData.id ||
+      !signupData.loginId ||
       !signupData.password ||
       !signupData.confirmPassword ||
       !signupData.phone
@@ -91,7 +136,7 @@ const useAuthStore = create((set, get) => ({
       isSignupMode: false,
       signupData: {
         name: '',
-        id: '',
+        loginId: '',
         password: '',
         confirmPassword: '',
         class: '',
@@ -105,6 +150,7 @@ const useAuthStore = create((set, get) => ({
     set({
       isLoggedIn: false,
       formData: { id: '', password: '' },
+      currentUser: null,
     }),
 
   resetForm: () =>
@@ -116,7 +162,7 @@ const useAuthStore = create((set, get) => ({
     set({
       signupData: {
         name: '',
-        id: '',
+        loginId: '',
         password: '',
         confirmPassword: '',
         class: '',

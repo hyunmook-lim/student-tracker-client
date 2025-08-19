@@ -12,7 +12,7 @@ function ResultList() {
   };
 
   // 임시 회차 데이터 (실제로는 서버에서 가져올 데이터)
-  const getSessionsForClass = classId => {
+  const getSessionsForClass = () => {
     // classId를 사용하여 해당 반의 회차 데이터를 가져옴
     const sessions = [
       {
@@ -126,7 +126,7 @@ function ResultList() {
                   <h4>회차별 성적 관리</h4>
                 </div>
                 <div className='sessions-list'>
-                  {getSessionsForClass(classroom.id).map(session => (
+                  {getSessionsForClass().map(session => (
                     <div key={session.id} className='session-item'>
                       <div className='session-info'>
                         <div className='session-title'>

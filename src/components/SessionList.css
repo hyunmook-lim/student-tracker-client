@@ -23,23 +23,21 @@
   margin: 0;
 }
 
-.session-list-container .add-session-btn {
-  background: #10b981;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* 로딩 및 에러 메시지 스타일 */
+.session-list-container .loading-message,
+.session-list-container .error-message {
+  padding: 40px 32px;
+  text-align: center;
+  font-size: 16px;
+  color: #64748b;
 }
 
-.session-list-container .add-session-btn:hover {
-  background: #059669;
+.session-list-container .error-message {
+  color: #ef4444;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  margin: 20px 32px;
 }
 
 .session-list-container .classroom-list {
@@ -80,7 +78,7 @@
   margin: 0 0 4px 0;
 }
 
-.session-list-container .classroom-info span {
+.session-list-container .student-count {
   color: #3b82f6;
   font-size: 12px;
   font-weight: 500;
@@ -89,7 +87,7 @@
 .session-list-container .classroom-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 
 .session-list-container .add-round-btn {
@@ -98,11 +96,10 @@
   border: none;
   padding: 8px 16px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s ease;
-  white-space: nowrap;
 }
 
 .session-list-container .add-round-btn:hover {
@@ -131,7 +128,7 @@
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 16px 0;
 }
 
 .session-list-container .sessions-list {
@@ -144,7 +141,7 @@
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 16px 20px;
+  padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -152,38 +149,49 @@
 }
 
 .session-list-container .session-item:hover {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  border-color: #cbd5e1;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
 }
 
 .session-list-container .session-info {
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.session-list-container .session-title {
+  display: flex;
   align-items: center;
-  gap: 16px;
-  flex: 1;
+  gap: 12px;
 }
 
 .session-list-container .session-title h5 {
   color: #1e293b;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
-  margin: 0 0 4px 0;
+  margin: 0;
 }
 
 .session-list-container .session-date {
-  color: #6b7280;
-  font-size: 12px;
+  color: #64748b;
+  font-size: 14px;
 }
 
-.session-list-container .session-status .status {
-  padding: 4px 8px;
+.session-list-container .session-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.session-list-container .status {
+  padding: 2px 8px;
   border-radius: 12px;
   font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
 }
 
-.session-list-container .session-status .status.completed {
+.session-list-container .status.completed {
   background: #dcfce7;
   color: #166534;
 }
@@ -195,14 +203,13 @@
 
 /* 버튼 스타일 */
 .session-list-container .btn {
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 6px 12px;
   border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  min-width: 80px;
+  transition: background 0.2s ease;
 }
 
 .session-list-container .btn-edit {
@@ -397,11 +404,12 @@
   background: #d97706;
 }
 
+/* 문제 추가 모달 스타일 */
 .session-list-container .question-modal-content {
   background: white;
   border-radius: 12px;
   width: 95%;
-  max-width: 1200px;
+  max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
@@ -409,14 +417,12 @@
 
 .session-list-container .questions-container {
   padding: 24px 32px;
-  box-sizing: border-box;
 }
 
 .session-list-container .question-labels {
-  display: flex;
-  gap: 16px;
-  padding: 12px 0;
-  border-bottom: 2px solid #e2e8f0;
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 100px 80px 80px;
+  gap: 12px;
   margin-bottom: 16px;
   font-weight: 600;
   color: #374151;
@@ -452,11 +458,11 @@
 }
 
 .session-list-container .question-row {
-  display: flex;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: 60px 1fr 1fr 100px 80px 80px;
+  gap: 12px;
+  margin-bottom: 12px;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #f1f5f9;
 }
 
 .session-list-container .question-row:last-child {
@@ -464,28 +470,20 @@
 }
 
 .session-list-container .question-number {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 40px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  text-align: center;
   font-weight: 600;
-  color: #374151;
+  color: #6b7280;
 }
 
 .session-list-container .remove-question-btn {
   background: #ef4444;
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 6px 12px;
+  border-radius: 4px;
   font-size: 12px;
   cursor: pointer;
   transition: background 0.2s ease;
-  width: 100%;
 }
 
 .session-list-container .remove-question-btn:hover {
@@ -531,62 +529,53 @@
 
 .session-list-container .field-group input,
 .session-list-container .field-group select {
+  width: 100%;
   padding: 8px 12px;
   border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 14px;
   transition: border-color 0.2s ease;
-  width: 100%;
-  box-sizing: border-box;
+}
+
+.session-list-container .field-group input:focus,
+.session-list-container .field-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
 }
 
 .session-list-container .question-actions {
   display: flex;
-  gap: 12px;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 32px;
+  padding: 24px 32px;
   border-top: 1px solid #e2e8f0;
   background: #f8fafc;
 }
 
 .session-list-container .add-questions-container {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
 }
 
 .session-list-container .question-count-input {
-  width: auto;
-  padding: 10px 20px;
+  width: 80px;
+  padding: 8px 12px;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  min-width: 60px;
-}
-
-.session-list-container .question-count-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.session-list-container .add-question-btn,
-.session-list-container .save-questions-btn {
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  border: none;
 }
 
 .session-list-container .add-question-btn {
   background: #10b981;
   color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .session-list-container .add-question-btn:hover {
@@ -596,6 +585,13 @@
 .session-list-container .save-questions-btn {
   background: #3b82f6;
   color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .session-list-container .save-questions-btn:hover {
@@ -605,11 +601,11 @@
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    max-height: 0;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    max-height: 1000px;
   }
 }
 
@@ -623,6 +619,14 @@
 
   .session-list-container .classroom-header {
     padding: 16px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .session-list-container .classroom-actions {
+    width: 100%;
+    justify-content: flex-end;
   }
 
   .session-list-container .sessions-section {
@@ -635,11 +639,6 @@
     gap: 12px;
   }
 
-  .session-list-container .session-info {
-    width: 100%;
-    justify-content: space-between;
-  }
-
   .session-list-container .session-actions {
     width: 100%;
     justify-content: flex-end;
@@ -650,7 +649,24 @@
     margin: 20px;
   }
 
-  .session-list-container .question-fields {
+  .session-list-container .question-modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .session-list-container .question-labels,
+  .session-list-container .question-row {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .session-list-container .question-actions {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .session-list-container .add-questions-container {
+    justify-content: center;
   }
 }

@@ -48,7 +48,25 @@ const useClassroomStore = create((set, get) => ({
   },
 
   // 액션
-  setExpandedClass: classId => set({ expandedClass: classId }),
+  setExpandedClass: classId =>
+    set(state => {
+      console.log('=== Store setExpandedClass ===');
+      console.log(
+        '현재 expandedClass:',
+        state.expandedClass,
+        '타입:',
+        typeof state.expandedClass
+      );
+      console.log('새로 설정할 classId:', classId, '타입:', typeof classId);
+      console.log('같은가?', state.expandedClass === classId);
+
+      const newValue = state.expandedClass === classId ? null : classId;
+      console.log('새로 설정될 값:', newValue);
+
+      return {
+        expandedClass: newValue,
+      };
+    }),
 
   setSelectedClassroom: classroom => set({ selectedClassroom: classroom }),
 
