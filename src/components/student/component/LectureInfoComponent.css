@@ -1,0 +1,218 @@
+/* LectureInfo 컴포넌트 스타일 */
+.lecture-info-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.lecture-info-container .lecture-info-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lecture-info-container .lecture-info-header h2 {
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.lecture-info-container .add-classroom-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lecture-info-container .add-classroom-btn:hover {
+  background: #2563eb;
+}
+
+.lecture-info-container .add-classroom-btn::before {
+  content: '+';
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.lecture-info-container .classrooms-list {
+  padding: 0;
+}
+
+.lecture-info-container .classroom-section {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.lecture-info-container .classroom-section:last-child {
+  border-bottom: none;
+}
+
+.lecture-info-container .classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.lecture-info-container .classroom-header:hover {
+  background: #f8fafc;
+}
+
+.lecture-info-container .classroom-info h3 {
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.lecture-info-container .classroom-info p {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+.lecture-info-container .classroom-info span {
+  color: #3b82f6;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.lecture-info-container .expand-icon {
+  color: #64748b;
+  font-size: 18px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.lecture-info-container .lectures-grid {
+  background: #f8fafc;
+  padding: 20px 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  animation: slideDown 0.3s ease;
+}
+
+.lecture-info-container .lecture-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.lecture-info-container .lecture-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  border-color: #3b82f6;
+}
+
+.lecture-info-container .lecture-header {
+  margin-bottom: 12px;
+}
+
+.lecture-info-container .lecture-header h4 {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.lecture-info-container .lecture-date {
+  color: #6b7280;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+.lecture-info-container .lecture-content {
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.lecture-info-container .lecture-content p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.lecture-info-container .lecture-actions {
+  margin-top: auto;
+}
+
+.lecture-info-container .view-detail-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.lecture-info-container .view-detail-btn:hover {
+  background: #2563eb;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+@media (max-width: 768px) {
+  .lecture-info-container .lecture-info-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .lecture-info-container .add-classroom-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .lecture-info-container .classroom-header {
+    padding: 16px 20px;
+  }
+
+  .lecture-info-container .lectures-grid {
+    padding: 16px 20px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .lecture-info-container .lecture-card {
+    padding: 16px;
+  }
+}

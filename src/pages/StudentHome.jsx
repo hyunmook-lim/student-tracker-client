@@ -1,11 +1,11 @@
 import React from 'react';
 import './StudentHome.css';
 import { useAuthStore, useUIStore } from '../store';
-import StudentDashboard from '../components/StudentDashboard';
-import SessionInfo from '../components/SessionInfo';
-import GradeReport from '../components/GradeReport';
-import StudentAttendanceCheck from '../components/StudentAttendanceCheck';
-import WrongPattern from '../components/WrongPattern';
+import DashboardComponent from '../components/student/component/DashboardComponent';
+import LectureInfoComponent from '../components/student/component/LectureInfoComponent';
+import GradeReportComponent from '../components/student/component/GradeReportComponent';
+import AttendanceCheckComponent from '../components/student/component/AttendanceCheckComponent';
+import WrongPatternComponent from '../components/student/component/WrongPatternComponent';
 
 function StudentHome() {
   const { logout } = useAuthStore();
@@ -20,8 +20,8 @@ function StudentHome() {
     name: '김학생',
     studentId: '2024001',
     className: '2학년 3반',
-    completedSessions: 8,
-    totalSessions: 12,
+    completedLectures: 8,
+    totalLectures: 12,
     attendanceRate: '96.2',
     totalAttendanceDays: 25,
     totalSchoolDays: 26,
@@ -33,9 +33,9 @@ function StudentHome() {
         id: 1,
         name: '수학 기초반',
         teacher: '김수학',
-        totalSessions: 12,
-        completedSessions: 8,
-        sessions: [
+        totalLectures: 12,
+        completedLectures: 8,
+        lectures: [
           {
             id: 1,
             title: '1회차 - 수와 연산',
@@ -114,9 +114,9 @@ function StudentHome() {
         id: 2,
         name: '영어 심화반',
         teacher: '박영어',
-        totalSessions: 10,
-        completedSessions: 6,
-        sessions: [
+        totalLectures: 10,
+        completedLectures: 6,
+        lectures: [
           {
             id: 1,
             title: '1회차 - Grammar Review',
@@ -183,9 +183,9 @@ function StudentHome() {
         id: 3,
         name: '과학 탐구반',
         teacher: '이과학',
-        totalSessions: 8,
-        completedSessions: 5,
-        sessions: [
+        totalLectures: 8,
+        completedLectures: 5,
+        lectures: [
           {
             id: 1,
             title: '1회차 - 물리학 기초',
@@ -239,24 +239,24 @@ function StudentHome() {
     ],
     // 그래프용 데이터
     testScores: [
-      { session: 1, myScore: 85, classAverage: 78 },
-      { session: 2, myScore: 92, classAverage: 82 },
-      { session: 3, myScore: 88, classAverage: 80 },
-      { session: 4, myScore: 95, classAverage: 85 },
-      { session: 5, myScore: 90, classAverage: 83 },
-      { session: 6, myScore: 87, classAverage: 79 },
-      { session: 7, myScore: 93, classAverage: 86 },
-      { session: 8, myScore: 89, classAverage: 84 },
+      { lecture: 1, myScore: 85, classAverage: 78 },
+      { lecture: 2, myScore: 92, classAverage: 82 },
+      { lecture: 3, myScore: 88, classAverage: 80 },
+      { lecture: 4, myScore: 95, classAverage: 85 },
+      { lecture: 5, myScore: 90, classAverage: 83 },
+      { lecture: 6, myScore: 87, classAverage: 79 },
+      { lecture: 7, myScore: 93, classAverage: 86 },
+      { lecture: 8, myScore: 89, classAverage: 84 },
     ],
     assignmentScores: [
-      { session: 1, myScore: 88, classAverage: 82 },
-      { session: 2, myScore: 95, classAverage: 85 },
-      { session: 3, myScore: 92, classAverage: 87 },
-      { session: 4, myScore: 89, classAverage: 83 },
-      { session: 5, myScore: 96, classAverage: 88 },
-      { session: 6, myScore: 91, classAverage: 86 },
-      { session: 7, myScore: 94, classAverage: 89 },
-      { session: 8, myScore: 90, classAverage: 85 },
+      { lecture: 1, myScore: 88, classAverage: 82 },
+      { lecture: 2, myScore: 95, classAverage: 85 },
+      { lecture: 3, myScore: 92, classAverage: 87 },
+      { lecture: 4, myScore: 89, classAverage: 83 },
+      { lecture: 5, myScore: 96, classAverage: 88 },
+      { lecture: 6, myScore: 91, classAverage: 86 },
+      { lecture: 7, myScore: 94, classAverage: 89 },
+      { lecture: 8, myScore: 90, classAverage: 85 },
     ],
     recentGrades: [
       { subject: '수학', grade: 92 },
@@ -275,14 +275,14 @@ function StudentHome() {
 
   const renderContent = () => {
     switch (currentView) {
-      case 'session-info':
-        return <SessionInfo studentData={studentData} />;
+      case 'lecture-info':
+        return <LectureInfoComponent studentData={studentData} />;
       case 'grade-report':
-        return <GradeReport />;
+        return <GradeReportComponent />;
       case 'attendance-report':
-        return <StudentAttendanceCheck />;
+        return <AttendanceCheckComponent />;
       case 'wrong-pattern':
-        return <WrongPattern />;
+        return <WrongPatternComponent />;
       default:
         return (
           <div className='student-dashboard'>
@@ -320,8 +320,8 @@ function StudentHome() {
             대시보드
           </button>
           <button
-            className={`nav-btn ${currentView === 'session-info' ? 'active' : ''}`}
-            onClick={() => setCurrentView('session-info')}
+            className={`nav-btn ${currentView === 'lecture-info' ? 'active' : ''}`}
+            onClick={() => setCurrentView('lecture-info')}
           >
             회차별 정보
           </button>
@@ -349,7 +349,7 @@ function StudentHome() {
       {/* 메인 콘텐츠 */}
       <main className='main-content'>
         {currentView === 'dashboard' && (
-          <StudentDashboard studentData={studentData} />
+          <DashboardComponent studentData={studentData} />
         )}
 
         {currentView !== 'dashboard' && renderContent()}

@@ -1,14 +1,154 @@
-/* TeacherHome 페이지 스타일 - 각 컴포넌트별 CSS로 분리됨 */
+/* TeacherHome 컴포넌트 스타일 */
+.teacher-home-container {
+  min-height: 100vh;
+  display: flex;
+  background: #f4f6f9;
+}
 
-/* 
-이 파일은 더 이상 사용되지 않습니다.
-각 컴포넌트별 CSS 파일로 분리되었습니다:
+/* 왼쪽 사이드바 */
+.teacher-home-container .sidebar {
+  width: 280px;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
 
-- TeacherHome 컴포넌트: src/components/TeacherHome.css
-- ClassroomList 컴포넌트: src/components/ClassroomList.css  
-- SessionList 컴포넌트: src/components/SessionList.css
-- Modal 컴포넌트: src/components/Modal.css
-- ResultList 컴포넌트: src/components/ResultList.css
+.teacher-home-container .sidebar-header {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
 
-각 컴포넌트에서 해당 CSS 파일을 import하여 사용합니다.
-*/
+.teacher-home-container .sidebar-title {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.teacher-home-container .user-info {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.teacher-home-container .user-type {
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.teacher-home-container .logout-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.teacher-home-container .logout-btn:hover {
+  background: #dc2626;
+}
+
+.teacher-home-container .sidebar-nav {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.teacher-home-container .nav-btn {
+  background: transparent;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.teacher-home-container .nav-btn:hover {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.teacher-home-container .nav-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.teacher-home-container .nav-btn.active:hover {
+  background: #2563eb;
+}
+
+/* 메인 콘텐츠 */
+.teacher-home-container .main-content {
+  flex: 1;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.teacher-home-container .welcome-section {
+  background: #ffffff;
+  padding: 48px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.teacher-home-container .welcome-title {
+  color: #1e293b;
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.teacher-home-container .welcome-message {
+  color: #64748b;
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* 새로운 탭 페이지 스타일 */
+.teacher-home-container .class-management,
+.teacher-home-container .lecture-management,
+.teacher-home-container .result-input {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.teacher-home-container .class-management h3,
+.teacher-home-container .lecture-management h3,
+.teacher-home-container .result-input h3 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+}
+
+.teacher-home-container .class-management p,
+.teacher-home-container .lecture-management p,
+.teacher-home-container .result-input p {
+  color: #64748b;
+  font-size: 16px;
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+}
