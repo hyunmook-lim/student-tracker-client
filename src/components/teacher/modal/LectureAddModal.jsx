@@ -10,26 +10,38 @@ function LectureAddModal({
 }) {
   if (!isOpen) return null;
 
+  const handleClose = () => {
+    updateNewLectureData('lectureName', '');
+    updateNewLectureData('description', '');
+    updateNewLectureData('lectureDate', '');
+    onClose();
+  };
+
   return (
-    <div className='modal-overlay' onClick={onClose}>
-      <div className='modal-content' onClick={e => e.stopPropagation()}>
-        <div className='modal-header'>
+    <div className='lecture-add-modal-overlay' onClick={handleClose}>
+      <div
+        className='lecture-add-modal-content'
+        onClick={e => e.stopPropagation()}
+      >
+        <div className='lecture-add-modal-header'>
           <h3>새 강의 추가</h3>
-          <button className='close-btn' onClick={onClose}>
+          <button className='lecture-add-close-btn' onClick={handleClose}>
             ×
           </button>
         </div>
-        <div className='modal-body'>
-          <div className='form-group'>
+        <div className='lecture-add-modal-body'>
+          <div className='lecture-add-form-group'>
             <label>강의 제목</label>
             <input
               type='text'
-              value={newLectureData.title}
-              onChange={e => updateNewLectureData('title', e.target.value)}
+              value={newLectureData.lectureName}
+              onChange={e =>
+                updateNewLectureData('lectureName', e.target.value)
+              }
               placeholder='강의 제목을 입력하세요'
             />
           </div>
-          <div className='form-group'>
+          <div className='lecture-add-form-group'>
             <label>강의 설명</label>
             <textarea
               value={newLectureData.description}
@@ -40,17 +52,19 @@ function LectureAddModal({
               rows='3'
             />
           </div>
-          <div className='form-group'>
+          <div className='lecture-add-form-group'>
             <label>강의 날짜</label>
             <input
               type='date'
-              value={newLectureData.date}
-              onChange={e => updateNewLectureData('date', e.target.value)}
+              value={newLectureData.lectureDate}
+              onChange={e =>
+                updateNewLectureData('lectureDate', e.target.value)
+              }
             />
           </div>
         </div>
-        <div className='modal-actions'>
-          <button className='cancel-btn' onClick={onClose}>
+        <div className='lecture-add-modal-actions'>
+          <button className='cancel-btn' onClick={handleClose}>
             취소
           </button>
           <button className='save-btn' onClick={onSave}>

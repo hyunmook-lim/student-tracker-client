@@ -8,6 +8,7 @@ import {
   deleteClassroom,
 } from '../../../api/classroomApi';
 import ClassroomAddModal from '../modal/ClassroomAddModal';
+import ConfirmModal from '../../ConfirmModal';
 import './ClassroomListComponent.css';
 
 function ClassroomListComponent() {
@@ -27,6 +28,11 @@ function ClassroomListComponent() {
   const [error, setError] = useState(null);
   const [editingClassroom, setEditingClassroom] = useState(null);
   const [editData, setEditData] = useState({ name: '', description: '' });
+  const [confirmModal, setConfirmModal] = useState({
+    isOpen: false,
+    classroomId: null,
+    classroomName: null,
+  });
 
   // 컴포넌트 마운트 시 교사의 반 목록 가져오기
   useEffect(() => {
@@ -146,14 +152,17 @@ function ClassroomListComponent() {
   };
 
   // 삭제 처리
-  const handleDeleteClick = async (classroomId, classroomName, e) => {
+  const handleDeleteClick = (classroomId, classroomName, e) => {
     e.stopPropagation();
+    setConfirmModal({
+      isOpen: true,
+      classroomId,
+      classroomName,
+    });
+  };
 
-    const confirmDelete = window.confirm(
-      `"${classroomName}" 반을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`
-    );
-
-    if (!confirmDelete) return;
+  const handleDeleteConfirm = async () => {
+    const { classroomId } = confirmModal;
 
     try {
       console.log('반 삭제 요청:', classroomId);
@@ -174,6 +183,12 @@ function ClassroomListComponent() {
       console.error('반 삭제 오류:', error);
       alert('반 삭제 중 오류가 발생했습니다.');
     }
+
+    setConfirmModal({ isOpen: false, classroomId: null, classroomName: null });
+  };
+
+  const handleDeleteCancel = () => {
+    setConfirmModal({ isOpen: false, classroomId: null, classroomName: null });
   };
 
   const handleAddClass = async () => {
@@ -372,6 +387,14 @@ function ClassroomListComponent() {
         newClassData={newClassData}
         updateNewClassData={updateNewClassData}
         onSave={handleAddClass}
+      />
+
+      <ConfirmModal
+        isOpen={confirmModal.isOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title='반 삭제'
+        message={`"${confirmModal.classroomName}" 반을 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`}
       />
     </div>
   );

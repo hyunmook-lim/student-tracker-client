@@ -9,11 +9,76 @@ const useClassroomStore = create((set, get) => ({
       description: '수학 기초 과정',
       studentCount: 25,
       students: [
-        { id: 1, name: '김철수', studentId: '2024001', status: 'approved' },
-        { id: 2, name: '이영희', studentId: '2024002', status: 'approved' },
-        { id: 3, name: '박민수', studentId: '2024003', status: 'pending' },
-        { id: 4, name: '정수진', studentId: '2024004', status: 'approved' },
-        { id: 5, name: '최동현', studentId: '2024005', status: 'pending' },
+        {
+          id: 1,
+          name: '김철수',
+          studentId: '2024001',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 85,
+          examTotal: 100,
+          assignmentGrade: 'A',
+        },
+        {
+          id: 2,
+          name: '이영희',
+          studentId: '2024002',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 92,
+          examTotal: 100,
+          assignmentGrade: 'A',
+        },
+        {
+          id: 3,
+          name: '박민수',
+          studentId: '2024003',
+          status: 'pending',
+          attendance: '출석',
+          examScore: 78,
+          examTotal: 100,
+          assignmentGrade: 'B',
+        },
+        {
+          id: 4,
+          name: '정수진',
+          studentId: '2024004',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 88,
+          examTotal: 100,
+          assignmentGrade: 'B',
+        },
+        {
+          id: 5,
+          name: '최동현',
+          studentId: '2024005',
+          status: 'pending',
+          attendance: '결석',
+          examScore: null,
+          examTotal: null,
+          assignmentGrade: null,
+        },
+        {
+          id: 12,
+          name: '한지민',
+          studentId: '2024012',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 95,
+          examTotal: 100,
+          assignmentGrade: 'A',
+        },
+        {
+          id: 13,
+          name: '박서준',
+          studentId: '2024013',
+          status: 'approved',
+          attendance: '결석',
+          examScore: null,
+          examTotal: null,
+          assignmentGrade: null,
+        },
       ],
     },
     {
@@ -22,10 +87,56 @@ const useClassroomStore = create((set, get) => ({
       description: '영어 기초 과정',
       studentCount: 23,
       students: [
-        { id: 6, name: '강지영', studentId: '2024006', status: 'approved' },
-        { id: 7, name: '윤서준', studentId: '2024007', status: 'pending' },
-        { id: 8, name: '임하나', studentId: '2024008', status: 'approved' },
-        { id: 9, name: '송태현', studentId: '2024009', status: 'pending' },
+        {
+          id: 6,
+          name: '강지영',
+          studentId: '2024006',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 90,
+          examTotal: 100,
+          assignmentGrade: 'A',
+        },
+        {
+          id: 7,
+          name: '윤서준',
+          studentId: '2024007',
+          status: 'pending',
+          attendance: '출석',
+          examScore: 82,
+          examTotal: 100,
+          assignmentGrade: 'C',
+        },
+        {
+          id: 8,
+          name: '임하나',
+          studentId: '2024008',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 75,
+          examTotal: 100,
+          assignmentGrade: 'C',
+        },
+        {
+          id: 9,
+          name: '송태현',
+          studentId: '2024009',
+          status: 'pending',
+          attendance: '결석',
+          examScore: null,
+          examTotal: null,
+          assignmentGrade: null,
+        },
+        {
+          id: 14,
+          name: '김민지',
+          studentId: '2024014',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 87,
+          examTotal: 100,
+          assignmentGrade: 'B',
+        },
       ],
     },
     {
@@ -34,8 +145,36 @@ const useClassroomStore = create((set, get) => ({
       description: '과학 심화 과정',
       studentCount: 20,
       students: [
-        { id: 10, name: '이정호', studentId: '2024010', status: 'approved' },
-        { id: 11, name: '김미영', studentId: '2024011', status: 'approved' },
+        {
+          id: 10,
+          name: '이정호',
+          studentId: '2024010',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 93,
+          examTotal: 100,
+          assignmentGrade: 'A',
+        },
+        {
+          id: 11,
+          name: '김미영',
+          studentId: '2024011',
+          status: 'approved',
+          attendance: '출석',
+          examScore: 89,
+          examTotal: 100,
+          assignmentGrade: 'B',
+        },
+        {
+          id: 15,
+          name: '정우진',
+          studentId: '2024015',
+          status: 'approved',
+          attendance: '결석',
+          examScore: null,
+          examTotal: null,
+          assignmentGrade: null,
+        },
       ],
     },
   ],
@@ -166,6 +305,31 @@ const useClassroomStore = create((set, get) => ({
               students: classroom.students.map(student =>
                 student.id === studentId ? { ...student, status } : student
               ),
+            }
+          : classroom
+      ),
+    })),
+
+  // 학생 결과 업데이트 함수
+  updateStudentResults: (classroomId, results) =>
+    set(state => ({
+      classrooms: state.classrooms.map(classroom =>
+        classroom.id === classroomId
+          ? {
+              ...classroom,
+              students: classroom.students.map(student => {
+                const result = results.find(r => r.id === student.id);
+                if (result) {
+                  return {
+                    ...student,
+                    attendance: result.attendance,
+                    examScore: result.examScore,
+                    examTotal: result.examTotal,
+                    assignmentGrade: result.assignmentGrade,
+                  };
+                }
+                return student;
+              }),
             }
           : classroom
       ),

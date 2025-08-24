@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useClassroomStore } from '../../../store';
 import ResultDetailModal from '../modal/ResultDetailModal';
+import ResultInputModal from '../modal/ResultInputModal';
 import './ResultListComponent.css';
 
 function ResultListComponent() {
-  const { classrooms, expandedClass, setExpandedClass } = useClassroomStore();
+  const { classrooms, expandedClass, setExpandedClass, updateStudentResults } =
+    useClassroomStore();
   const [selectedLecture, setSelectedLecture] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInputModalOpen, setIsInputModalOpen] = useState(false);
 
   const handleClassClick = classId => {
     setExpandedClass(expandedClass === classId ? null : classId);
@@ -78,7 +81,7 @@ function ResultListComponent() {
 
   const handleInputResults = lecture => {
     setSelectedLecture(lecture);
-    setIsModalOpen(true);
+    setIsInputModalOpen(true);
   };
 
   const handleViewResults = lecture => {
@@ -88,6 +91,17 @@ function ResultListComponent() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setSelectedLecture(null);
+  };
+
+  const handleCloseInputModal = () => {
+    setIsInputModalOpen(false);
+    setSelectedLecture(null);
+  };
+
+  const handleSaveResults = results => {
+    updateStudentResults(expandedClass, results);
+    setIsInputModalOpen(false);
     setSelectedLecture(null);
   };
 
@@ -180,6 +194,15 @@ function ResultListComponent() {
         getGradeColor={getGradeColor}
         classrooms={classrooms}
         expandedClass={expandedClass}
+      />
+
+      <ResultInputModal
+        isOpen={isInputModalOpen}
+        onClose={handleCloseInputModal}
+        selectedLecture={selectedLecture}
+        classrooms={classrooms}
+        expandedClass={expandedClass}
+        onSave={handleSaveResults}
       />
     </div>
   );

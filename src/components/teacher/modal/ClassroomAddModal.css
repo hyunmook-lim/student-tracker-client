@@ -1,5 +1,5 @@
 /* ClassroomAddModal 컴포넌트 스타일 */
-.modal-overlay {
+.classroom-add-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
   z-index: 1000;
 }
 
-.modal-content {
+.classroom-add-modal-content {
   background: white;
   border-radius: 12px;
   width: 90%;
@@ -22,7 +22,7 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.modal-header {
+.classroom-add-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,14 +30,14 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.modal-header h3 {
+.classroom-add-modal-header h3 {
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
-.close-btn {
+.classroom-add-close-btn {
   background: none;
   border: none;
   font-size: 24px;
@@ -53,20 +53,20 @@
   transition: background 0.2s ease;
 }
 
-.close-btn:hover {
+.classroom-add-close-btn:hover {
   background: #f1f5f9;
   color: #1e293b;
 }
 
-.modal-body {
+.classroom-add-modal-body {
   padding: 24px 32px;
 }
 
-.form-group {
+.classroom-add-form-group {
   margin-bottom: 20px;
 }
 
-.form-group label {
+.classroom-add-form-group label {
   display: block;
   margin-bottom: 8px;
   color: #374151;
@@ -74,8 +74,8 @@
   font-size: 14px;
 }
 
-.form-group input,
-.form-group textarea {
+.classroom-add-form-group input,
+.classroom-add-form-group textarea {
   width: 100%;
   padding: 12px 16px;
   border: 1px solid #d1d5db;
@@ -87,14 +87,14 @@
   box-sizing: border-box;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.classroom-add-form-group input:focus,
+.classroom-add-form-group textarea:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.modal-actions {
+.classroom-add-modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
@@ -103,8 +103,8 @@
   background: #f8fafc;
 }
 
-.cancel-btn,
-.save-btn {
+.classroom-add-cancel-btn,
+.classroom-add-save-btn {
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 14px;
@@ -113,29 +113,29 @@
   transition: all 0.2s ease;
 }
 
-.cancel-btn {
+.classroom-add-cancel-btn {
   background: #f3f4f6;
   color: #374151;
   border: 1px solid #d1d5db;
 }
 
-.cancel-btn:hover {
+.classroom-add-cancel-btn:hover {
   background: #e5e7eb;
   border-color: #9ca3af;
 }
 
-.save-btn {
+.classroom-add-save-btn {
   background: #10b981;
   color: white;
   border: none;
 }
 
-.save-btn:hover {
+.classroom-add-save-btn:hover {
   background: #059669;
 }
 
 @media (max-width: 768px) {
-  .modal-content {
+  .classroom-add-modal-content {
     width: 95%;
     margin: 20px;
   }

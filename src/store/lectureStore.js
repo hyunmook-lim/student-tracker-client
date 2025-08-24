@@ -1,63 +1,30 @@
 import { create } from 'zustand';
+import { createLecture } from '../api/lectureApi';
 
 const useLectureStore = create((set, get) => ({
   // 상태
-  lectures: [
-    {
-      id: 1,
-      title: '1회차 - 수학 기초',
-      description: '수학의 기본 개념과 연산법칙',
-      date: '2024-01-15',
-      classroomId: 1,
-    },
-    {
-      id: 2,
-      title: '2회차 - 방정식',
-      description: '1차 방정식 풀이 방법',
-      date: '2024-01-22',
-      classroomId: 1,
-    },
-    {
-      id: 3,
-      title: '3회차 - 함수',
-      description: '함수의 개념과 그래프',
-      date: '2024-01-29',
-      classroomId: 1,
-    },
-    {
-      id: 4,
-      title: '1회차 - 영어 기초',
-      description: '알파벳과 기본 인사말',
-      date: '2024-01-16',
-      classroomId: 2,
-    },
-    {
-      id: 5,
-      title: '2회차 - 문법 기초',
-      description: '기본 문법 구조',
-      date: '2024-01-23',
-      classroomId: 2,
-    },
-  ],
+  lectures: [],
   selectedLecture: null,
   expandedClasses: new Set(),
   isLectureModalOpen: false,
   isQuestionModalOpen: false,
   newLectureData: {
-    title: '',
+    lectureName: '',
     description: '',
-    date: '',
+    lectureDate: '',
     classroomId: null,
   },
   questions: [
     {
-      id: 1,
-      mainUnit: '',
-      subUnit: '',
+      id: Date.now(),
+      number: 1,
+      mainTopic: '',
+      subTopic: '',
       difficulty: '',
-      points: '',
+      score: '',
     },
   ],
+  questionIdCounter: Date.now(),
 
   // 액션
   setSelectedLecture: lecture => set({ selectedLecture: lecture }),
@@ -78,9 +45,9 @@ const useLectureStore = create((set, get) => ({
     set({
       isLectureModalOpen: false,
       newLectureData: {
-        title: '',
+        lectureName: '',
         description: '',
-        date: '',
+        lectureDate: '',
         classroomId: null,
       },
     }),
@@ -99,31 +66,18 @@ const useLectureStore = create((set, get) => ({
   addLecture: () => {
     const { newLectureData } = get();
     if (
-      !newLectureData.title ||
-      !newLectureData.date ||
+      !newLectureData.lectureName ||
+      !newLectureData.lectureDate ||
       !newLectureData.classroomId
     ) {
       alert('모든 필드를 입력해주세요.');
       return false;
     }
 
-    set(state => ({
-      lectures: [
-        ...state.lectures,
-        {
-          ...newLectureData,
-          id: Date.now(),
-        },
-      ],
+    set({
       isLectureModalOpen: false,
       isQuestionModalOpen: true,
-      newLectureData: {
-        title: '',
-        description: '',
-        date: '',
-        classroomId: null,
-      },
-    }));
+    });
     return true;
   },
 
@@ -146,18 +100,24 @@ const useLectureStore = create((set, get) => ({
 
   // 문제 관리
   addQuestion: () =>
-    set(state => ({
-      questions: [
-        ...state.questions,
-        {
-          id: Date.now(),
-          mainUnit: '',
-          subUnit: '',
-          difficulty: '',
-          points: '',
-        },
-      ],
-    })),
+    set(state => {
+      const newId = state.questionIdCounter + 1;
+      const nextNumber = state.questions.length + 1;
+      return {
+        questions: [
+          ...state.questions,
+          {
+            id: newId,
+            number: nextNumber,
+            mainTopic: '',
+            subTopic: '',
+            difficulty: '',
+            score: '',
+          },
+        ],
+        questionIdCounter: newId,
+      };
+    }),
 
   updateQuestion: (questionId, field, value) =>
     set(state => ({
@@ -167,22 +127,79 @@ const useLectureStore = create((set, get) => ({
     })),
 
   removeQuestion: questionId =>
-    set(state => ({
-      questions: state.questions.filter(question => question.id !== questionId),
-    })),
+    set(state => {
+      const filteredQuestions = state.questions.filter(
+        question => question.id !== questionId
+      );
+      // 문제 번호 재정렬
+      const reorderedQuestions = filteredQuestions.map((question, index) => ({
+        ...question,
+        number: index + 1,
+      }));
+      return { questions: reorderedQuestions };
+    }),
 
-  resetQuestions: () =>
+  resetQuestions: () => {
+    const newId = Date.now();
     set({
       questions: [
         {
-          id: 1,
-          mainUnit: '',
-          subUnit: '',
+          id: newId,
+          number: 1,
+          mainTopic: '',
+          subTopic: '',
           difficulty: '',
-          points: '',
+          score: '',
         },
       ],
-    }),
+      questionIdCounter: newId,
+    });
+  },
+
+  saveQuestions: async () => {
+    const { newLectureData, questions } = get();
+
+    const lectureData = {
+      ...newLectureData,
+      questions: questions,
+    };
+
+    try {
+      const result = await createLecture(lectureData);
+
+      if (result.success) {
+        const newId = Date.now();
+        set(() => ({
+          isQuestionModalOpen: false,
+          newLectureData: {
+            lectureName: '',
+            description: '',
+            lectureDate: '',
+            classroomId: null,
+          },
+          questions: [
+            {
+              id: newId,
+              number: 1,
+              mainTopic: '',
+              subTopic: '',
+              difficulty: '',
+              score: '',
+            },
+          ],
+          questionIdCounter: newId,
+        }));
+        return true;
+      } else {
+        alert(`강의 생성 실패: ${result.error}`);
+        return false;
+      }
+    } catch (error) {
+      console.error('강의 생성 중 오류:', error);
+      alert('강의 생성 중 오류가 발생했습니다.');
+      return false;
+    }
+  },
 }));
 
 export default useLectureStore;

@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useLectureStore } from '../../../store';
 import { useAuthStore } from '../../../store';
 import { getTeacherClassrooms } from '../../../api/classroomApi';
+import {
+  getLecturesByClassroom as apiGetLecturesByClassroom,
+  deleteLecture,
+} from '../../../api/lectureApi';
 import LectureAddModal from '../modal/LectureAddModal';
 import QuestionAddModal from '../modal/QuestionAddModal';
+import ConfirmModal from '../../ConfirmModal';
 import './LectureListComponent.css';
 
 function LectureListComponent() {
@@ -23,13 +28,19 @@ function LectureListComponent() {
     updateQuestion,
     removeQuestion,
     resetQuestions,
-    getLecturesByClassroom,
+    saveQuestions,
   } = useLectureStore();
 
   const { currentUser } = useAuthStore();
   const [apiClassrooms, setApiClassrooms] = useState([]);
+  const [classroomLectures, setClassroomLectures] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [confirmModal, setConfirmModal] = useState({
+    isOpen: false,
+    lectureId: null,
+    classroomId: null,
+  });
 
   // 컴포넌트 마운트 시 교사의 반 목록 가져오기
   useEffect(() => {
@@ -63,9 +74,43 @@ function LectureListComponent() {
     fetchClassrooms();
   }, [currentUser]);
 
-  const handleAddLecture = () => {
-    if (addLecture()) {
+  // 특정 반의 강의 목록 가져오기
+  const fetchLecturesForClassroom = async classroomId => {
+    try {
+      const result = await apiGetLecturesByClassroom(classroomId);
+      if (result.success) {
+        console.log(`반 ${classroomId} 강의 목록 가져오기 성공:`, result.data);
+        setClassroomLectures(prev => ({
+          ...prev,
+          [classroomId]: result.data,
+        }));
+      } else {
+        console.error(
+          `반 ${classroomId} 강의 목록 가져오기 실패:`,
+          result.error
+        );
+      }
+    } catch (error) {
+      console.error(`반 ${classroomId} 강의 목록 가져오기 오류:`, error);
+    }
+  };
+
+  // 반을 클릭할 때 강의 목록 가져오기
+  const handleClassroomClick = classroomId => {
+    toggleClassExpansion(classroomId);
+    if (!expandedClasses.has(classroomId) && !classroomLectures[classroomId]) {
+      fetchLecturesForClassroom(classroomId);
+    }
+  };
+
+  const handleAddLecture = async () => {
+    const success = await addLecture();
+    if (success) {
       resetQuestions();
+      // 강의 추가 후 해당 반의 강의 목록 새로고침
+      if (newLectureData.classroomId) {
+        fetchLecturesForClassroom(newLectureData.classroomId);
+      }
     }
   };
 
@@ -81,6 +126,44 @@ function LectureListComponent() {
     } else {
       alert('1-50 사이의 숫자를 입력해주세요.');
     }
+  };
+
+  const handleSaveQuestions = async () => {
+    const success = await saveQuestions();
+    if (success && newLectureData.classroomId) {
+      fetchLecturesForClassroom(newLectureData.classroomId);
+    }
+  };
+
+  const handleDeleteClick = (lectureId, classroomId) => {
+    setConfirmModal({
+      isOpen: true,
+      lectureId,
+      classroomId,
+    });
+  };
+
+  const handleDeleteConfirm = async () => {
+    const { lectureId, classroomId } = confirmModal;
+
+    try {
+      const result = await deleteLecture(lectureId);
+      if (result.success) {
+        alert('강의가 삭제되었습니다.');
+        fetchLecturesForClassroom(classroomId);
+      } else {
+        alert(`강의 삭제 실패: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('강의 삭제 중 오류:', error);
+      alert('강의 삭제 중 오류가 발생했습니다.');
+    }
+
+    setConfirmModal({ isOpen: false, lectureId: null, classroomId: null });
+  };
+
+  const handleDeleteCancel = () => {
+    setConfirmModal({ isOpen: false, lectureId: null, classroomId: null });
   };
 
   const handleRemoveQuestion = id => {
@@ -131,7 +214,7 @@ function LectureListComponent() {
           <div key={classroom.uid} className='classroom-item'>
             <div
               className='classroom-header'
-              onClick={() => toggleClassExpansion(classroom.uid)}
+              onClick={() => handleClassroomClick(classroom.uid)}
             >
               <div className='classroom-info'>
                 <h3>{classroom.classroomName}</h3>
@@ -160,12 +243,19 @@ function LectureListComponent() {
                   <h4>회차별 수업 관리</h4>
                 </div>
                 <div className='lectures-list'>
-                  {getLecturesByClassroom(classroom.uid).map(lecture => (
-                    <div key={lecture.id} className='lecture-item'>
+                  {(classroomLectures[classroom.uid] || []).map(lecture => (
+                    <div
+                      key={lecture.uid || lecture.id}
+                      className='lecture-item'
+                    >
                       <div className='lecture-info'>
                         <div className='lecture-title'>
-                          <h5>{lecture.title}</h5>
-                          <span className='lecture-date'>{lecture.date}</span>
+                          <h5>{lecture.lectureName}</h5>
+                          <span className='lecture-date'>
+                            {lecture.lectureDate
+                              ? lecture.lectureDate.split('T')[0]
+                              : ''}
+                          </span>
                         </div>
                         <div className='lecture-status'>
                           <span className='status completed'>완료</span>
@@ -173,7 +263,18 @@ function LectureListComponent() {
                       </div>
                       <div className='lecture-actions'>
                         <button className='btn btn-edit'>수정</button>
-                        <button className='btn btn-delete'>삭제</button>
+                        <button
+                          className='btn btn-delete'
+                          onClick={e => {
+                            e.stopPropagation();
+                            handleDeleteClick(
+                              lecture.uid || lecture.id,
+                              classroom.uid
+                            );
+                          }}
+                        >
+                          삭제
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -201,6 +302,17 @@ function LectureListComponent() {
         questionCount={questionCount}
         setQuestionCount={setQuestionCount}
         handleAddQuestions={handleAddQuestions}
+        onSave={handleSaveQuestions}
+        lectureData={newLectureData}
+        resetQuestions={resetQuestions}
+      />
+
+      <ConfirmModal
+        isOpen={confirmModal.isOpen}
+        onClose={handleDeleteCancel}
+        onConfirm={handleDeleteConfirm}
+        title='강의 삭제'
+        message='정말로 이 강의를 삭제하시겠습니까?'
       />
     </div>
   );

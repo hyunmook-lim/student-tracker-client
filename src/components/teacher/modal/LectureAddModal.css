@@ -1,5 +1,5 @@
 /* LectureAddModal 컴포넌트 스타일 */
-.modal-overlay {
+.lecture-add-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
   z-index: 1000;
 }
 
-.modal-content {
+.lecture-add-modal-content {
   background: white;
   border-radius: 12px;
   width: 90%;
@@ -22,7 +22,7 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.modal-header {
+.lecture-add-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,14 +30,14 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.modal-header h3 {
+.lecture-add-modal-header h3 {
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
-.close-btn {
+.lecture-add-close-btn {
   background: none;
   border: none;
   font-size: 24px;
@@ -53,20 +53,20 @@
   transition: background 0.2s ease;
 }
 
-.close-btn:hover {
+.lecture-add-close-btn:hover {
   background: #f1f5f9;
   color: #1e293b;
 }
 
-.modal-body {
+.lecture-add-modal-body {
   padding: 24px 32px;
 }
 
-.form-group {
+.lecture-add-form-group {
   margin-bottom: 20px;
 }
 
-.form-group label {
+.lecture-add-form-group label {
   display: block;
   margin-bottom: 8px;
   color: #374151;
@@ -74,8 +74,8 @@
   font-size: 14px;
 }
 
-.form-group input,
-.form-group textarea {
+.lecture-add-form-group input,
+.lecture-add-form-group textarea {
   width: 100%;
   padding: 12px 16px;
   border: 1px solid #d1d5db;
@@ -87,14 +87,14 @@
   box-sizing: border-box;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.lecture-add-form-group input:focus,
+.lecture-add-form-group textarea:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.modal-actions {
+.lecture-add-modal-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
@@ -135,7 +135,7 @@
 }
 
 @media (max-width: 768px) {
-  .modal-content {
+  .lecture-add-modal-content {
     width: 95%;
     margin: 20px;
   }

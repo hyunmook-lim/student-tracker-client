@@ -11,16 +11,19 @@ function ClassroomAddModal({
   if (!isOpen) return null;
 
   return (
-    <div className='modal-overlay' onClick={onClose}>
-      <div className='modal-content' onClick={e => e.stopPropagation()}>
-        <div className='modal-header'>
+    <div className='classroom-add-modal-overlay' onClick={onClose}>
+      <div
+        className='classroom-add-modal-content'
+        onClick={e => e.stopPropagation()}
+      >
+        <div className='classroom-add-modal-header'>
           <h3>새 반 추가</h3>
-          <button className='close-btn' onClick={onClose}>
+          <button className='classroom-add-close-btn' onClick={onClose}>
             ×
           </button>
         </div>
-        <div className='modal-body'>
-          <div className='form-group'>
+        <div className='classroom-add-modal-body'>
+          <div className='classroom-add-form-group'>
             <label>반 이름</label>
             <input
               type='text'
@@ -29,7 +32,7 @@ function ClassroomAddModal({
               placeholder='예: 1학년 1반'
             />
           </div>
-          <div className='form-group'>
+          <div className='classroom-add-form-group'>
             <label>반 설명</label>
             <textarea
               value={newClassData.description}
@@ -39,11 +42,11 @@ function ClassroomAddModal({
             />
           </div>
         </div>
-        <div className='modal-actions'>
-          <button className='cancel-btn' onClick={onClose}>
+        <div className='classroom-add-modal-actions'>
+          <button className='classroom-add-cancel-btn' onClick={onClose}>
             취소
           </button>
-          <button className='save-btn' onClick={onSave}>
+          <button className='classroom-add-save-btn' onClick={onSave}>
             저장
           </button>
         </div>

@@ -1,0 +1,255 @@
+/* ResultInputModal 컴포넌트 스타일 */
+.result-input-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.result-input-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.result-input-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.result-input-modal-header h3 {
+  color: #1e293b;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.result-input-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.result-input-modal-close:hover {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.result-input-modal-body {
+  padding: 24px 32px;
+}
+
+.result-input-form {
+  width: 100%;
+}
+
+.result-input-table {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.result-input-table-header {
+  display: grid;
+  grid-template-columns: 1fr 120px 150px 120px;
+  gap: 16px;
+  padding: 16px;
+  background: #f8fafc;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.result-input-table-row {
+  display: grid;
+  grid-template-columns: 1fr 120px 150px 120px;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: center;
+}
+
+.result-input-table-row:last-child {
+  border-bottom: none;
+}
+
+.result-input-student-name {
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.result-input-attendance-select select,
+.result-input-assignment-grade select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.result-input-attendance-select select:focus,
+.result-input-assignment-grade select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.result-input-attendance-select select:disabled,
+.result-input-assignment-grade select:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.result-input-exam-score {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-input-exam-score input {
+  width: 80px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.result-input-exam-score input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.result-input-exam-score input:disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.result-input-total {
+  color: #64748b;
+  font-size: 14px;
+  min-width: 60px;
+}
+
+.result-input-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.result-input-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.result-input-btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.result-input-btn-cancel:hover {
+  background: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+.result-input-btn-save {
+  background: #3b82f6;
+  color: white;
+}
+
+.result-input-btn-save:hover {
+  background: #2563eb;
+}
+
+/* 과제 등급별 색상 */
+.result-input-assignment-grade select option[value='A'] {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.result-input-assignment-grade select option[value='B'] {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.result-input-assignment-grade select option[value='C'] {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.result-input-assignment-grade select option[value='D'] {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+@media (max-width: 768px) {
+  .result-input-modal-content {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .result-input-table-header,
+  .result-input-table-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .result-input-table-header span,
+  .result-input-table-row > * {
+    text-align: left;
+  }
+
+  .result-input-exam-score {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .result-input-exam-score input {
+    width: 100%;
+  }
+
+  .result-input-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

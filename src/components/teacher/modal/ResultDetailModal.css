@@ -1,5 +1,5 @@
 /* ResultDetailModal 컴포넌트 스타일 */
-.modal-overlay {
+.result-detail-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,17 +12,17 @@
   z-index: 1000;
 }
 
-.modal-content {
+.result-detail-modal-content {
   background: white;
   border-radius: 12px;
   width: 90%;
-  max-width: 800px;
+  max-width: 900px;
   max-height: 90vh;
   overflow-y: auto;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-.modal-header {
+.result-detail-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,14 +30,14 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.modal-header h3 {
+.result-detail-modal-header h3 {
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
-.modal-close {
+.result-detail-modal-close {
   background: none;
   border: none;
   font-size: 24px;
@@ -53,29 +53,29 @@
   transition: background 0.2s ease;
 }
 
-.modal-close:hover {
+.result-detail-modal-close:hover {
   background: #f1f5f9;
   color: #1e293b;
 }
 
-.modal-body {
+.result-detail-modal-body {
   padding: 24px 32px;
 }
 
-.results-display {
+.result-detail-results-display {
   width: 100%;
 }
 
-.results-table {
+.result-detail-results-table {
   width: 100%;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.table-header {
+.result-detail-table-header {
   display: grid;
-  grid-template-columns: 80px 1fr 100px 100px 80px;
+  grid-template-columns: 80px 80px 1fr 150px 150px;
   gap: 16px;
   padding: 16px;
   background: #f8fafc;
@@ -84,197 +84,115 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.table-row {
+.result-detail-table-row {
   display: grid;
-  grid-template-columns: 80px 1fr 100px 100px 80px;
+  grid-template-columns: 80px 80px 1fr 150px 150px;
   gap: 16px;
   padding: 16px;
   border-bottom: 1px solid #f1f5f9;
   align-items: center;
 }
 
-.table-row:last-child {
+.result-detail-table-row:last-child {
   border-bottom: none;
 }
 
-.rank {
+.result-detail-rank {
   font-weight: 600;
   color: #6b7280;
 }
 
-.name {
+.result-detail-attendance {
   font-weight: 500;
-  color: #1e293b;
-}
-
-.score {
-  font-weight: 600;
-  color: #3b82f6;
-}
-
-.total {
-  color: #64748b;
-}
-
-.grade {
-  font-weight: 600;
   text-align: center;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 14px;
 }
 
-.grade.A {
+.result-detail-attendance.present {
   background: #dcfce7;
   color: #166534;
 }
 
-.grade.B {
-  background: #dbeafe;
-  color: #1e40af;
-}
-
-.grade.C {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-.grade.D {
+.result-detail-attendance.absent {
   background: #fee2e2;
   color: #991b1b;
 }
 
-.results-input {
-  width: 100%;
-}
-
-.results-input p {
-  margin-bottom: 20px;
-  color: #64748b;
-  font-size: 16px;
-}
-
-.input-form {
-  width: 100%;
-}
-
-.form-group {
-  margin-bottom: 24px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 12px;
-  color: #374151;
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.student-scores {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.score-input-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
-}
-
-.student-name {
-  flex: 1;
+.result-detail-name {
   font-weight: 500;
   color: #1e293b;
 }
 
-.score-input {
-  width: 100px;
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 14px;
+.result-detail-exam-score {
+  font-weight: 600;
+  color: #3b82f6;
   text-align: center;
 }
 
-.score-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.total-score {
-  color: #64748b;
+.result-detail-assignment-score {
+  font-weight: 600;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-size: 14px;
-  min-width: 60px;
+  min-width: 30px;
+  display: inline-block;
 }
 
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding-top: 24px;
-  border-top: 1px solid #e2e8f0;
+.result-detail-assignment-score.A {
+  background: #dcfce7;
+  color: #166534;
 }
 
-.btn {
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: none;
+.result-detail-assignment-score.B {
+  background: #dbeafe;
+  color: #1e40af;
 }
 
-.btn-cancel {
-  background: #f3f4f6;
-  color: #374151;
-  border: 1px solid #d1d5db;
+.result-detail-assignment-score.C {
+  background: #fef3c7;
+  color: #92400e;
 }
 
-.btn-cancel:hover {
-  background: #e5e7eb;
-  border-color: #9ca3af;
+.result-detail-assignment-score.D {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
-.btn-save {
-  background: #3b82f6;
-  color: white;
-}
-
-.btn-save:hover {
-  background: #2563eb;
+/* 기존 스타일들 제거 (더 이상 사용하지 않음) */
+.result-detail-total,
+.result-detail-grade,
+.result-detail-results-input,
+.result-detail-input-form,
+.result-detail-form-group,
+.result-detail-student-scores,
+.result-detail-score-input-row,
+.result-detail-student-name,
+.result-detail-score-input,
+.result-detail-total-score,
+.result-detail-form-actions,
+.result-detail-btn,
+.result-detail-btn-cancel,
+.result-detail-btn-save {
+  display: none;
 }
 
 @media (max-width: 768px) {
-  .modal-content {
+  .result-detail-modal-content {
     width: 95%;
     margin: 20px;
   }
 
-  .table-header,
-  .table-row {
+  .result-detail-table-header,
+  .result-detail-table-row {
     grid-template-columns: 1fr;
     gap: 8px;
   }
 
-  .score-input-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .score-input {
-    width: 100%;
-  }
-
-  .form-actions {
-    flex-direction: column;
-    gap: 8px;
+  .result-detail-table-header span,
+  .result-detail-table-row span {
+    text-align: left;
   }
 }
