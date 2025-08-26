@@ -8,6 +8,7 @@ import {
 } from '../../../api/lectureApi';
 import LectureAddModal from '../modal/LectureAddModal';
 import QuestionAddModal from '../modal/QuestionAddModal';
+import LectureDetailModal from '../modal/LectureDetailModal';
 import ConfirmModal from '../../ConfirmModal';
 import './LectureListComponent.css';
 
@@ -40,6 +41,10 @@ function LectureListComponent() {
     isOpen: false,
     lectureId: null,
     classroomId: null,
+  });
+  const [lectureDetailModal, setLectureDetailModal] = useState({
+    isOpen: false,
+    lecture: null,
   });
 
   // 컴포넌트 마운트 시 교사의 반 목록 가져오기
@@ -166,6 +171,20 @@ function LectureListComponent() {
     setConfirmModal({ isOpen: false, lectureId: null, classroomId: null });
   };
 
+  const handleLectureClick = (lecture) => {
+    setLectureDetailModal({
+      isOpen: true,
+      lecture: lecture,
+    });
+  };
+
+  const handleLectureDetailClose = () => {
+    setLectureDetailModal({
+      isOpen: false,
+      lecture: null,
+    });
+  };
+
   const handleRemoveQuestion = id => {
     if (questions.length > 1) {
       removeQuestion(id);
@@ -175,6 +194,38 @@ function LectureListComponent() {
   const handleAddRound = classroomId => {
     updateNewLectureData('classroomId', classroomId);
     openLectureModal();
+  };
+
+  const getLectureStatus = lectureDate => {
+    if (!lectureDate) return 'completed';
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const lecture = new Date(lectureDate);
+    lecture.setHours(0, 0, 0, 0);
+
+    if (lecture.getTime() === today.getTime()) {
+      return 'ongoing';
+    } else if (lecture.getTime() < today.getTime()) {
+      return 'completed';
+    } else {
+      return 'scheduled';
+    }
+  };
+
+  const getLectureStatusText = lectureDate => {
+    const status = getLectureStatus(lectureDate);
+    switch (status) {
+      case 'ongoing':
+        return '진행중';
+      case 'completed':
+        return '완료';
+      case 'scheduled':
+        return '예정';
+      default:
+        return '완료';
+    }
   };
 
   // 로딩 중 표시
@@ -243,10 +294,26 @@ function LectureListComponent() {
                   <h4>회차별 수업 관리</h4>
                 </div>
                 <div className='lectures-list'>
-                  {(classroomLectures[classroom.uid] || []).map(lecture => (
+                  {(classroomLectures[classroom.uid] || [])
+                    .sort((a, b) => {
+                      // 날짜 기준 정렬 (없으면 맨 뒤로)
+                      const dateA = a.lectureDate ? new Date(a.lectureDate) : new Date('9999-12-31');
+                      const dateB = b.lectureDate ? new Date(b.lectureDate) : new Date('9999-12-31');
+                      
+                      if (dateA.getTime() !== dateB.getTime()) {
+                        return dateA.getTime() - dateB.getTime();
+                      }
+                      
+                      // 날짜가 같으면 강의명 기준 정렬
+                      const nameA = (a.lectureName || '').toLowerCase();
+                      const nameB = (b.lectureName || '').toLowerCase();
+                      return nameA.localeCompare(nameB);
+                    })
+                    .map(lecture => (
                     <div
                       key={lecture.uid || lecture.id}
                       className='lecture-item'
+                      onClick={() => handleLectureClick(lecture)}
                     >
                       <div className='lecture-info'>
                         <div className='lecture-title'>
@@ -258,7 +325,13 @@ function LectureListComponent() {
                           </span>
                         </div>
                         <div className='lecture-status'>
-                          <span className='status completed'>완료</span>
+                          <span
+                            className={`status ${getLectureStatus(
+                              lecture.lectureDate
+                            )}`}
+                          >
+                            {getLectureStatusText(lecture.lectureDate)}
+                          </span>
                         </div>
                       </div>
                       <div className='lecture-actions'>
@@ -305,6 +378,12 @@ function LectureListComponent() {
         onSave={handleSaveQuestions}
         lectureData={newLectureData}
         resetQuestions={resetQuestions}
+      />
+
+      <LectureDetailModal
+        isOpen={lectureDetailModal.isOpen}
+        onClose={handleLectureDetailClose}
+        lecture={lectureDetailModal.lecture}
       />
 
       <ConfirmModal

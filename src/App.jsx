@@ -3,6 +3,7 @@ import TeacherHome from './pages/TeacherHome';
 import StudentHome from './pages/StudentHome';
 import { useAuthStore } from './store';
 import { signupTeacher, loginTeacher } from './api/teacherApi';
+import { signupStudent, loginStudent } from './api/studentApi';
 
 function App() {
   const {
@@ -16,7 +17,6 @@ function App() {
     updateSignupField,
     toggleSignupMode,
     login,
-    signup,
   } = useAuthStore();
 
   const handleInputChange = e => {
@@ -59,8 +59,34 @@ function App() {
         alert('로그인 중 오류가 발생했습니다.');
       }
     } else {
-      // 학생 로그인은 기존 로직 유지
-      login();
+      // 학생 로그인 API 호출
+      try {
+        const loginData = {
+          loginId: formData.id,
+          password: formData.password,
+        };
+
+        const result = await loginStudent(loginData);
+
+        if (result.success) {
+          console.log('학생 로그인 API 응답 전체:', result);
+          console.log('학생 로그인 API 응답 데이터:', result.data);
+          console.log('학생 로그인 API 응답 데이터 타입:', typeof result.data);
+
+          alert(
+            `학생 로그인이 완료되었습니다!\n환영합니다, ${result.data.name}님!`
+          );
+          console.log('학생 로그인 성공:', result.data);
+          // 로그인 성공 시 상태 업데이트 (API 결과 전달)
+          login(result);
+        } else {
+          alert(`로그인 실패: ${result.error}`);
+          console.error('학생 로그인 실패 상세:', result);
+        }
+      } catch (error) {
+        console.error('학생 로그인 오류:', error);
+        alert('로그인 중 오류가 발생했습니다.');
+      }
     }
   };
 
@@ -103,8 +129,33 @@ function App() {
         alert('회원가입 중 오류가 발생했습니다.');
       }
     } else {
-      // 학생 회원가입은 기존 로직 유지
-      signup();
+      // 학생 회원가입 API 호출
+      try {
+        const studentData = {
+          name: signupData.name,
+          loginId: signupData.loginId,
+          phone: signupData.phone,
+          password: signupData.password,
+        };
+
+        const result = await signupStudent(studentData);
+
+        if (result.success) {
+          alert('학생 회원가입이 완료되었습니다!');
+          console.log('학생 회원가입 성공:', result.data);
+          // 회원가입 성공 후 로그인 화면으로 돌아가기
+          toggleSignupMode();
+          // 폼 데이터 초기화
+          Object.keys(signupData).forEach(key => {
+            updateSignupField(key, '');
+          });
+        } else {
+          alert(`회원가입 실패: ${result.error}`);
+        }
+      } catch (error) {
+        console.error('학생 회원가입 오류:', error);
+        alert('회원가입 중 오류가 발생했습니다.');
+      }
     }
   };
 

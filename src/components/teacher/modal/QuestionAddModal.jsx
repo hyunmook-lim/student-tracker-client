@@ -82,9 +82,10 @@ function QuestionAddModal({
                   }
                 >
                   <option value=''>선택</option>
-                  <option value='쉬움'>쉬움</option>
-                  <option value='보통'>보통</option>
-                  <option value='어려움'>어려움</option>
+                  <option value='중'>중</option>
+                  <option value='중상'>중상</option>
+                  <option value='상'>상</option>
+                  <option value='최상'>최상</option>
                 </select>
               </div>
               <div className='question-add-field-group score'>
@@ -94,7 +95,7 @@ function QuestionAddModal({
                   onChange={e =>
                     updateQuestion(question.id, 'score', e.target.value)
                   }
-                  placeholder='배점을 입력하세요'
+                  placeholder='배점'
                   min='1'
                 />
               </div>
@@ -105,7 +106,7 @@ function QuestionAddModal({
                   onChange={e =>
                     updateQuestion(question.id, 'answer', e.target.value)
                   }
-                  placeholder='정답을 입력하세요'
+                  placeholder='정답'
                 />
               </div>
               <div className='question-add-field-group delete'>

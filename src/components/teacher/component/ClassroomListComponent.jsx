@@ -7,6 +7,10 @@ import {
   updateClassroom,
   deleteClassroom,
 } from '../../../api/classroomApi';
+import {
+  getClassroomStudents,
+  updateStudentClassroomStatus,
+} from '../../../api/classroomStudentApi';
 import ClassroomAddModal from '../modal/ClassroomAddModal';
 import ConfirmModal from '../../ConfirmModal';
 import './ClassroomListComponent.css';
@@ -33,6 +37,8 @@ function ClassroomListComponent() {
     classroomId: null,
     classroomName: null,
   });
+  const [classroomStudents, setClassroomStudents] = useState({});
+  const [studentsLoading, setStudentsLoading] = useState({});
 
   // 컴포넌트 마운트 시 교사의 반 목록 가져오기
   useEffect(() => {
@@ -80,7 +86,7 @@ function ClassroomListComponent() {
     }
   };
 
-  const handleClassClick = classId => {
+  const handleClassClick = async classId => {
     console.log('=== 반 클릭 이벤트 ===');
     console.log('클릭된 반 ID:', classId, '타입:', typeof classId);
     console.log(
@@ -90,7 +96,121 @@ function ClassroomListComponent() {
       typeof expandedClass
     );
     console.log('ID가 같은가?', expandedClass === classId);
+
+    // 이미 확장된 반을 클릭한 경우 축소
+    if (expandedClass === classId) {
+      setExpandedClass(null);
+      return;
+    }
+
     setExpandedClass(classId);
+
+    // 해당 반의 학생 정보 가져오기
+    await fetchClassroomStudents(classId);
+  };
+
+  // 반의 학생 정보 가져오기
+  const fetchClassroomStudents = async classroomId => {
+    try {
+      setStudentsLoading(prev => ({ ...prev, [classroomId]: true }));
+
+      const result = await getClassroomStudents(classroomId);
+
+      if (result.success) {
+        console.log('반 학생 목록 가져오기 성공:', result.data);
+        setClassroomStudents(prev => ({
+          ...prev,
+          [classroomId]: result.data,
+        }));
+      } else {
+        console.error('반 학생 목록 가져오기 실패:', result.error);
+        setClassroomStudents(prev => ({
+          ...prev,
+          [classroomId]: [],
+        }));
+      }
+    } catch (error) {
+      console.error('반 학생 목록 가져오기 오류:', error);
+      setClassroomStudents(prev => ({
+        ...prev,
+        [classroomId]: [],
+      }));
+    } finally {
+      setStudentsLoading(prev => ({ ...prev, [classroomId]: false }));
+    }
+  };
+
+  // 학생 상태 업데이트 처리 (승인/거절)
+  const handleStudentStatusUpdate = async (studentUid, status, classroomId) => {
+    try {
+      console.log('학생 상태 업데이트 요청:', {
+        studentUid,
+        status,
+        classroomId,
+      });
+
+      const result = await updateStudentClassroomStatus(
+        studentUid,
+        classroomId,
+        status
+      );
+
+      if (result.success) {
+        const statusText = status === 'APPROVED' ? '승인' : '거절';
+        alert(`학생이 성공적으로 ${statusText}되었습니다!`);
+        console.log('학생 상태 업데이트 성공:', result.data);
+
+        // 해당 반의 학생 목록 새로고침
+        await fetchClassroomStudents(classroomId);
+      } else {
+        alert(`학생 상태 업데이트 실패: ${result.error}`);
+        console.error('학생 상태 업데이트 실패 상세:', result);
+      }
+    } catch (error) {
+      console.error('학생 상태 업데이트 오류:', error);
+      alert('학생 상태 업데이트 중 오류가 발생했습니다.');
+    }
+  };
+
+  // 학생 상태에 따른 렌더링
+  const renderStudentStatus = student => {
+    switch (student.status) {
+      case 'WAITING':
+        return (
+          <div className='student-actions'>
+            <button
+              className='approve-btn'
+              onClick={() =>
+                handleStudentStatusUpdate(
+                  student.student.uid,
+                  'APPROVED',
+                  expandedClass
+                )
+              }
+            >
+              승인
+            </button>
+            <button
+              className='reject-btn'
+              onClick={() =>
+                handleStudentStatusUpdate(
+                  student.student.uid,
+                  'REJECTED',
+                  expandedClass
+                )
+              }
+            >
+              거절
+            </button>
+          </div>
+        );
+      case 'APPROVED':
+        return <span className='status-tag approved'>승인됨</span>;
+      case 'REJECTED':
+        return <span className='status-tag rejected'>거절됨</span>;
+      default:
+        return <span className='status-tag unknown'>알 수 없음</span>;
+    }
   };
 
   // 수정 모드 시작
@@ -360,12 +480,22 @@ function ClassroomListComponent() {
                   <h4>학생 목록</h4>
                 </div>
                 <div className='students-list'>
-                  {classroom.studentIds && classroom.studentIds.length > 0 ? (
-                    classroom.studentIds.map((studentId, index) => (
+                  {studentsLoading[classroom.uid] ? (
+                    <div className='loading-message'>
+                      학생 목록을 불러오는 중...
+                    </div>
+                  ) : classroomStudents[classroom.uid] &&
+                    classroomStudents[classroom.uid].length > 0 ? (
+                    classroomStudents[classroom.uid].map((student, index) => (
                       <div key={index} className='student-item'>
                         <div className='student-info'>
-                          <span className='student-name'>학생 {studentId}</span>
-                          <span className='student-id'>ID: {studentId}</span>
+                          <span className='student-name'>
+                            {student.student.name ||
+                              `학생 ${student.student.name}`}
+                          </span>
+                        </div>
+                        <div className='student-status'>
+                          {renderStudentStatus(student)}
                         </div>
                       </div>
                     ))

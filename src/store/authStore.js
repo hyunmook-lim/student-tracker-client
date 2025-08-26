@@ -5,6 +5,7 @@ const useAuthStore = create((set, get) => ({
   userType: 'teacher', // 'teacher' 또는 'student'
   isLoggedIn: false,
   isSignupMode: false, // 회원가입 모드 여부
+  currentUser: null, // 현재 로그인한 사용자 정보
   formData: {
     id: '',
     password: '',
@@ -44,35 +45,23 @@ const useAuthStore = create((set, get) => ({
   login: (apiResult = null) => {
     const { formData, userType } = get();
 
-    // 교사 모드이고 API 검증 결과가 있는 경우
-    if (userType === 'teacher' && apiResult) {
-      if (apiResult.success) {
-        set({
-          isLoggedIn: true,
-          // 로그인된 교사 정보 저장
-          currentUser: {
-            type: 'teacher',
-            ...apiResult.data,
-          },
-        });
-        return true;
-      } else {
-        alert('아이디 또는 비밀번호가 올바르지 않습니다.');
-        return false;
-      }
-    }
+    // API 검증 결과가 있는 경우 (교사 또는 학생)
+    if (apiResult) {
+      console.log('authStore login - apiResult:', apiResult);
+      console.log('authStore login - apiResult.data:', apiResult.data);
+      console.log('authStore login - userType:', userType);
 
-    // 학생 모드이거나 기존 로직 (임시)
-    if (userType === 'student') {
-      // 학생 로그인: student/student
-      if (formData.id === 'student' && formData.password === 'student') {
+      if (apiResult.success) {
+        const currentUserData = {
+          type: userType,
+          ...apiResult.data,
+        };
+        console.log('authStore login - currentUserData:', currentUserData);
+
         set({
           isLoggedIn: true,
-          currentUser: {
-            type: 'student',
-            id: 'student',
-            name: '학생',
-          },
+          // 로그인된 사용자 정보 저장
+          currentUser: currentUserData,
         });
         return true;
       } else {
