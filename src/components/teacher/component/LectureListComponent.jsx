@@ -171,7 +171,7 @@ function LectureListComponent() {
     setConfirmModal({ isOpen: false, lectureId: null, classroomId: null });
   };
 
-  const handleLectureClick = (lecture) => {
+  const handleLectureClick = lecture => {
     setLectureDetailModal({
       isOpen: true,
       lecture: lecture,
@@ -297,60 +297,64 @@ function LectureListComponent() {
                   {(classroomLectures[classroom.uid] || [])
                     .sort((a, b) => {
                       // 날짜 기준 정렬 (없으면 맨 뒤로)
-                      const dateA = a.lectureDate ? new Date(a.lectureDate) : new Date('9999-12-31');
-                      const dateB = b.lectureDate ? new Date(b.lectureDate) : new Date('9999-12-31');
-                      
+                      const dateA = a.lectureDate
+                        ? new Date(a.lectureDate)
+                        : new Date('9999-12-31');
+                      const dateB = b.lectureDate
+                        ? new Date(b.lectureDate)
+                        : new Date('9999-12-31');
+
                       if (dateA.getTime() !== dateB.getTime()) {
                         return dateA.getTime() - dateB.getTime();
                       }
-                      
+
                       // 날짜가 같으면 강의명 기준 정렬
                       const nameA = (a.lectureName || '').toLowerCase();
                       const nameB = (b.lectureName || '').toLowerCase();
                       return nameA.localeCompare(nameB);
                     })
                     .map(lecture => (
-                    <div
-                      key={lecture.uid || lecture.id}
-                      className='lecture-item'
-                      onClick={() => handleLectureClick(lecture)}
-                    >
-                      <div className='lecture-info'>
-                        <div className='lecture-title'>
-                          <h5>{lecture.lectureName}</h5>
-                          <span className='lecture-date'>
-                            {lecture.lectureDate
-                              ? lecture.lectureDate.split('T')[0]
-                              : ''}
-                          </span>
+                      <div
+                        key={lecture.uid || lecture.id}
+                        className='lecture-item'
+                        onClick={() => handleLectureClick(lecture)}
+                      >
+                        <div className='lecture-info'>
+                          <div className='lecture-title'>
+                            <h5>{lecture.lectureName}</h5>
+                            <span className='lecture-date'>
+                              {lecture.lectureDate
+                                ? lecture.lectureDate.split('T')[0]
+                                : ''}
+                            </span>
+                          </div>
+                          <div className='lecture-status'>
+                            <span
+                              className={`status ${getLectureStatus(
+                                lecture.lectureDate
+                              )}`}
+                            >
+                              {getLectureStatusText(lecture.lectureDate)}
+                            </span>
+                          </div>
                         </div>
-                        <div className='lecture-status'>
-                          <span
-                            className={`status ${getLectureStatus(
-                              lecture.lectureDate
-                            )}`}
+                        <div className='lecture-actions'>
+                          <button className='btn btn-edit'>수정</button>
+                          <button
+                            className='btn btn-delete'
+                            onClick={e => {
+                              e.stopPropagation();
+                              handleDeleteClick(
+                                lecture.uid || lecture.id,
+                                classroom.uid
+                              );
+                            }}
                           >
-                            {getLectureStatusText(lecture.lectureDate)}
-                          </span>
+                            삭제
+                          </button>
                         </div>
                       </div>
-                      <div className='lecture-actions'>
-                        <button className='btn btn-edit'>수정</button>
-                        <button
-                          className='btn btn-delete'
-                          onClick={e => {
-                            e.stopPropagation();
-                            handleDeleteClick(
-                              lecture.uid || lecture.id,
-                              classroom.uid
-                            );
-                          }}
-                        >
-                          삭제
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             )}

@@ -22,7 +22,7 @@ function LectureDetailModal({ isOpen, onClose, lecture }) {
     try {
       const lectureId = lecture.uid || lecture.id;
       const result = await getQuestionsByLecture(lectureId);
-      
+
       if (result.success) {
         setQuestions(result.data || []);
       } else {
@@ -36,7 +36,7 @@ function LectureDetailModal({ isOpen, onClose, lecture }) {
     }
   };
 
-  const handleOverlayClick = (e) => {
+  const handleOverlayClick = e => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -45,67 +45,72 @@ function LectureDetailModal({ isOpen, onClose, lecture }) {
   if (!isOpen) return null;
 
   return (
-    <div className="lecture-detail-modal-overlay" onClick={handleOverlayClick}>
-      <div className="lecture-detail-modal">
-        <div className="modal-header">
+    <div className='lecture-detail-modal-overlay' onClick={handleOverlayClick}>
+      <div className='lecture-detail-modal'>
+        <div className='modal-header'>
           <h2>강의 상세 정보</h2>
-          <button className="close-btn" onClick={onClose}>
+          <button className='close-btn' onClick={onClose}>
             ×
           </button>
         </div>
 
-        <div className="modal-content">
+        <div className='modal-content'>
           {lecture && (
-            <div className="lecture-info-section">
+            <div className='lecture-info-section'>
               <h3>강의 정보</h3>
-              <div className="lecture-details-row">
-                <span className="lecture-name">{lecture.lectureName}</span>
-                <span className="lecture-description">{lecture.description || 'N/A'}</span>
-                <span className="lecture-date">
-                  {lecture.lectureDate ? lecture.lectureDate.split('T')[0] : 'N/A'}
+              <div className='lecture-details-row'>
+                <span className='lecture-name'>{lecture.lectureName}</span>
+                <span className='lecture-description'>
+                  {lecture.description || 'N/A'}
+                </span>
+                <span className='lecture-date'>
+                  {lecture.lectureDate
+                    ? lecture.lectureDate.split('T')[0]
+                    : 'N/A'}
                 </span>
               </div>
             </div>
           )}
 
-          <div className="questions-section">
+          <div className='questions-section'>
             <h3>문제 목록 ({questions.length}개)</h3>
-            
+
             {loading && (
-              <div className="loading-message">문제를 불러오는 중...</div>
+              <div className='loading-message'>문제를 불러오는 중...</div>
             )}
 
-            {error && (
-              <div className="error-message">{error}</div>
-            )}
+            {error && <div className='error-message'>{error}</div>}
 
             {!loading && !error && questions.length === 0 && (
-              <div className="no-questions-message">
+              <div className='no-questions-message'>
                 이 강의에 등록된 문제가 없습니다.
               </div>
             )}
 
             {!loading && !error && questions.length > 0 && (
-              <div className="questions-list">
+              <div className='questions-list'>
                 {questions.map((question, index) => (
-                  <div key={question.uid || question.id || index} className="question-item">
-                    <div className="question-row">
-                      <span className="question-number">
+                  <div
+                    key={question.uid || question.id || index}
+                    className='question-item'
+                  >
+                    <div className='question-row'>
+                      <span className='question-number'>
                         문제 {question.number || index + 1}
                       </span>
-                      <span className="question-main-topic">
+                      <span className='question-main-topic'>
                         {question.mainTopic || 'N/A'}
                       </span>
-                      <span className="question-sub-topic">
+                      <span className='question-sub-topic'>
                         {question.subTopic || 'N/A'}
                       </span>
-                      <span className="question-difficulty">
+                      <span className='question-difficulty'>
                         {question.difficulty || 'N/A'}
                       </span>
-                      <span className="question-score">
+                      <span className='question-score'>
                         {question.score || 0}점
                       </span>
-                      <span className="question-answer">
+                      <span className='question-answer'>
                         {question.answer || question.correctAnswer || 'N/A'}
                       </span>
                     </div>
@@ -116,8 +121,8 @@ function LectureDetailModal({ isOpen, onClose, lecture }) {
           </div>
         </div>
 
-        <div className="modal-footer">
-          <button className="btn btn-secondary" onClick={onClose}>
+        <div className='modal-footer'>
+          <button className='btn btn-secondary' onClick={onClose}>
             닫기
           </button>
         </div>

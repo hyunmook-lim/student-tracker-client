@@ -40,13 +40,16 @@ export const getQuestionsByLecture = async lectureId => {
   try {
     console.log('강의 문제 목록 가져오기 요청:', lectureId);
 
-    const response = await fetch(`${API_BASE_URL}/questions/lecture/${lectureId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/questions/lecture/${lectureId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
 
     console.log('강의 문제 목록 응답 상태:', response.status);
 

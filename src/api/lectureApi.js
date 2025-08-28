@@ -108,3 +108,43 @@ export const deleteLecture = async lectureId => {
     return { success: false, error: error.message };
   }
 };
+
+// 강의 결과 입력 상태 업데이트 API
+export const updateLectureResultStatus = async (lectureId, isResultEntered) => {
+  try {
+    console.log(
+      '강의 결과 상태 업데이트 요청 - 강의 ID:',
+      lectureId,
+      '결과 입력 완료:',
+      isResultEntered
+    );
+
+    const response = await fetch(
+      `${API_BASE_URL}/lectures/${lectureId}/result-status?isResultEntered=${isResultEntered}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
+
+    console.log('강의 결과 상태 업데이트 응답 상태:', response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('강의 결과 상태 업데이트 응답 에러:', errorText);
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorText}`
+      );
+    }
+
+    const data = await response.json();
+    console.log('강의 결과 상태 업데이트 응답 데이터:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('강의 결과 상태 업데이트 API 오류:', error);
+    return { success: false, error: error.message };
+  }
+};

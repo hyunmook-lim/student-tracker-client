@@ -311,6 +311,15 @@ function ClassroomListComponent() {
     setConfirmModal({ isOpen: false, classroomId: null, classroomName: null });
   };
 
+  // 승인된 학생 수 계산 함수
+  const getApprovedStudentCount = classroomId => {
+    const students = classroomStudents[classroomId];
+    if (!students || students.length === 0) {
+      return 0;
+    }
+    return students.filter(student => student.status === 'APPROVED').length;
+  };
+
   const handleAddClass = async () => {
     // 필수 필드 검증
     if (!newClassData.name.trim()) {
@@ -430,8 +439,7 @@ function ClassroomListComponent() {
                     <h3>{classroom.classroomName}</h3>
                     <p>{classroom.description}</p>
                     <span className='student-count'>
-                      학생 수:{' '}
-                      {classroom.studentIds ? classroom.studentIds.length : 0}명
+                      학생 수: {getApprovedStudentCount(classroom.uid)}명
                     </span>
                   </>
                 )}

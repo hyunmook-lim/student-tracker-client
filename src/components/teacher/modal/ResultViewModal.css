@@ -1,5 +1,5 @@
-/* ResultInputModal 컴포넌트 스타일 */
-.result-input-modal-overlay {
+/* ResultViewModal 컴포넌트 스타일 */
+.result-view-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   animation: fadeIn 0.2s ease;
 }
 
-.result-input-modal-content {
+.result-view-modal-content {
   background: white;
   border-radius: 12px;
   width: 90%;
@@ -26,7 +26,7 @@
   animation: slideIn 0.3s ease;
 }
 
-.result-input-modal-header {
+.result-view-modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,14 +34,14 @@
   border-bottom: 1px solid #e2e8f0;
 }
 
-.result-input-modal-header h3 {
+.result-view-modal-header h3 {
   color: #1e293b;
   font-size: 20px;
   font-weight: 600;
   margin: 0;
 }
 
-.result-input-modal-close {
+.result-view-modal-close {
   background: none;
   border: none;
   font-size: 24px;
@@ -57,12 +57,12 @@
   transition: background 0.2s ease;
 }
 
-.result-input-modal-close:hover {
+.result-view-modal-close:hover {
   background: #f1f5f9;
   color: #1e293b;
 }
 
-.result-input-modal-body {
+.result-view-modal-body {
   padding: 24px 32px;
 }
 
@@ -232,7 +232,7 @@
 }
 
 /* 액션 버튼들 */
-.result-input-actions {
+.result-view-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
@@ -241,7 +241,7 @@
   background: #f8fafc;
 }
 
-.result-input-btn {
+.result-view-btn {
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 14px;
@@ -251,37 +251,15 @@
   border: none;
 }
 
-.result-input-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  background: #9ca3af !important;
-  color: #6b7280 !important;
-  border-color: #d1d5db !important;
-}
-
-.result-input-btn-save:disabled {
-  background: #9ca3af !important;
-  color: #6b7280 !important;
-}
-
-.result-input-btn-cancel {
+.result-view-btn-close {
   background: #f3f4f6;
   color: #374151;
   border: 1px solid #d1d5db;
 }
 
-.result-input-btn-cancel:hover:not(:disabled) {
+.result-view-btn-close:hover {
   background: #e5e7eb;
   border-color: #9ca3af;
-}
-
-.result-input-btn-save {
-  background: #3b82f6;
-  color: white;
-}
-
-.result-input-btn-save:hover:not(:disabled) {
-  background: #2563eb;
 }
 
 /* 애니메이션 */
@@ -314,21 +292,21 @@
 }
 
 @media (max-width: 768px) {
-  .result-input-modal-content {
+  .result-view-modal-content {
     width: 95%;
     max-height: 95vh;
     margin: 20px;
   }
 
-  .result-input-modal-header {
+  .result-view-modal-header {
     padding: 20px 24px;
   }
 
-  .result-input-modal-header h3 {
+  .result-view-modal-header h3 {
     font-size: 18px;
   }
 
-  .result-input-modal-body {
+  .result-view-modal-body {
     padding: 24px;
   }
 
@@ -349,23 +327,23 @@
     font-size: 16px;
   }
 
-  .result-input-actions {
+  .result-view-actions {
     flex-direction: column;
     gap: 12px;
   }
 
-  .result-input-btn {
+  .result-view-btn {
     width: 100%;
     padding: 14px 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .result-input-modal-header {
+  .result-view-modal-header {
     padding: 16px 20px;
   }
 
-  .result-input-modal-body {
+  .result-view-modal-body {
     padding: 20px;
   }
 
