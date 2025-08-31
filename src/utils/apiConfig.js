@@ -4,7 +4,7 @@ const getApiBaseUrl = () => {
   if (import.meta.env.PROD) {
     return (
       import.meta.env.VITE_API_BASE_URL ||
-      'http://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com'
+      'https://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com'
     );
   }
 
