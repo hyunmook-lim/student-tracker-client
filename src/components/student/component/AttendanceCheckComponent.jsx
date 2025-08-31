@@ -1,170 +1,120 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAuthStore } from '../../../store';
+import { getStudentClassrooms } from '../../../api/classroomStudentApi';
+import { getLecturesByClassroom } from '../../../api/lectureApi';
+import { getStudentLectureResultByStudentAndLecture } from '../../../api/studentLectureResultApi';
 import LectureDetailModal from '../modal/LectureDetailModal';
 import './AttendanceCheckComponent.css';
 
-// 가상의 수업 데이터 (실제로는 store에서 가져올 예정)
-const mockClasses = [
-  {
-    id: 1,
-    name: '웹 개발 기초',
-    description: 'HTML, CSS, JavaScript 기초부터 심화까지',
-    totalLectures: 12,
-    attendedLectures: 10,
-    lectures: [
-      { id: 1, title: '1회차 - HTML 기초', date: '2024-01-15', attended: true },
-      { id: 2, title: '2회차 - CSS 기초', date: '2024-01-17', attended: true },
-      {
-        id: 3,
-        title: '3회차 - JavaScript 변수',
-        date: '2024-01-22',
-        attended: false,
-      },
-      {
-        id: 4,
-        title: '4회차 - JavaScript 함수',
-        date: '2024-01-24',
-        attended: true,
-      },
-      { id: 5, title: '5회차 - DOM 조작', date: '2024-01-29', attended: true },
-      {
-        id: 6,
-        title: '6회차 - 이벤트 처리',
-        date: '2024-01-31',
-        attended: true,
-      },
-      {
-        id: 7,
-        title: '7회차 - 비동기 프로그래밍',
-        date: '2024-02-05',
-        attended: false,
-      },
-      { id: 8, title: '8회차 - API 연동', date: '2024-02-07', attended: true },
-      {
-        id: 9,
-        title: '9회차 - 프로젝트 1',
-        date: '2024-02-12',
-        attended: true,
-      },
-      {
-        id: 10,
-        title: '10회차 - 프로젝트 2',
-        date: '2024-02-14',
-        attended: true,
-      },
-      { id: 11, title: '11회차 - 배포', date: '2024-02-19', attended: true },
-      {
-        id: 12,
-        title: '12회차 - 최종 발표',
-        date: '2024-02-21',
-        attended: true,
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'React 심화',
-    description: 'React Hooks, 상태 관리, 최적화 기법',
-    totalLectures: 8,
-    attendedLectures: 7,
-    lectures: [
-      {
-        id: 1,
-        title: '1회차 - React 소개',
-        date: '2024-02-26',
-        attended: true,
-      },
-      {
-        id: 2,
-        title: '2회차 - JSX와 컴포넌트',
-        date: '2024-02-28',
-        attended: true,
-      },
-      {
-        id: 3,
-        title: '3회차 - State와 Props',
-        date: '2024-03-05',
-        attended: false,
-      },
-      {
-        id: 4,
-        title: '4회차 - Hooks 기초',
-        date: '2024-03-07',
-        attended: true,
-      },
-      { id: 5, title: '5회차 - useEffect', date: '2024-03-12', attended: true },
-      {
-        id: 6,
-        title: '6회차 - Context API',
-        date: '2024-03-14',
-        attended: true,
-      },
-      {
-        id: 7,
-        title: '7회차 - 성능 최적화',
-        date: '2024-03-19',
-        attended: true,
-      },
-      {
-        id: 8,
-        title: '8회차 - 프로젝트 실습',
-        date: '2024-03-21',
-        attended: true,
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: '데이터베이스 설계',
-    description: 'SQL, 데이터 모델링, 성능 최적화',
-    totalLectures: 10,
-    attendedLectures: 9,
-    lectures: [
-      {
-        id: 1,
-        title: '1회차 - 데이터베이스 개요',
-        date: '2024-03-26',
-        attended: true,
-      },
-      {
-        id: 2,
-        title: '2회차 - 관계형 모델',
-        date: '2024-03-28',
-        attended: true,
-      },
-      { id: 3, title: '3회차 - SQL 기초', date: '2024-04-02', attended: true },
-      {
-        id: 4,
-        title: '4회차 - 조인과 서브쿼리',
-        date: '2024-04-04',
-        attended: false,
-      },
-      { id: 5, title: '5회차 - 인덱스', date: '2024-04-09', attended: true },
-      { id: 6, title: '6회차 - 트랜잭션', date: '2024-04-11', attended: true },
-      { id: 7, title: '7회차 - 정규화', date: '2024-04-16', attended: true },
-      { id: 8, title: '8회차 - 성능 튜닝', date: '2024-04-18', attended: true },
-      {
-        id: 9,
-        title: '9회차 - 프로젝트 설계',
-        date: '2024-04-23',
-        attended: true,
-      },
-      {
-        id: 10,
-        title: '10회차 - 최종 발표',
-        date: '2024-04-25',
-        attended: true,
-      },
-    ],
-  },
-];
-
 function StudentAttendanceCheck() {
-  const [expandedClassId, setExpandedClassId] = useState(null);
+  const { currentUser } = useAuthStore();
+  const [studentClassrooms, setStudentClassrooms] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [expandedClassrooms, setExpandedClassrooms] = useState(new Set());
+  const [classroomSessions, setClassroomSessions] = useState({});
+  const [sessionResults, setSessionResults] = useState({});
   const [selectedLecture, setSelectedLecture] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleClassClick = classId => {
-    setExpandedClassId(expandedClassId === classId ? null : classId);
+  // 학생의 수업 목록 가져오기
+  useEffect(() => {
+    if (currentUser?.uid) {
+      fetchStudentClassrooms();
+    }
+  }, [currentUser]);
+
+  const fetchStudentClassrooms = async () => {
+    setLoading(true);
+    try {
+      const result = await getStudentClassrooms(currentUser.uid);
+      if (result.success) {
+        // 승인된 수업만 필터링
+        const approvedClassrooms = result.data.filter(
+          item => item.status === 'APPROVED'
+        );
+        setStudentClassrooms(approvedClassrooms);
+      } else {
+        console.error('학생 수업 목록 가져오기 실패:', result.error);
+        alert('수업 목록을 가져오는데 실패했습니다.');
+      }
+    } catch (error) {
+      console.error('학생 수업 목록 가져오기 오류:', error);
+      alert('수업 목록을 가져오는데 오류가 발생했습니다.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClassroomClick = classroomUid => {
+    setExpandedClassrooms(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(classroomUid)) {
+        newSet.delete(classroomUid);
+      } else {
+        newSet.add(classroomUid);
+        fetchClassroomSessions(classroomUid);
+      }
+      return newSet;
+    });
+  };
+
+  const fetchClassroomSessions = async classroomUid => {
+    try {
+      const result = await getLecturesByClassroom(classroomUid);
+      if (result.success) {
+        setClassroomSessions(prev => ({
+          ...prev,
+          [classroomUid]: result.data,
+        }));
+
+        // 각 강의의 출석 정보 확인
+        const sessions = result.data;
+        const initialResultMap = {};
+        sessions.forEach(lecture => {
+          initialResultMap[lecture.uid] = {
+            hasResult: false,
+            isAttended: null,
+            status: 'scheduled',
+          };
+        });
+
+        setSessionResults(prev => ({
+          ...prev,
+          [classroomUid]: initialResultMap,
+        }));
+
+        // 백그라운드에서 출석 정보 확인
+        sessions.forEach(async lecture => {
+          try {
+            const resultData = await getStudentLectureResultByStudentAndLecture(
+              currentUser.uid,
+              lecture.uid
+            );
+
+            if (resultData.success) {
+              const isAttended = resultData.data.isAttended;
+              setSessionResults(prev => ({
+                ...prev,
+                [classroomUid]: {
+                  ...prev[classroomUid],
+                  [lecture.uid]: {
+                    hasResult: true,
+                    isAttended: isAttended,
+                    status: isAttended ? 'completed' : 'absent',
+                  },
+                },
+              }));
+            }
+          } catch (error) {
+            console.log(`강의 ${lecture.uid} 출석 정보 확인 실패:`, error);
+          }
+        });
+      } else {
+        console.error('강의 목록 가져오기 실패:', result.error);
+      }
+    } catch (error) {
+      console.error('강의 목록 가져오기 오류:', error);
+    }
   };
 
   const handleLectureClick = lecture => {
@@ -177,89 +127,189 @@ function StudentAttendanceCheck() {
     setSelectedLecture(null);
   };
 
-  const getAttendanceRate = (attendedLectures, totalLectures) => {
-    return Math.round((attendedLectures / totalLectures) * 100);
+  // 출석률 계산
+  const calculateAttendanceRate = classroomUid => {
+    const sessions = classroomSessions[classroomUid] || [];
+    const results = sessionResults[classroomUid] || {};
+
+    if (sessions.length === 0) return 0;
+
+    const attendedCount = sessions.filter(session => {
+      const result = results[session.uid];
+      return result && result.hasResult && result.isAttended;
+    }).length;
+
+    return Math.round((attendedCount / sessions.length) * 100);
   };
 
+  // 출석 횟수 계산
+  const calculateAttendanceCount = classroomUid => {
+    const sessions = classroomSessions[classroomUid] || [];
+    const results = sessionResults[classroomUid] || {};
+
+    const attendedCount = sessions.filter(session => {
+      const result = results[session.uid];
+      return result && result.hasResult && result.isAttended;
+    }).length;
+
+    return { attended: attendedCount, total: sessions.length };
+  };
+
+  if (loading) {
+    return (
+      <div className='attendance-check-container'>
+        <div className='attendance-check-header'>
+          <h2>출석 현황 확인</h2>
+        </div>
+        <div className='loading-message'>
+          <p>출석 정보를 불러오는 중...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (studentClassrooms.length === 0) {
+    return (
+      <div className='attendance-check-container'>
+        <div className='attendance-check-header'>
+          <h2>출석 현황 확인</h2>
+        </div>
+        <div className='empty-message'>
+          <p>승인된 수업이 없습니다.</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className='student-attendance-check-container'>
-      <div className='student-attendance-check-header'>
-        <h2>출석 현황 확인</h2>
-        <p>수업별 출석 현황을 확인하고 회차별 상세 정보를 살펴보세요</p>
-      </div>
+    <>
+      <div className='attendance-check-container'>
+        <div className='attendance-check-header'>
+          <h2>출석 현황 확인</h2>
+        </div>
 
-      <div className='classes-list'>
-        {mockClasses.map(classItem => (
-          <div key={classItem.id} className='class-card'>
-            <div
-              className='class-summary'
-              onClick={() => handleClassClick(classItem.id)}
-            >
-              <div className='class-info'>
-                <h3>{classItem.name}</h3>
-                <p>{classItem.description}</p>
-              </div>
-              <div className='attendance-summary'>
-                <div className='attendance-stats'>
-                  <span className='attendance-count'>
-                    {classItem.attendedLectures}/{classItem.totalLectures}회
-                    출석
-                  </span>
-                  <span className='attendance-rate'>
-                    출석률{' '}
-                    {getAttendanceRate(
-                      classItem.attendedLectures,
-                      classItem.totalLectures
-                    )}
-                    %
-                  </span>
-                </div>
-                <div className='expand-icon'>
-                  {expandedClassId === classItem.id ? '▼' : '▶'}
-                </div>
-              </div>
-            </div>
+        <div className='classrooms-list'>
+          {studentClassrooms.map(item => {
+            const attendanceCount = calculateAttendanceCount(
+              item.classroom.uid
+            );
+            const attendanceRate = calculateAttendanceRate(item.classroom.uid);
+            const isExpanded = expandedClassrooms.has(item.classroom.uid);
 
-            {expandedClassId === classItem.id && (
-              <div className='lectures-list'>
-                <div className='lectures-grid'>
-                  {classItem.lectures.map(lecture => (
-                    <div
-                      key={lecture.id}
-                      className={`lecture-card-compact ${lecture.attended ? 'attended' : 'absent'}`}
-                      onClick={() => handleLectureClick(lecture)}
-                    >
-                      <div className='lecture-info-compact'>
-                        <div
-                          className={`attendance-badge-left ${lecture.attended ? 'present' : 'absent'}`}
-                        ></div>
-                        <span className='lecture-title-compact'>
-                          {lecture.title}
-                        </span>
-                        <span className='lecture-date-compact'>
-                          {lecture.date}
-                        </span>
-                        <span
-                          className={`status-badge-compact ${lecture.attended ? 'present' : 'absent'}`}
-                        >
-                          {lecture.attended ? '출석' : '결석'}
-                        </span>
-                      </div>
+            return (
+              <div key={item.uid} className='class-section'>
+                <div
+                  className='class-header'
+                  onClick={() => handleClassroomClick(item.classroom.uid)}
+                >
+                  <div className='class-info'>
+                    <h3>{item.classroom.classroomName}</h3>
+                    <p>
+                      {item.classroom.description || '수업 설명이 없습니다.'}
+                    </p>
+                  </div>
+                  <div className='attendance-summary'>
+                    <div className='attendance-stats'>
+                      <span className='attendance-count'>
+                        {attendanceCount.attended}/{attendanceCount.total}회
+                        출석
+                      </span>
+                      <span className='attendance-rate'>
+                        출석률 {attendanceRate}%
+                      </span>
                     </div>
-                  ))}
+                    <div
+                      className={`expand-icon ${isExpanded ? 'expanded' : ''}`}
+                    >
+                      {'>'}
+                    </div>
+                  </div>
                 </div>
+
+                {isExpanded && (
+                  <div className='sessions-list'>
+                    {classroomSessions[item.classroom.uid]?.length > 0 ? (
+                      <div className='lectures-grid'>
+                        {classroomSessions[item.classroom.uid].map(lecture => {
+                          const sessionResult =
+                            sessionResults[item.classroom.uid]?.[lecture.uid];
+                          const status = sessionResult?.status || 'scheduled';
+                          const isClickable = sessionResult?.hasResult;
+                          const isAttended = status === 'completed';
+                          const isScheduled = status === 'scheduled';
+
+                          return (
+                            <div
+                              key={lecture.uid || lecture.id}
+                              className={`lecture-card-compact ${
+                                isAttended
+                                  ? 'attended'
+                                  : isScheduled
+                                    ? 'scheduled'
+                                    : 'absent'
+                              }`}
+                              onClick={() =>
+                                isClickable && handleLectureClick(lecture)
+                              }
+                            >
+                              <div className='lecture-info-compact'>
+                                <div
+                                  className={`attendance-badge-left ${
+                                    isAttended
+                                      ? 'present'
+                                      : isScheduled
+                                        ? 'scheduled'
+                                        : 'absent'
+                                  }`}
+                                ></div>
+                                <span className='lecture-title-compact'>
+                                  {lecture.lectureName}
+                                </span>
+                                <span className='lecture-date-compact'>
+                                  {lecture.lectureDate
+                                    ? lecture.lectureDate.split('T')[0]
+                                    : ''}
+                                </span>
+                                <span
+                                  className={`status-badge-compact ${
+                                    isAttended
+                                      ? 'present'
+                                      : isScheduled
+                                        ? 'scheduled'
+                                        : 'absent'
+                                  }`}
+                                >
+                                  {isAttended
+                                    ? '출석'
+                                    : isScheduled
+                                      ? '예정'
+                                      : '결석'}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <div className='empty-sessions-message'>
+                        아직 회차가 없습니다.
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        ))}
+            );
+          })}
+        </div>
       </div>
 
+      {/* 강의 상세 모달 */}
       <LectureDetailModal
         lecture={selectedLecture}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
-    </div>
+    </>
   );
 }
 

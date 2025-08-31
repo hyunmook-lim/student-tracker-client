@@ -126,32 +126,14 @@
   overflow: hidden;
 }
 
-.student-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  transition: background-color 0.3s ease;
-}
-
 .student-card.completed {
   border-color: #10b981;
   background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
 }
 
-.student-card.completed::before {
-  background: linear-gradient(90deg, #10b981, #059669);
-}
-
 .student-card.incomplete {
   border-color: #ef4444;
   background: linear-gradient(135deg, #fef2f2 0%, #fef7f7 100%);
-}
-
-.student-card.incomplete::before {
-  background: linear-gradient(90deg, #ef4444, #dc2626);
 }
 
 .student-card:hover {

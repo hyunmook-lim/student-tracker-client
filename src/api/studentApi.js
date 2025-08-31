@@ -80,3 +80,117 @@ export const loginStudent = async loginData => {
     return { success: false, error: error.message };
   }
 };
+
+// 특정 학생의 특정 성적표 상세 조회 API
+export const getStudentReport = async (studentId, reportId) => {
+  try {
+    console.log('학생 성적표 조회 요청:', { studentId, reportId });
+    const endpoint = `${API_BASE_URL}/student-reports/students/${studentId}/reports/${reportId}`;
+    console.log('학생 성적표 조회 엔드포인트:', endpoint);
+
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    console.log('학생 성적표 조회 응답 상태:', response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('학생 성적표 조회 응답 에러:', errorText);
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorText}`
+      );
+    }
+
+    const data = await response.json();
+    console.log('학생 성적표 조회 응답 데이터:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('학생 성적표 조회 API 오류:', error);
+    console.error('학생 성적표 조회 에러 상세 정보:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    });
+    return { success: false, error: error.message };
+  }
+};
+
+// 특정 학생의 모든 성적표 목록 조회 API
+export const getStudentReports = async studentId => {
+  try {
+    console.log('학생 성적표 목록 조회 요청:', { studentId });
+    const endpoint = `${API_BASE_URL}/student-reports/students/${studentId}`;
+    console.log('학생 성적표 목록 조회 엔드포인트:', endpoint);
+
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    console.log('학생 성적표 목록 조회 응답 상태:', response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('학생 성적표 목록 조회 응답 에러:', errorText);
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorText}`
+      );
+    }
+
+    const data = await response.json();
+    console.log('학생 성적표 목록 조회 응답 데이터:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('학생 성적표 목록 조회 API 오류:', error);
+    console.error('학생 성적표 목록 조회 에러 상세 정보:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    });
+    return { success: false, error: error.message };
+  }
+};
+
+// 학생 대시보드 정보 조회 API
+export const getStudentDashboard = async studentId => {
+  try {
+    console.log('학생 대시보드 조회 요청:', { studentId });
+    const endpoint = `${API_BASE_URL}/students/${studentId}/dashboard`;
+    console.log('학생 대시보드 조회 엔드포인트:', endpoint);
+
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    console.log('학생 대시보드 조회 응답 상태:', response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('학생 대시보드 조회 응답 에러:', errorText);
+      throw new Error(
+        `HTTP error! status: ${response.status}, message: ${errorText}`
+      );
+    }
+
+    const data = await response.json();
+    console.log('학생 대시보드 조회 응답 데이터:', data);
+    return { success: true, data };
+  } catch (error) {
+    console.error('학생 대시보드 조회 API 오류:', error);
+    console.error('학생 대시보드 조회 에러 상세 정보:', {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    });
+    return { success: false, error: error.message };
+  }
+};

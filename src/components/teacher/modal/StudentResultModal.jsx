@@ -73,6 +73,7 @@ function StudentResultModal({
     }
   };
 
+
   const validateForm = () => {
     const newErrors = {};
 
@@ -280,6 +281,7 @@ function StudentResultModal({
               </div>
             </div>
           )}
+
         </div>
 
         <div className='student-result-modal-actions'>

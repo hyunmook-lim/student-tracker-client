@@ -294,7 +294,11 @@
   margin-bottom: 0;
 }
 
-.session-item:hover {
+.session-clickable {
+  cursor: pointer;
+}
+
+.session-clickable:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-color: #3b82f6;
 }
@@ -325,17 +329,27 @@
   font-weight: 500;
 }
 
-.session-status-badge.status-완료 {
+.session-status-badge.status-completed {
   background: #d1fae5;
   color: #059669;
 }
 
-.session-status-badge.status-진행\ 중 {
-  background: #dbeafe;
-  color: #2563eb;
-}
-
-.session-status-badge.status-예정 {
+.session-status-badge.status-scheduled {
   background: #fef3c7;
   color: #d97706;
+}
+
+.session-status-badge.status-absent {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.session-disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.session-disabled:hover {
+  box-shadow: none !important;
+  border-color: #e2e8f0 !important;
 }

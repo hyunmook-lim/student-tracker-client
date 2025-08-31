@@ -73,7 +73,6 @@
   margin: 0 0 16px 0;
   color: #333;
   font-size: 1.2rem;
-  border-bottom: 2px solid #007bff;
   padding-bottom: 8px;
 }
 
@@ -84,7 +83,6 @@
   background-color: #f8f9fa;
   padding: 16px;
   border-radius: 6px;
-  border-left: 4px solid #007bff;
 }
 
 .lecture-name {
@@ -113,7 +111,6 @@
   margin: 0 0 20px 0;
   color: #333;
   font-size: 1.2rem;
-  border-bottom: 2px solid #28a745;
   padding-bottom: 8px;
 }
 
@@ -143,6 +140,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
 }
 
 .question-item {
@@ -151,44 +149,53 @@
   background-color: #fff;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition: box-shadow 0.2s ease;
+  width: 100%;
 }
 
 .question-item:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.question-row {
-  display: flex;
-  align-items: center;
+.lecture-detail-modal-overlay .question-row {
+  display: flex !important;
+  align-items: center !important;
   padding: 10px 12px;
   gap: 12px;
   font-size: 0.85rem;
+  min-height: 40px;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+  box-sizing: border-box;
 }
 
-.question-number {
+.lecture-detail-modal-overlay .question-number {
   font-weight: 600;
   color: #007bff;
   min-width: 60px;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  display: inline-block;
 }
 
-.question-main-topic {
+.lecture-detail-modal-overlay .question-main-topic {
   color: #333;
   font-weight: 600;
   font-size: 0.9rem;
   min-width: 120px;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  display: inline-block;
 }
 
-.question-sub-topic {
+.lecture-detail-modal-overlay .question-sub-topic {
   color: #666;
   font-size: 0.8rem;
   font-weight: 400;
-  flex: 1;
-  min-width: 120px;
+  flex: 1 !important;
+  min-width: 150px;
+  word-break: break-word;
+  display: inline-block;
 }
 
-.question-difficulty {
+.lecture-detail-modal-overlay .question-difficulty {
   background-color: #fff3cd;
   color: #856404;
   padding: 3px 8px;
@@ -198,10 +205,12 @@
   border: 1px solid #ffeaa7;
   min-width: 50px;
   text-align: center;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  white-space: nowrap;
+  display: inline-block;
 }
 
-.question-score {
+.lecture-detail-modal-overlay .question-score {
   background-color: #f8f9fa;
   color: #495057;
   padding: 3px 8px;
@@ -211,10 +220,12 @@
   border: 1px solid #dee2e6;
   min-width: 50px;
   text-align: center;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  white-space: nowrap;
+  display: inline-block;
 }
 
-.question-answer {
+.lecture-detail-modal-overlay .question-answer {
   background-color: #d4edda;
   color: #155724;
   padding: 3px 8px;
@@ -224,11 +235,12 @@
   border: 2px solid #28a745;
   min-width: 50px;
   text-align: center;
-  flex-shrink: 0;
-  position: relative;
+  flex-shrink: 0 !important;
+  white-space: nowrap;
+  display: inline-block;
 }
 
-.question-answer:before {
+.lecture-detail-modal-overlay .question-answer:before {
   content: "✓ ";
   font-weight: bold;
   font-size: 0.8rem;

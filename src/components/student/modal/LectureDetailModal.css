@@ -23,7 +23,7 @@
   height: 90vh;
   max-width: none;
   max-height: none;
-  overflow: hidden;
+  overflow-y: auto;
   box-shadow:
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -48,6 +48,83 @@
   margin: 0;
   color: #1e293b;
   font-size: 20px;
+}
+
+/* 로딩 및 에러 상태 스타일 */
+.loading-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: #f8fafc;
+  margin: 20px 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top: 4px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-overlay p {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+}
+
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 32px;
+  text-align: center;
+}
+
+.error-message p {
+  color: #dc2626;
+  margin: 0 0 16px 0;
+  font-size: 14px;
+}
+
+.retry-btn {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.retry-btn:hover {
+  background: #b91c1c;
+}
+
+.empty-problems-message,
+.empty-chart-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #9ca3af;
+  font-size: 14px;
+  font-style: italic;
   font-weight: 600;
 }
 
@@ -70,6 +147,46 @@
 .lecture-detail-modal-content .close-btn:hover {
   background: #f1f5f9;
   color: #1e293b;
+}
+
+.lecture-detail-modal-content .modal-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lecture-detail-modal-content .pdf-export-btn {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.lecture-detail-modal-content .pdf-export-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.lecture-detail-modal-content .pdf-export-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.lecture-detail-modal-content .pdf-export-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .lecture-detail-modal-content .lecture-detail-grid {
@@ -184,6 +301,13 @@
   color: #1e293b;
 }
 
+.lecture-detail-modal-content .score-total {
+  font-size: 20px;
+  color: #94a3b8;
+  margin-left: 2px;
+  font-weight: 400;
+}
+
 .lecture-detail-modal-content .score-unit {
   font-size: 18px;
   color: #64748b;
@@ -213,10 +337,38 @@
 }
 
 /* 숙제 카드 */
+.lecture-detail-modal-content .homework-card {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
 .lecture-detail-modal-content .homework-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 130px;
+  padding-right: 4px;
+}
+
+.lecture-detail-modal-content .homework-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lecture-detail-modal-content .homework-list::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.lecture-detail-modal-content .homework-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.lecture-detail-modal-content .homework-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .lecture-detail-modal-content .homework-item {
@@ -232,21 +384,38 @@
   font-weight: 500;
 }
 
+.lecture-detail-modal-content .homework-number {
+  color: #6b7280;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.lecture-detail-modal-content .no-homework {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+  background: #f9fafb;
+  border-radius: 6px;
+  border: 1px dashed #d1d5db;
+}
+
 /* 하단 섹션 */
 .lecture-detail-modal-content .lecture-detail-bottom {
-  padding: 16px 32px 20px 32px;
-  flex: 1;
+  padding: 16px 32px 40px 32px;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  height: auto;
 }
 
 .lecture-detail-modal-content .bottom-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
-  flex: 1;
   min-height: 0;
+  align-items: start;
+  height: auto;
 }
 
 .lecture-detail-modal-content .problems-list-card {
@@ -255,19 +424,19 @@
   border-radius: 8px;
   padding: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: 100%;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  height: fit-content;
 }
 
 .lecture-detail-modal-content .problems-list {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1;
-  overflow-y: auto;
+  overflow: visible;
   min-height: 0;
+  max-height: none;
 }
 
 .lecture-detail-modal-content .problem-item {
@@ -306,7 +475,7 @@
   background: linear-gradient(135deg, #10b981, #059669);
 }
 
-.lecture-detail-modal-content .problem-status-badge.wrong {
+.lecture-detail-modal-content .problem-status-badge.incorrect {
   background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
@@ -379,7 +548,16 @@
   color: white;
 }
 
-.lecture-detail-modal-content .status-badge.wrong {
+.lecture-detail-modal-content .score-badge {
+  background: #6366f1;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.lecture-detail-modal-content .status-badge.incorrect {
   background: #ef4444;
   color: white;
 }
@@ -389,8 +567,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  height: 100%;
   min-height: 0;
+  height: auto;
 }
 
 .lecture-detail-modal-content .chart-card {
@@ -402,8 +580,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex: 1;
   min-height: 0;
+  height: auto;
 }
 
 .lecture-detail-modal-content .chart-content {
@@ -411,6 +589,7 @@
   flex: 1;
   gap: 12px;
   min-height: 0;
+  height: 100%;
 }
 
 .lecture-detail-modal-content .chart-container {
@@ -421,6 +600,7 @@
   align-items: center;
   justify-content: space-between;
   overflow: visible;
+  height: 100%;
   min-height: 0;
   gap: 8px;
   padding: 0;

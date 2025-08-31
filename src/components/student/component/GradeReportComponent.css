@@ -66,11 +66,15 @@
   font-weight: 500;
 }
 
-.grade-report-container .expand-icon {
+.grade-report-container .class-expand-icon {
   color: #64748b;
   font-size: 18px;
   font-weight: bold;
   transition: transform 0.2s ease;
+}
+
+.grade-report-container .class-expand-icon.expanded {
+  transform: rotate(90deg);
 }
 
 .grade-report-container .grade-cards-grid {

@@ -67,24 +67,24 @@
 }
 
 /* 폼 섹션 */
-.form-section {
+.student-result-view-modal-overlay .form-section {
   margin-bottom: 24px;
 }
 
-.form-section h4 {
+.student-result-view-modal-overlay .form-section h4 {
   color: #1e293b;
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 16px 0;
 }
 
-.form-row {
+.student-result-view-modal-overlay .form-row {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
 }
 
-.form-label {
+.student-result-view-modal-overlay .form-label {
   width: 120px;
   font-weight: 500;
   color: #374151;
@@ -92,11 +92,11 @@
 }
 
 /* 출석 표시 */
-.attendance-display {
+.student-result-view-modal-overlay .attendance-display {
   flex: 1;
 }
 
-.attendance-status {
+.student-result-view-modal-overlay .attendance-status {
   display: inline-block;
   padding: 8px 16px;
   border-radius: 8px;
@@ -106,24 +106,24 @@
   min-width: 80px;
 }
 
-.attendance-status.present {
+.student-result-view-modal-overlay .attendance-status.present {
   background: #dcfce7;
   color: #166534;
   border: 1px solid #bbf7d0;
 }
 
-.attendance-status.absent {
+.student-result-view-modal-overlay .attendance-status.absent {
   background: #fee2e2;
   color: #991b1b;
   border: 1px solid #fecaca;
 }
 
 /* 등급 표시 */
-.grade-display {
+.student-result-view-modal-overlay .grade-display {
   flex: 1;
 }
 
-.grade-status {
+.student-result-view-modal-overlay .grade-status {
   display: inline-block;
   padding: 8px 16px;
   border-radius: 8px;
@@ -133,46 +133,46 @@
   min-width: 60px;
 }
 
-.grade-status.grade-A {
+.student-result-view-modal-overlay .grade-status.grade-A {
   background: #dcfce7;
   color: #166534;
   border: 1px solid #bbf7d0;
 }
 
-.grade-status.grade-B {
+.student-result-view-modal-overlay .grade-status.grade-B {
   background: #dbeafe;
   color: #1e40af;
   border: 1px solid #bfdbfe;
 }
 
-.grade-status.grade-C {
+.student-result-view-modal-overlay .grade-status.grade-C {
   background: #fef3c7;
   color: #92400e;
   border: 1px solid #fde68a;
 }
 
-.grade-status.grade-D {
+.student-result-view-modal-overlay .grade-status.grade-D {
   background: #fee2e2;
   color: #991b1b;
   border: 1px solid #fecaca;
 }
 
-.grade-status:not([class*='grade-']) {
+.student-result-view-modal-overlay .grade-status:not([class*='grade-']) {
   background: #f3f4f6;
   color: #6b7280;
   border: 1px solid #d1d5db;
 }
 
 /* 문제 컨테이너 */
-.questions-container {
+.student-result-view-modal-overlay .questions-container {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.questions-header {
+.student-result-view-modal-overlay .questions-header {
   display: grid;
-  grid-template-columns: 80px 120px 1fr 70px 70px 100px 100px;
+  grid-template-columns: 60px 120px 1fr 80px 80px 80px 80px;
   gap: 12px;
   padding: 12px 16px;
   background: #f8fafc;
@@ -182,14 +182,14 @@
   color: #374151;
 }
 
-.question-header-item {
+.student-result-view-modal-overlay .question-header-item {
   text-align: center;
 }
 
 /* 문제 행 */
-.question-row {
+.student-result-view-modal-overlay .question-row {
   display: grid;
-  grid-template-columns: 80px 120px 1fr 70px 70px 100px 100px;
+  grid-template-columns: 60px 120px 1fr 80px 80px 80px 80px;
   gap: 12px;
   padding: 12px 16px;
   border-bottom: 1px solid #f1f5f9;
@@ -197,95 +197,99 @@
   font-size: 14px;
 }
 
-.question-row:last-child {
+.student-result-view-modal-overlay .question-row:last-child {
   border-bottom: none;
 }
 
-.question-number,
-.question-major-unit,
-.question-minor-unit,
-.question-difficulty,
-.question-score,
-.question-answer {
+.student-result-view-modal-overlay .question-number,
+.student-result-view-modal-overlay .question-major-unit,
+.student-result-view-modal-overlay .question-minor-unit,
+.student-result-view-modal-overlay .question-difficulty,
+.student-result-view-modal-overlay .question-score,
+.student-result-view-modal-overlay .question-answer {
   text-align: center;
   color: #374151;
 }
 
-.question-major-unit {
+.student-result-view-modal-overlay .question-major-unit {
   font-weight: 600;
   font-size: 16px;
   color: #374151;
 }
 
-.question-minor-unit {
+.student-result-view-modal-overlay .question-minor-unit {
   font-weight: 400;
-  font-size: 12px;
+  font-size: 13px;
   color: #374151;
   text-align: left;
+  padding: 0 8px;
 }
 
-.question-difficulty,
-.question-score,
-.question-answer {
+.student-result-view-modal-overlay .question-difficulty,
+.student-result-view-modal-overlay .question-score,
+.student-result-view-modal-overlay .question-answer {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  width: 80px;
   text-align: center;
   white-space: nowrap;
+  max-width: 70px;
 }
 
-.question-difficulty {
+.student-result-view-modal-overlay .question-difficulty {
   background: #f3f4f6;
   color: #374151;
   border: 1px solid #d1d5db;
 }
 
-.question-score {
+.student-result-view-modal-overlay .question-score {
   background: #dbeafe;
   color: #1e40af;
   border: 1px solid #bfdbfe;
 }
 
-.question-answer {
+.student-result-view-modal-overlay .question-answer {
   background: #dcfce7;
   color: #166534;
   border: 1px solid #bbf7d0;
 }
 
 /* 배지 컨테이너들 */
-.question-difficulty-container,
-.question-score-container, 
-.question-answer-container,
-.answer-display-container {
+.student-result-view-modal-overlay .question-difficulty-container,
+.student-result-view-modal-overlay .question-score-container, 
+.student-result-view-modal-overlay .question-answer-container,
+.student-result-view-modal-overlay .answer-display-container {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.answer-display {
+.student-result-view-modal-overlay .answer-display {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 4px 8px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
-  width: 80px;
+  width: 60px;
+  max-width: 60px;
+  min-width: 60px;
   text-align: center;
   white-space: nowrap;
   border: 1px solid #e2e8f0;
   background: #f8fafc;
   color: #374151;
+  box-sizing: border-box;
 }
 
-.answer-display.correct {
+.student-result-view-modal-overlay .answer-display.correct {
   background: #dcfce7;
   color: #166534;
   border-color: #bbf7d0;
 }
 
-.answer-display.incorrect {
+.student-result-view-modal-overlay .answer-display.incorrect {
   background: #fee2e2;
   color: #991b1b;
   border-color: #fecaca;
@@ -345,76 +349,76 @@
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-  .student-result-view-modal-content {
+  .student-result-view-modal-overlay .student-result-view-modal-content {
     width: 95%;
     max-height: 95vh;
     margin: 20px;
   }
 
-  .student-result-view-modal-header {
+  .student-result-view-modal-overlay .student-result-view-modal-header {
     padding: 20px 24px;
   }
 
-  .student-result-view-modal-header h3 {
+  .student-result-view-modal-overlay .student-result-view-modal-header h3 {
     font-size: 18px;
   }
 
-  .student-result-view-modal-body {
+  .student-result-view-modal-overlay .student-result-view-modal-body {
     padding: 24px;
   }
 
-  .form-row {
+  .student-result-view-modal-overlay .form-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
 
-  .form-label {
+  .student-result-view-modal-overlay .form-label {
     width: auto;
   }
 
-  .questions-header,
-  .question-row {
+  .student-result-view-modal-overlay .questions-header,
+  .student-result-view-modal-overlay .question-row {
     grid-template-columns: 1fr;
     gap: 8px;
   }
 
-  .question-header-item,
-  .question-number,
-  .question-major-unit,
-  .question-minor-unit,
-  .question-difficulty,
-  .question-score,
-  .question-answer {
+  .student-result-view-modal-overlay .question-header-item,
+  .student-result-view-modal-overlay .question-number,
+  .student-result-view-modal-overlay .question-major-unit,
+  .student-result-view-modal-overlay .question-minor-unit,
+  .student-result-view-modal-overlay .question-difficulty,
+  .student-result-view-modal-overlay .question-score,
+  .student-result-view-modal-overlay .question-answer {
     text-align: left;
   }
 
-  .student-result-view-modal-actions {
+  .student-result-view-modal-overlay .student-result-view-modal-actions {
     flex-direction: column;
     gap: 12px;
   }
 
-  .student-result-view-btn {
+  .student-result-view-modal-overlay .student-result-view-btn {
     width: 100%;
     padding: 14px 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .student-result-view-modal-header {
+  .student-result-view-modal-overlay .student-result-view-modal-header {
     padding: 16px 20px;
   }
 
-  .student-result-view-modal-body {
+  .student-result-view-modal-overlay .student-result-view-modal-body {
     padding: 20px;
   }
 
-  .form-section h4 {
+  .student-result-view-modal-overlay .form-section h4 {
     font-size: 16px;
   }
 
-  .questions-header,
-  .question-row {
+  .student-result-view-modal-overlay .questions-header,
+  .student-result-view-modal-overlay .question-row {
     padding: 8px 12px;
   }
 }

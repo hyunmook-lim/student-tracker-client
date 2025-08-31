@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 const useUIStore = create(set => ({
   // 상태
-  currentView: 'dashboard', // 'dashboard', 'students', 'grades', 'attendance', 'settings'
+  currentView: 'lecture-info', // 학생: 'lecture-info', 교사: 'class-management'
   selectedStudent: null,
   selectedClass: { grade: 1, class: 1 },
   isModalOpen: false,
@@ -121,7 +121,7 @@ const useUIStore = create(set => ({
 
   resetUI: () =>
     set({
-      currentView: 'dashboard',
+      currentView: 'lecture-info',
       selectedStudent: null,
       selectedClass: { grade: 1, class: 1 },
       isModalOpen: false,

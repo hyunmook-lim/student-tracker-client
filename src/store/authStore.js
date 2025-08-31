@@ -89,6 +89,25 @@ const useAuthStore = create((set, get) => ({
       }
     }
 
+    // 학생 모드 - 하드코딩된 로그인
+    if (userType === 'student') {
+      if (formData.id === 'student' && formData.password === 'student') {
+        set({
+          isLoggedIn: true,
+          currentUser: {
+            type: 'student',
+            id: 1, // 테스트용 학생 ID - 백엔드에 실제 존재하는 학생 ID로 변경 필요
+            name: '김학생',
+            loginId: 'student'
+          },
+        });
+        return true;
+      } else {
+        alert('아이디 또는 비밀번호가 올바르지 않습니다.');
+        return false;
+      }
+    }
+
     return false;
   },
 

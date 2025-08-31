@@ -50,10 +50,13 @@ function StudentResultViewModal({
         onClick={e => e.stopPropagation()}
       >
         <div className='student-result-view-modal-header'>
-          <h3>{(() => {
-            const studentObj = student.student || student;
-            return studentObj.name || studentObj.studentName || '학생';
-          })()} - 회차 정보 보기</h3>
+          <h3>
+            {(() => {
+              const studentObj = student.student || student;
+              return studentObj.name || studentObj.studentName || '학생';
+            })()}{' '}
+            - 회차 정보 보기
+          </h3>
           <button className='student-result-view-modal-close' onClick={onClose}>
             ×
           </button>
@@ -107,7 +110,7 @@ function StudentResultViewModal({
                 {questions.map((question, index) => {
                   const questionId = question.uid || question.id;
                   const studentAnswer = formData.answers[questionId] || '';
-                  
+
                   // 백엔드 데이터에서 정답 여부 가져오기
                   let isCorrect = false;
                   if (initialData && initialData.questionResults) {

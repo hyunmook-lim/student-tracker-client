@@ -13,6 +13,7 @@ function ResultInputModal({ isOpen, onClose, selectedLecture, onSave }) {
   const [students, setStudents] = useState([]);
   const [questions, setQuestions] = useState([]);
   const [studentResults, setStudentResults] = useState({});
+  const [homework, setHomework] = useState(['']);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -137,6 +138,20 @@ function ResultInputModal({ isOpen, onClose, selectedLecture, onSave }) {
     setSelectedStudent(null);
   };
 
+  const handleHomeworkChange = (index, value) => {
+    setHomework(prev => prev.map((item, i) => (i === index ? value : item)));
+  };
+
+  const addHomeworkField = () => {
+    setHomework(prev => [...prev, '']);
+  };
+
+  const removeHomeworkField = (index) => {
+    if (homework.length > 1) {
+      setHomework(prev => prev.filter((_, i) => i !== index));
+    }
+  };
+
   const handleSaveAll = async () => {
     // 모든 학생의 결과가 완료되었는지 확인
     const incompleteStudents = students.filter(studentData => {
@@ -191,6 +206,9 @@ function ResultInputModal({ isOpen, onClose, selectedLecture, onSave }) {
           };
         });
 
+        // 숙제 데이터 필터링 (빈 문자열 제거)
+        const filteredHomework = homework.filter(hw => hw.trim() !== '');
+
         // API 요청 데이터 생성
         const requestData = {
           studentId: studentId,
@@ -198,6 +216,7 @@ function ResultInputModal({ isOpen, onClose, selectedLecture, onSave }) {
           isAttended: isAttended,
           assignmentScore: result.assignmentGrade || '',
           questionResults: questionResults,
+          homework: filteredHomework,
         };
 
         console.log(`${student.studentName} 학생 결과 전송:`, requestData);
@@ -369,6 +388,41 @@ function ResultInputModal({ isOpen, onClose, selectedLecture, onSave }) {
                     );
                   })}
                 </div>
+
+                {/* 숙제 입력 섹션 */}
+                <div className='homework-section'>
+                  <h4>이번 회차 숙제</h4>
+                  <div className='homework-container'>
+                    {homework.map((homeworkItem, index) => (
+                      <div key={index} className='homework-row'>
+                        <input
+                          type='text'
+                          className='homework-input'
+                          placeholder={`숙제 ${index + 1} 입력...`}
+                          value={homeworkItem}
+                          onChange={e => handleHomeworkChange(index, e.target.value)}
+                        />
+                        {homework.length > 1 && (
+                          <button
+                            type='button'
+                            className='homework-remove-btn'
+                            onClick={() => removeHomeworkField(index)}
+                          >
+                            ×
+                          </button>
+                        )}
+                      </div>
+                    ))}
+                    <button
+                      type='button'
+                      className='homework-add-btn'
+                      onClick={addHomeworkField}
+                    >
+                      + 숙제 추가
+                    </button>
+                  </div>
+                </div>
+
                 <div className='result-input-actions'>
                   <button
                     className='result-input-btn result-input-btn-cancel'

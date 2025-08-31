@@ -1,232 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GradeDetailModal from '../modal/GradeDetailModal';
+import { getStudentClassrooms } from '../../../api/classroomStudentApi';
+import { getReportsByStudent } from '../../../api/reportApi';
+import { useAuthStore } from '../../../store';
 import './GradeReportComponent.css';
 
-// 가상의 수업 데이터 (실제로는 store에서 가져올 예정)
-const mockClasses = [
-  {
-    id: 1,
-    name: '웹 개발 기초',
-    description: 'HTML, CSS, JavaScript 기초부터 심화까지',
-    studentCount: 25,
-    grades: [
-      {
-        id: 1,
-        title: '1-2회차 성적표',
-        startLecture: 1,
-        endLecture: 2,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 88.5,
-        rank: 5,
-        subject: 'HTML/CSS 기초',
-        lectures: [
-          { lecture: 1, score: 85, attended: true, date: '2024-01-15' },
-          { lecture: 2, score: 92, attended: true, date: '2024-01-22' },
-        ],
-      },
-      {
-        id: 2,
-        title: '3-4회차 성적표',
-        startLecture: 3,
-        endLecture: 4,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 83.0,
-        rank: 8,
-        subject: 'JavaScript 기초',
-        lectures: [
-          { lecture: 3, score: 78, attended: true, date: '2024-01-29' },
-          { lecture: 4, score: 88, attended: true, date: '2024-02-05' },
-        ],
-      },
-      {
-        id: 3,
-        title: '5-6회차 성적표',
-        startLecture: 5,
-        endLecture: 6,
-        totalLectures: 8,
-        attendedLectures: 1,
-        averageScore: 90.0,
-        rank: 3,
-        subject: 'DOM 조작',
-        lectures: [
-          { lecture: 5, score: 95, attended: true, date: '2024-02-12' },
-          { lecture: 6, score: 85, attended: false, date: '2024-02-19' },
-        ],
-      },
-      {
-        id: 4,
-        title: '7-8회차 성적표',
-        startLecture: 7,
-        endLecture: 8,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 91.5,
-        rank: 2,
-        subject: '프로젝트 실습',
-        lectures: [
-          { lecture: 7, score: 87, attended: true, date: '2024-02-26' },
-          { lecture: 8, score: 96, attended: true, date: '2024-03-05' },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: 'React 심화',
-    description: 'React Hooks, 상태 관리, 최적화 기법',
-    studentCount: 20,
-    grades: [
-      {
-        id: 1,
-        title: '1-2회차 성적표',
-        startLecture: 1,
-        endLecture: 2,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 85.5,
-        rank: 4,
-        subject: 'React 기초',
-        lectures: [
-          { lecture: 1, score: 82, attended: true, date: '2024-02-26' },
-          { lecture: 2, score: 89, attended: true, date: '2024-03-05' },
-        ],
-      },
-      {
-        id: 2,
-        title: '3-4회차 성적표',
-        startLecture: 3,
-        endLecture: 4,
-        totalLectures: 8,
-        attendedLectures: 1,
-        averageScore: 83.5,
-        rank: 6,
-        subject: 'Hooks & Context',
-        lectures: [
-          { lecture: 3, score: 76, attended: true, date: '2024-03-12' },
-          { lecture: 4, score: 91, attended: false, date: '2024-03-19' },
-        ],
-      },
-      {
-        id: 3,
-        title: '5-6회차 성적표',
-        startLecture: 5,
-        endLecture: 6,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 89.5,
-        rank: 3,
-        subject: '성능 최적화',
-        lectures: [
-          { lecture: 5, score: 88, attended: true, date: '2024-03-26' },
-          { lecture: 6, score: 91, attended: true, date: '2024-04-02' },
-        ],
-      },
-      {
-        id: 4,
-        title: '7-8회차 성적표',
-        startLecture: 7,
-        endLecture: 8,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 87.0,
-        rank: 5,
-        subject: '프로젝트 실습',
-        lectures: [
-          { lecture: 7, score: 84, attended: true, date: '2024-04-09' },
-          { lecture: 8, score: 90, attended: true, date: '2024-04-16' },
-        ],
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: '데이터베이스 설계',
-    description: 'SQL, 데이터 모델링, 성능 최적화',
-    studentCount: 18,
-    grades: [
-      {
-        id: 1,
-        title: '1-2회차 성적표',
-        startLecture: 1,
-        endLecture: 2,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 88.5,
-        rank: 3,
-        subject: '데이터베이스 기초',
-        lectures: [
-          { lecture: 1, score: 85, attended: true, date: '2024-03-26' },
-          { lecture: 2, score: 92, attended: true, date: '2024-04-02' },
-        ],
-      },
-      {
-        id: 2,
-        title: '3-4회차 성적표',
-        startLecture: 3,
-        endLecture: 4,
-        totalLectures: 8,
-        attendedLectures: 1,
-        averageScore: 86.0,
-        rank: 4,
-        subject: 'SQL 고급',
-        lectures: [
-          { lecture: 3, score: 89, attended: true, date: '2024-04-09' },
-          { lecture: 4, score: 83, attended: false, date: '2024-04-16' },
-        ],
-      },
-      {
-        id: 3,
-        title: '5-6회차 성적표',
-        startLecture: 5,
-        endLecture: 6,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 91.0,
-        rank: 2,
-        subject: '데이터 모델링',
-        lectures: [
-          { lecture: 5, score: 88, attended: true, date: '2024-04-23' },
-          { lecture: 6, score: 94, attended: true, date: '2024-04-30' },
-        ],
-      },
-      {
-        id: 4,
-        title: '7-8회차 성적표',
-        startLecture: 7,
-        endLecture: 8,
-        totalLectures: 8,
-        attendedLectures: 2,
-        averageScore: 89.5,
-        rank: 3,
-        subject: '성능 최적화',
-        lectures: [
-          { lecture: 7, score: 87, attended: true, date: '2024-05-07' },
-          { lecture: 8, score: 92, attended: true, date: '2024-05-14' },
-        ],
-      },
-    ],
-  },
-];
-
 function GradeReport() {
+  const { currentUser } = useAuthStore();
   const [expandedClasses, setExpandedClasses] = useState(new Set());
   const [selectedGrade, setSelectedGrade] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [classes, setClasses] = useState([]);
+  const [studentReports, setStudentReports] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!currentUser?.uid) return;
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        // 학생이 수강하는 반 목록 조회
+        const classroomResponse = await getStudentClassrooms(currentUser.uid);
+        console.log('학생 수업 목록:', classroomResponse);
+
+        if (classroomResponse.success) {
+          // 승인된 수업만 필터링
+          const approvedClasses = classroomResponse.data.filter(
+            item => item.status === 'APPROVED'
+          );
+          setClasses(approvedClasses);
+
+          // 학생의 성적표 조회
+          const reportsResponse = await getReportsByStudent(currentUser.uid);
+          console.log('학생 성적표:', reportsResponse);
+
+          if (reportsResponse.success) {
+            setStudentReports(reportsResponse.data);
+          } else {
+            console.warn('성적표를 가져올 수 없습니다:', reportsResponse.error);
+            setStudentReports([]);
+          }
+        } else {
+          setError(
+            classroomResponse.error || '수업 목록을 불러올 수 없습니다.'
+          );
+        }
+      } catch (err) {
+        console.error('데이터 조회 중 오류 발생:', err);
+        setError('데이터를 불러오는 중 오류가 발생했습니다.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [currentUser]);
 
   const toggleClassExpansion = classId => {
-    const newExpandedClasses = new Set(expandedClasses);
-    if (newExpandedClasses.has(classId)) {
-      newExpandedClasses.delete(classId);
+    if (expandedClasses.has(classId)) {
+      setExpandedClasses(new Set());
     } else {
-      newExpandedClasses.add(classId);
+      setExpandedClasses(new Set([classId]));
     }
-    setExpandedClasses(newExpandedClasses);
   };
 
   const handleGradeClick = grade => {
-    setSelectedGrade(grade);
+    // reportId 추가하여 모달에 전달
+    const gradeWithReportId = {
+      ...grade,
+      reportId: grade.uid, // report의 uid가 reportId
+      title: grade.reportTitle,
+    };
+    setSelectedGrade(gradeWithReportId);
     setIsModalOpen(true);
   };
 
@@ -235,9 +84,51 @@ function GradeReport() {
     setSelectedGrade(null);
   };
 
-  const getAttendanceRate = (attendedLectures, totalLectures) => {
-    return Math.round((attendedLectures / totalLectures) * 100);
+  // 특정 반의 성적표 목록 가져오기
+  const getReportsForClass = classroomUid => {
+    // 해당 교실의 성적표만 필터링
+    return studentReports.filter(report => report.classroomId === classroomUid);
   };
+
+  if (loading) {
+    return (
+      <div className='grade-report-container'>
+        <div className='grade-report-header'>
+          <h2>성적 확인</h2>
+        </div>
+        <div className='loading-message'>
+          <p>성적 정보를 불러오는 중...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className='grade-report-container'>
+        <div className='grade-report-header'>
+          <h2>성적 확인</h2>
+        </div>
+        <div className='error-message'>
+          <p>오류: {error}</p>
+          <button onClick={() => window.location.reload()}>다시 시도</button>
+        </div>
+      </div>
+    );
+  }
+
+  if (classes.length === 0) {
+    return (
+      <div className='grade-report-container'>
+        <div className='grade-report-header'>
+          <h2>성적 확인</h2>
+        </div>
+        <div className='empty-message'>
+          <p>승인된 수업이 없습니다.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -247,76 +138,89 @@ function GradeReport() {
         </div>
 
         <div className='classes-list'>
-          {mockClasses.map(classItem => (
-            <div key={classItem.id} className='class-section'>
-              <div
-                className='class-header'
-                onClick={() => toggleClassExpansion(classItem.id)}
-              >
-                <div className='class-info'>
-                  <h3>{classItem.name}</h3>
-                  <p>{classItem.description}</p>
-                  <span>학생 수: {classItem.studentCount}명</span>
-                </div>
-                <div className='expand-icon'>
-                  {expandedClasses.has(classItem.id) ? '▼' : '▶'}
-                </div>
-              </div>
+          {classes.map(classItem => {
+            const classReports = getReportsForClass(classItem.classroom.uid);
 
-              {expandedClasses.has(classItem.id) && (
-                <div className='grade-cards-grid'>
-                  {classItem.grades.map(grade => (
-                    <div
-                      key={grade.id}
-                      className='grade-card'
-                      onClick={() => handleGradeClick(grade)}
-                    >
-                      <div className='grade-header'>
-                        <h4>{grade.title}</h4>
-                        <span className='grade-subject'>{grade.subject}</span>
-                      </div>
-                      <div className='grade-content'>
-                        <div className='grade-summary'>
-                          <div className='summary-item'>
-                            <span className='summary-label'>회차:</span>
-                            <span className='summary-value'>
-                              {grade.startLecture}-{grade.endLecture}회차
+            return (
+              <div key={classItem.uid} className='class-section'>
+                <div
+                  className='class-header'
+                  onClick={() => toggleClassExpansion(classItem.uid)}
+                >
+                  <div className='class-info'>
+                    <h3>{classItem.classroom.classroomName}</h3>
+                    <p>
+                      {classItem.classroom.description ||
+                        '수업 설명이 없습니다.'}
+                    </p>
+                  </div>
+                  <div
+                    className={`class-expand-icon ${
+                      expandedClasses.has(classItem.uid) ? 'expanded' : ''
+                    }`}
+                  >
+                    {'>'}
+                  </div>
+                </div>
+
+                {expandedClasses.has(classItem.uid) && (
+                  <div className='grade-cards-grid'>
+                    {classReports.length > 0 ? (
+                      classReports.map(report => (
+                        <div
+                          key={report.uid}
+                          className='grade-card'
+                          onClick={() => handleGradeClick(report)}
+                        >
+                          <div className='grade-header'>
+                            <h4>{report.reportTitle}</h4>
+                            <span className='grade-subject'>
+                              {classItem.classroom.classroomName}
                             </span>
                           </div>
-                          <div className='summary-item'>
-                            <span className='summary-label'>출석률:</span>
-                            <span className='summary-value'>
-                              {grade.attendedLectures}/{grade.totalLectures}회 (
-                              {getAttendanceRate(
-                                grade.attendedLectures,
-                                grade.totalLectures
+                          <div className='grade-content'>
+                            <div className='grade-summary'>
+                              <div className='summary-item'>
+                                <span className='summary-label'>생성일:</span>
+                                <span className='summary-value'>
+                                  {new Date(
+                                    report.createdAt
+                                  ).toLocaleDateString()}
+                                </span>
+                              </div>
+                              <div className='summary-item'>
+                                <span className='summary-label'>설명:</span>
+                                <span className='summary-value'>
+                                  {report.reportDescription || '설명 없음'}
+                                </span>
+                              </div>
+                              {report.studentReport?.feedback && (
+                                <div className='summary-item'>
+                                  <span className='summary-label'>피드백:</span>
+                                  <span className='summary-value'>
+                                    {report.studentReport.feedback}
+                                  </span>
+                                </div>
                               )}
-                              %)
-                            </span>
+                            </div>
                           </div>
-                          <div className='summary-item'>
-                            <span className='summary-label'>평균 점수:</span>
-                            <span className='summary-value'>
-                              {grade.averageScore}점
-                            </span>
-                          </div>
-                          <div className='summary-item'>
-                            <span className='summary-label'>등수:</span>
-                            <span className='summary-value'>
-                              {grade.rank}등
-                            </span>
+                          <div className='grade-actions'>
+                            <button className='view-detail-btn'>
+                              자세히 보기
+                            </button>
                           </div>
                         </div>
+                      ))
+                    ) : (
+                      <div className='no-grades-message'>
+                        <p>아직 성적표가 없습니다.</p>
                       </div>
-                      <div className='grade-actions'>
-                        <button className='view-detail-btn'>자세히 보기</button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 

@@ -339,7 +339,6 @@ function LectureListComponent() {
                           </div>
                         </div>
                         <div className='lecture-actions'>
-                          <button className='btn btn-edit'>수정</button>
                           <button
                             className='btn btn-delete'
                             onClick={e => {

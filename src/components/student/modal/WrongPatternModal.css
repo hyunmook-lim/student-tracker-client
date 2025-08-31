@@ -1,4 +1,43 @@
 /* WrongPatternModal 컴포넌트 스타일 */
+
+/* 데이터 없음 상태 스타일 */
+.no-data-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  min-height: 300px;
+}
+
+.no-data-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+
+.no-data-state h3 {
+  color: #475569;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.no-data-state p {
+  color: #64748b;
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Top3 카드 표시를 위한 스타일 */
+.top3-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .wrong-pattern-modal-overlay {
   position: fixed;
   top: 0;
@@ -66,6 +105,46 @@
   color: #1e293b;
 }
 
+.wrong-pattern-modal .modal-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wrong-pattern-modal .pdf-export-btn {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.wrong-pattern-modal .pdf-export-btn:hover {
+  background: linear-gradient(135deg, #2563eb, #1e40af);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.wrong-pattern-modal .pdf-export-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.wrong-pattern-modal .pdf-export-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 /* 모달 콘텐츠 */
 .wrong-pattern-modal .modal-content {
   padding: 3%;
@@ -78,6 +157,7 @@
   display: flex;
   gap: 3%;
   align-items: start;
+  height: 100%;
 }
 
 /* 왼쪽 섹션 */
@@ -87,6 +167,7 @@
   flex-direction: column;
   gap: 3%;
   padding: 2% 1.5%;
+  height: 100%;
 }
 
 /* 전체 통계 */
@@ -102,8 +183,16 @@
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   transition: all 0.2s ease;
+}
+
+.wrong-pattern-modal .stat-icon {
+  font-size: clamp(20px, 2.5vw, 24px);
+  margin-bottom: 8px;
 }
 
 .wrong-pattern-modal .stat-card:hover {
@@ -198,8 +287,9 @@
 }
 
 .wrong-pattern-modal .card-back {
-  background: #1e293b;
-  color: white;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #e2e8f0;
   transform: rotateX(180deg);
 }
 
@@ -253,23 +343,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
-  border-bottom: 1px solid #334155;
+  padding: 6px 8px;
+  border-bottom: 1px solid #e2e8f0;
+  gap: 8px;
 }
 
 .wrong-pattern-modal .sub-unit-item:last-child {
   border-bottom: none;
 }
 
+.wrong-pattern-modal .sub-unit-rank {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .wrong-pattern-modal .sub-unit-name {
   font-size: clamp(9px, 1.2vw, 11px);
-  color: #e2e8f0;
-  text-align: left;
+  color: #475569;
+  text-align: center;
+  flex: 1;
 }
 
 .wrong-pattern-modal .sub-unit-rate {
   font-size: clamp(9px, 1.2vw, 11px);
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 /* 오른쪽 섹션 */
@@ -277,13 +384,15 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 3%;
+  height: 100%;
   padding: 2% 1.5%;
 }
 
 /* 히트맵 섹션 */
 .wrong-pattern-modal .heatmap-section {
-  margin-bottom: 3%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 2% 0;
 }
 
@@ -297,10 +406,12 @@
 .wrong-pattern-modal .heatmap-container {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 1.5%;
+  margin-bottom: 0.5%;
   width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .wrong-pattern-modal .heatmap-header {
@@ -334,6 +445,7 @@
 .wrong-pattern-modal .heatmap-body {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .wrong-pattern-modal .heatmap-row {
@@ -384,10 +496,11 @@
   justify-content: center;
   gap: 1.5%;
   flex-wrap: wrap;
-  padding: 1.2%;
+  padding: 0.8%;
   background: #f8fafc;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid #e2e8f0;
+  margin-top: auto;
 }
 
 .wrong-pattern-modal .legend-item {
@@ -403,6 +516,7 @@
   height: clamp(10px, 1.2vw, 12px);
   border-radius: 4px;
   flex-shrink: 0;
+  border: 1px solid #e2e8f0;
 }
 
 /* 트리맵 섹션 */
@@ -694,5 +808,144 @@
     padding: 0.8%;
     flex-direction: column;
     align-items: center;
+  }
+}
+
+/* 과제 점수 통계 스타일 */
+.wrong-pattern-modal .assignment-stats-section {
+  margin-top: 2%;
+  padding: 1.5%;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.wrong-pattern-modal .assignment-stats-section h3 {
+  color: #1e293b;
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: 600;
+  margin: 0 0 1.5% 0;
+}
+
+.wrong-pattern-modal .assignment-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wrong-pattern-modal .assignment-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2% 1.5%;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.wrong-pattern-modal .total-label {
+  color: #475569;
+  font-weight: 500;
+  font-size: clamp(12px, 1.5vw, 14px);
+}
+
+.wrong-pattern-modal .total-number {
+  color: #1e293b;
+  font-weight: 600;
+  font-size: clamp(14px, 1.8vw, 16px);
+}
+
+.wrong-pattern-modal .grade-distribution {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.wrong-pattern-modal .grade-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+}
+
+.wrong-pattern-modal .grade-item.grade-a {
+  background: #ecfdf5;
+  border-color: #059669;
+}
+
+.wrong-pattern-modal .grade-item.grade-a .grade-label {
+  color: #059669;
+  font-weight: 600;
+}
+
+.wrong-pattern-modal .grade-item.grade-b {
+  background: #f0f9ff;
+  border-color: #0ea5e9;
+}
+
+.wrong-pattern-modal .grade-item.grade-b .grade-label {
+  color: #0ea5e9;
+  font-weight: 600;
+}
+
+.wrong-pattern-modal .grade-item.grade-c {
+  background: #fffbeb;
+  border-color: #f59e0b;
+}
+
+.wrong-pattern-modal .grade-item.grade-c .grade-label {
+  color: #f59e0b;
+  font-weight: 600;
+}
+
+.wrong-pattern-modal .grade-item.grade-d {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
+.wrong-pattern-modal .grade-item.grade-d .grade-label {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.wrong-pattern-modal .grade-label {
+  color: #475569;
+  font-weight: 500;
+  font-size: clamp(11px, 1.4vw, 13px);
+}
+
+.wrong-pattern-modal .grade-count {
+  color: #1e293b;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: 8px;
+  font-size: clamp(11px, 1.4vw, 13px);
+}
+
+.wrong-pattern-modal .grade-rate {
+  color: #64748b;
+  font-size: clamp(10px, 1.2vw, 12px);
+}
+
+@media (max-width: 768px) {
+  .wrong-pattern-modal .grade-distribution {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .wrong-pattern-modal .assignment-stats-section {
+    margin-top: 2.5%;
+    padding: 2%;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrong-pattern-modal .assignment-stats-section {
+    margin-top: 3%;
+    padding: 1.5%;
   }
 }

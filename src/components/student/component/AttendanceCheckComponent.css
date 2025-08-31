@@ -1,5 +1,5 @@
-/* StudentAttendanceCheck 컴포넌트 스타일 - 출석 현황 확인 */
-.student-attendance-check-container {
+/* AttendanceCheck 컴포넌트 스타일 */
+.attendance-check-container {
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -9,129 +9,109 @@
   z-index: 1;
 }
 
-.student-attendance-check-container .student-attendance-check-header {
+.attendance-check-container .attendance-check-header {
   padding: 24px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
-  text-align: center;
 }
 
-.student-attendance-check-container .student-attendance-check-header h2 {
+.attendance-check-container .attendance-check-header h2 {
   color: #1e293b;
   font-size: 24px;
   font-weight: 700;
-  margin: 0 0 8px 0;
-}
-
-.student-attendance-check-container .student-attendance-check-header p {
-  color: #64748b;
-  font-size: 16px;
   margin: 0;
 }
 
-/* 수업 목록 스타일 */
-.student-attendance-check-container .classes-list {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.attendance-check-container .classrooms-list {
+  padding: 0;
 }
 
-.student-attendance-check-container .class-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+.attendance-check-container .class-section {
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.student-attendance-check-container .class-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+.attendance-check-container .class-section:last-child {
+  border-bottom: none;
 }
 
-/* 수업 요약 정보 */
-.student-attendance-check-container .class-summary {
-  padding: 24px;
-  cursor: pointer;
+.attendance-check-container .class-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background-color 0.2s ease;
+  padding: 20px 32px;
+  transition: background 0.2s ease;
+  cursor: pointer;
 }
 
-.student-attendance-check-container .class-summary:hover {
-  background-color: #f8fafc;
+.attendance-check-container .class-header:hover {
+  background: #f8fafc;
 }
 
-.student-attendance-check-container .class-info {
-  flex: 1;
-}
-
-.student-attendance-check-container .class-info h3 {
+.attendance-check-container .class-info h3 {
   color: #1e293b;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
 }
 
-.student-attendance-check-container .class-info p {
+.attendance-check-container .class-info p {
   color: #64748b;
   font-size: 14px;
-  margin: 0;
-  line-height: 1.5;
+  margin: 0 0 4px 0;
 }
 
-.student-attendance-check-container .attendance-summary {
+.attendance-check-container .attendance-summary {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.student-attendance-check-container .attendance-stats {
+.attendance-check-container .attendance-stats {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 4px;
 }
 
-.student-attendance-check-container .attendance-count {
+.attendance-check-container .attendance-count {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
   margin: 0;
 }
 
-.student-attendance-check-container .attendance-rate {
+.attendance-check-container .attendance-rate {
   color: #3b82f6;
   font-size: 14px;
   font-weight: 500;
   margin: 0;
 }
 
-.student-attendance-check-container .expand-icon {
+.attendance-check-container .expand-icon {
   color: #64748b;
   font-size: 18px;
   font-weight: bold;
   transition: transform 0.2s ease;
-  margin-left: 16px;
 }
 
-/* 세션 목록 스타일 */
-.student-attendance-check-container .lectures-list {
+.attendance-check-container .expand-icon.expanded {
+  transform: rotate(90deg);
+}
+
+/* 회차 목록 스타일 - 기존 컴팩트 디자인 유지 */
+.attendance-check-container .sessions-list {
   background: #f8fafc;
   padding: 16px 24px;
   animation: slideDown 0.3s ease;
 }
 
-.student-attendance-check-container .lectures-grid {
+.attendance-check-container .lectures-grid {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.student-attendance-check-container .lecture-card-compact {
+.attendance-check-container .lecture-card-compact {
   background: white;
   border: none;
   border-radius: 8px;
@@ -145,50 +125,62 @@
   margin-bottom: 8px;
 }
 
-.student-attendance-check-container .lecture-card-compact:hover {
+.attendance-check-container .lecture-card-compact:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
 
-.student-attendance-check-container .lecture-card-compact.attended {
+.attendance-check-container .lecture-card-compact.attended {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.student-attendance-check-container .lecture-card-compact.attended:hover {
+.attendance-check-container .lecture-card-compact.attended:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.student-attendance-check-container .lecture-card-compact.absent {
+.attendance-check-container .lecture-card-compact.absent {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.student-attendance-check-container .lecture-card-compact.absent:hover {
+.attendance-check-container .lecture-card-compact.absent:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.student-attendance-check-container .lecture-info-compact {
+.attendance-check-container .lecture-card-compact.scheduled {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.attendance-check-container .lecture-card-compact.scheduled:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.attendance-check-container .lecture-info-compact {
   display: flex;
   align-items: center;
   gap: 16px;
   flex: 1;
 }
 
-.student-attendance-check-container .attendance-badge-left {
+.attendance-check-container .attendance-badge-left {
   width: 8px;
   height: 32px;
   border-radius: 4px;
   flex-shrink: 0;
 }
 
-.student-attendance-check-container .attendance-badge-left.present {
+.attendance-check-container .attendance-badge-left.present {
   background: linear-gradient(135deg, #10b981, #059669);
 }
 
-.student-attendance-check-container .attendance-badge-left.absent {
+.attendance-check-container .attendance-badge-left.absent {
   background: linear-gradient(135deg, #ef4444, #dc2626);
 }
 
-.student-attendance-check-container .lecture-title-compact {
+.attendance-check-container .attendance-badge-left.scheduled {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.attendance-check-container .lecture-title-compact {
   color: #1e293b;
   font-size: 13px;
   font-weight: 600;
@@ -197,7 +189,7 @@
   flex: 1;
 }
 
-.student-attendance-check-container .lecture-date-compact {
+.attendance-check-container .lecture-date-compact {
   color: #64748b;
   font-size: 11px;
   margin: 0;
@@ -206,7 +198,7 @@
   text-align: center;
 }
 
-.student-attendance-check-container .status-badge-compact {
+.attendance-check-container .status-badge-compact {
   padding: 3px 8px;
   border-radius: 12px;
   font-size: 11px;
@@ -215,14 +207,19 @@
   min-width: 45px;
 }
 
-.student-attendance-check-container .status-badge-compact.present {
+.attendance-check-container .status-badge-compact.present {
   background: #dcfce7;
   color: #166534;
 }
 
-.student-attendance-check-container .status-badge-compact.absent {
+.attendance-check-container .status-badge-compact.absent {
   background: #fee2e2;
   color: #991b1b;
+}
+
+.attendance-check-container .status-badge-compact.scheduled {
+  background: #fef3c7;
+  color: #d97706;
 }
 
 @keyframes slideDown {
@@ -236,71 +233,79 @@
   }
 }
 
+/* 로딩 및 빈 상태 메시지 */
+.attendance-check-container .loading-message,
+.attendance-check-container .empty-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.attendance-check-container .empty-message {
+  color: #9ca3af;
+}
+
+.attendance-check-container .empty-sessions-message {
+  text-align: center;
+  padding: 20px;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
-  .student-attendance-check-container .student-attendance-check-header {
-    padding: 20px 24px;
+  .attendance-check-container .attendance-check-header {
+    padding: 16px 20px;
   }
 
-  .student-attendance-check-container .student-attendance-check-header h2 {
-    font-size: 20px;
-  }
-
-  .student-attendance-check-container .classes-list {
-    padding: 20px 24px;
-  }
-
-  .student-attendance-check-container .class-summary {
-    padding: 20px 24px;
+  .attendance-check-container .class-header {
+    padding: 16px 20px;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
 
-  .student-attendance-check-container .class-info h3 {
-    font-size: 18px;
-  }
-
-  .student-attendance-check-container .attendance-summary {
+  .attendance-check-container .attendance-summary {
     width: 100%;
     justify-content: space-between;
   }
 
-  .student-attendance-check-container .attendance-stats {
+  .attendance-check-container .attendance-stats {
     align-items: flex-start;
   }
 
-  .student-attendance-check-container .lectures-list {
-    padding: 16px 24px;
+  .attendance-check-container .sessions-list {
+    padding: 16px 20px;
   }
 
-  .student-attendance-check-container .lectures-grid {
+  .attendance-check-container .lectures-grid {
     gap: 6px;
   }
 
-  .student-attendance-check-container .lecture-card-compact {
+  .attendance-check-container .lecture-card-compact {
     padding: 10px 12px;
     min-height: 40px;
   }
 
-  .student-attendance-check-container .lecture-info-compact {
+  .attendance-check-container .lecture-info-compact {
     gap: 12px;
   }
 
-  .student-attendance-check-container .attendance-badge-left {
+  .attendance-check-container .attendance-badge-left {
     width: 6px;
     height: 28px;
   }
 
-  .student-attendance-check-container .lecture-title-compact {
+  .attendance-check-container .lecture-title-compact {
     font-size: 12px;
   }
 
-  .student-attendance-check-container .lecture-date-compact {
+  .attendance-check-container .lecture-date-compact {
     font-size: 10px;
     min-width: 70px;
   }
 
-  .student-attendance-check-container .status-badge-compact {
+  .attendance-check-container .status-badge-compact {
     padding: 2px 6px;
     font-size: 10px;
     min-width: 40px;
@@ -308,50 +313,46 @@
 }
 
 @media (max-width: 480px) {
-  .student-attendance-check-container .student-attendance-check-header {
+  .attendance-check-container .attendance-check-header {
     padding: 16px 20px;
   }
 
-  .student-attendance-check-container .classes-list {
+  .attendance-check-container .class-header {
     padding: 16px 20px;
   }
 
-  .student-attendance-check-container .class-summary {
-    padding: 16px 20px;
-  }
-
-  .student-attendance-check-container .lectures-list {
+  .attendance-check-container .sessions-list {
     padding: 12px 20px;
   }
 
-  .student-attendance-check-container .lectures-grid {
+  .attendance-check-container .lectures-grid {
     gap: 4px;
   }
 
-  .student-attendance-check-container .lecture-card-compact {
+  .attendance-check-container .lecture-card-compact {
     padding: 8px 10px;
     min-height: 36px;
   }
 
-  .student-attendance-check-container .lecture-info-compact {
+  .attendance-check-container .lecture-info-compact {
     gap: 8px;
   }
 
-  .student-attendance-check-container .attendance-badge-left {
+  .attendance-check-container .attendance-badge-left {
     width: 4px;
     height: 24px;
   }
 
-  .student-attendance-check-container .lecture-title-compact {
+  .attendance-check-container .lecture-title-compact {
     font-size: 11px;
   }
 
-  .student-attendance-check-container .lecture-date-compact {
+  .attendance-check-container .lecture-date-compact {
     font-size: 9px;
     min-width: 60px;
   }
 
-  .student-attendance-check-container .status-badge-compact {
+  .attendance-check-container .status-badge-compact {
     padding: 2px 4px;
     font-size: 9px;
     min-width: 35px;

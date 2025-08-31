@@ -71,6 +71,10 @@
   transition: transform 0.2s ease;
 }
 
+.result-list-container .expand-icon.expanded {
+  transform: rotate(90deg);
+}
+
 /* 회차별 섹션 스타일 */
 .result-list-container .lectures-section {
   background: #f8fafc;
@@ -207,8 +211,6 @@
   background: #059669;
 }
 
-
-
 /* 애니메이션 */
 @keyframes slideDown {
   from {
@@ -270,5 +272,4 @@
     width: 100%;
     justify-content: flex-end;
   }
-
 }

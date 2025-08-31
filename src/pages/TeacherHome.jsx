@@ -1,14 +1,21 @@
 import React from 'react';
 import './TeacherHome.css';
 import { useAuthStore, useUIStore } from '../store';
-import DashboardComponent from '../components/teacher/component/DashboardComponent';
 import ClassroomListComponent from '../components/teacher/component/ClassroomListComponent';
 import LectureListComponent from '../components/teacher/component/LectureListComponent';
 import ResultListComponent from '../components/teacher/component/ResultListComponent';
+import ReportGenerationComponent from '../components/teacher/component/ReportGenerationComponent';
 
 function TeacherHome() {
   const { logout } = useAuthStore();
   const { currentView, setCurrentView } = useUIStore();
+
+  // 교사 페이지 진입 시 기본 뷰 설정
+  React.useEffect(() => {
+    if (currentView === 'dashboard' || !currentView) {
+      setCurrentView('class-management');
+    }
+  }, [currentView, setCurrentView]);
 
   const handleLogout = () => {
     logout();
@@ -22,17 +29,10 @@ function TeacherHome() {
         return <LectureListComponent />;
       case 'result-input':
         return <ResultListComponent />;
+      case 'report-generation':
+        return <ReportGenerationComponent />;
       default:
-        return (
-          <div className='teacher-dashboard'>
-            <div className='welcome-section'>
-              <h2 className='welcome-title'>선생님 대시보드</h2>
-              <p className='welcome-message'>
-                학생들을 관리하고 성적을 확인할 수 있습니다.
-              </p>
-            </div>
-          </div>
-        );
+        return <ClassroomListComponent />;
     }
   };
 
@@ -53,12 +53,6 @@ function TeacherHome() {
 
         <nav className='sidebar-nav'>
           <button
-            className={`nav-btn ${currentView === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setCurrentView('dashboard')}
-          >
-            대시보드
-          </button>
-          <button
             className={`nav-btn ${currentView === 'class-management' ? 'active' : ''}`}
             onClick={() => setCurrentView('class-management')}
           >
@@ -76,14 +70,18 @@ function TeacherHome() {
           >
             수업 결과 입력
           </button>
+          <button
+            className={`nav-btn ${currentView === 'report-generation' ? 'active' : ''}`}
+            onClick={() => setCurrentView('report-generation')}
+          >
+            성적표 생성
+          </button>
         </nav>
       </aside>
 
       {/* 메인 콘텐츠 */}
       <main className='main-content'>
-        {currentView === 'dashboard' && <DashboardComponent />}
-
-        {currentView !== 'dashboard' && renderContent()}
+        {renderContent()}
       </main>
     </div>
   );

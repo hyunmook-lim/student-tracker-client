@@ -271,8 +271,12 @@ function ResultListComponent() {
                   {classroom.studentIds ? classroom.studentIds.length : 0}명
                 </span>
               </div>
-              <div className='expand-icon'>
-                {expandedClasses.has(classroom.uid) ? '▼' : '▶'}
+              <div
+                className={`expand-icon ${
+                  expandedClasses.has(classroom.uid) ? 'expanded' : ''
+                }`}
+              >
+                {'>'}
               </div>
             </div>
 
@@ -309,10 +313,19 @@ function ResultListComponent() {
                         `강의 ${lecture.lectureName}: resultEntered = ${lecture.resultEntered}, hasResults = ${hasResults}`
                       );
 
+                      const handleLectureClick = () => {
+                        if (isCompleted && hasResults) {
+                          handleViewResults(lecture);
+                        } else if (isCompleted && !hasResults) {
+                          handleInputResults(lecture);
+                        }
+                      };
+
                       return (
                         <div
                           key={lecture.uid || lecture.id}
-                          className='lecture-item'
+                          className={`lecture-item ${isCompleted ? 'clickable' : ''}`}
+                          onClick={handleLectureClick}
                         >
                           <div className='lecture-info'>
                             <div className='lecture-title'>
@@ -333,14 +346,20 @@ function ResultListComponent() {
                             {isCompleted && hasResults ? (
                               <button
                                 className='btn btn-view'
-                                onClick={() => handleViewResults(lecture)}
+                                onClick={e => {
+                                  e.stopPropagation();
+                                  handleViewResults(lecture);
+                                }}
                               >
                                 결과 보기
                               </button>
                             ) : isCompleted && !hasResults ? (
                               <button
                                 className='btn btn-input'
-                                onClick={() => handleInputResults(lecture)}
+                                onClick={e => {
+                                  e.stopPropagation();
+                                  handleInputResults(lecture);
+                                }}
                               >
                                 결과 입력
                               </button>

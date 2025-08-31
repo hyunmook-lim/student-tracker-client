@@ -8,9 +8,6 @@
 }
 
 .lecture-list-container .lecture-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 24px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
@@ -23,38 +20,12 @@
   margin: 0;
 }
 
-/* 로딩 및 에러 메시지 스타일 */
-.lecture-list-container .loading-message,
-.lecture-list-container .error-message {
-  padding: 40px 32px;
-  text-align: center;
-  font-size: 16px;
-  color: #64748b;
-}
-
-.lecture-list-container .error-message {
-  color: #ef4444;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-  margin: 20px 32px;
-}
-
 .lecture-list-container .classroom-list {
   padding: 0;
 }
 
 .lecture-list-container .classroom-item {
   border-bottom: 1px solid #e2e8f0;
-}
-
-.lecture-list-container .lecture-item {
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.lecture-list-container .lecture-item:hover {
-  background-color: #f8fafc;
 }
 
 .lecture-list-container .classroom-item:last-child {
@@ -87,7 +58,7 @@
   margin: 0 0 4px 0;
 }
 
-.lecture-list-container .student-count {
+.lecture-list-container .classroom-info span {
   color: #3b82f6;
   font-size: 12px;
   font-weight: 500;
@@ -95,34 +66,10 @@
 
 .lecture-list-container .classroom-actions {
   display: flex;
-  align-items: center;
   gap: 8px;
 }
 
-.lecture-list-container .add-round-btn {
-  background: #10b981;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.lecture-list-container .add-round-btn:hover {
-  background: #059669;
-}
-
-.lecture-list-container .expand-icon {
-  color: #64748b;
-  font-size: 18px;
-  font-weight: bold;
-  transition: transform 0.2s ease;
-}
-
-/* 회차별 섹션 스타일 */
+/* 강의 섹션 스타일 */
 .lecture-list-container .lectures-section {
   background: #f8fafc;
   padding: 20px 32px;
@@ -137,7 +84,7 @@
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0;
 }
 
 .lecture-list-container .lectures-list {
@@ -150,67 +97,57 @@
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 16px;
+  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .lecture-list-container .lecture-item:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
 }
 
 .lecture-list-container .lecture-info {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.lecture-list-container .lecture-title {
-  display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  flex: 1;
 }
 
 .lecture-list-container .lecture-title h5 {
   color: #1e293b;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  margin: 0;
+  margin: 0 0 4px 0;
 }
 
 .lecture-list-container .lecture-date {
-  color: #64748b;
-  font-size: 14px;
+  color: #6b7280;
+  font-size: 12px;
 }
 
-.lecture-list-container .lecture-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.lecture-list-container .status {
-  padding: 2px 8px;
+.lecture-list-container .lecture-status .status {
+  padding: 4px 8px;
   border-radius: 12px;
   font-size: 11px;
-  font-weight: 500;
-  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-.lecture-list-container .status.completed {
+.lecture-list-container .lecture-status .status.completed {
   background: #dcfce7;
   color: #166534;
 }
 
-.lecture-list-container .status.ongoing {
+.lecture-list-container .lecture-status .status.ongoing {
   background: #dbeafe;
   color: #2563eb;
 }
 
-.lecture-list-container .status.scheduled {
+.lecture-list-container .lecture-status .status.scheduled {
   background: #fef3c7;
   color: #d97706;
 }
@@ -222,13 +159,14 @@
 
 /* 버튼 스타일 */
 .lecture-list-container .btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
   font-weight: 500;
+  border: none;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  min-width: 80px;
 }
 
 .lecture-list-container .btn-edit {
@@ -249,47 +187,36 @@
   background: #dc2626;
 }
 
-.lecture-list-container .edit-btn,
-.lecture-list-container .delete-btn,
-.lecture-list-container .question-btn {
-  padding: 6px 12px;
+.lecture-list-container .add-round-btn {
+  background: #10b981;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
   border: none;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
   cursor: pointer;
   transition: background 0.2s ease;
 }
 
-.lecture-list-container .edit-btn {
-  background: #3b82f6;
-  color: white;
+.lecture-list-container .add-round-btn:hover {
+  background: #059669;
 }
 
-.lecture-list-container .edit-btn:hover {
-  background: #2563eb;
+/* 로딩 및 에러 메시지 */
+.lecture-list-container .loading-message,
+.lecture-list-container .error-message {
+  padding: 40px 32px;
+  text-align: center;
+  color: #64748b;
+  font-size: 16px;
 }
 
-.lecture-list-container .delete-btn {
-  background: #ef4444;
-  color: white;
+.lecture-list-container .error-message {
+  color: #ef4444;
 }
 
-.lecture-list-container .delete-btn:hover {
-  background: #dc2626;
-}
-
-
-.lecture-list-container .question-btn {
-  background: #f59e0b;
-  color: white;
-}
-
-.lecture-list-container .question-btn:hover {
-  background: #d97706;
-}
-
-
+/* 애니메이션 */
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -301,28 +228,21 @@
   }
 }
 
+/* 반응형 디자인 */
 @media (max-width: 768px) {
   .lecture-list-container .lecture-list-header {
-    padding: 20px 24px;
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
+    padding: 16px 20px;
   }
 
   .lecture-list-container .classroom-header {
-    padding: 16px 24px;
+    padding: 16px 20px;
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
 
-  .lecture-list-container .classroom-actions {
-    width: 100%;
-    justify-content: flex-end;
-  }
-
   .lecture-list-container .lectures-section {
-    padding: 16px 24px;
+    padding: 16px 20px;
   }
 
   .lecture-list-container .lecture-item {
@@ -331,9 +251,13 @@
     gap: 12px;
   }
 
+  .lecture-list-container .lecture-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .lecture-list-container .lecture-actions {
     width: 100%;
     justify-content: flex-end;
   }
-
 }

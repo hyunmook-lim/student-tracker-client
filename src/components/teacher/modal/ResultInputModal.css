@@ -126,32 +126,14 @@
   overflow: hidden;
 }
 
-.student-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  transition: background-color 0.3s ease;
-}
-
 .student-card.completed {
   border-color: #10b981;
   background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
 }
 
-.student-card.completed::before {
-  background: linear-gradient(90deg, #10b981, #059669);
-}
-
 .student-card.incomplete {
   border-color: #ef4444;
   background: linear-gradient(135deg, #fef2f2 0%, #fef7f7 100%);
-}
-
-.student-card.incomplete::before {
-  background: linear-gradient(90deg, #ef4444, #dc2626);
 }
 
 .student-card:hover {
@@ -380,4 +362,94 @@
   .student-card-header {
     margin-bottom: 12px;
   }
+}
+
+/* 숙제 섹션 스타일 */
+.homework-section {
+  margin: 32px 0;
+  padding: 24px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.homework-section h4 {
+  margin: 0 0 20px 0;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.homework-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.homework-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.homework-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.homework-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.homework-input::placeholder {
+  color: #9ca3af;
+}
+
+.homework-remove-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.homework-remove-btn:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+
+.homework-add-btn {
+  padding: 12px 20px;
+  border: 2px dashed #d1d5db;
+  background-color: #fff;
+  color: #6b7280;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.homework-add-btn:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+  color: #3b82f6;
 }

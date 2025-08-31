@@ -8,12 +8,12 @@
 }
 
 .classroom-list-container .classroom-list-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 24px 32px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .classroom-list-container .classroom-list-header h2 {
@@ -24,22 +24,19 @@
 }
 
 .classroom-list-container .add-classroom-btn {
-  background: #10b981;
+  background: #3b82f6;
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 10px 20px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .classroom-list-container .add-classroom-btn:hover {
-  background: #059669;
+  background: #2563eb;
 }
 
 .classroom-list-container .classroom-grid {
@@ -80,136 +77,33 @@
   margin: 0 0 4px 0;
 }
 
-.classroom-list-container .student-count {
+.classroom-list-container .classroom-info span {
   color: #3b82f6;
   font-size: 12px;
   font-weight: 500;
 }
 
-/* 수정 폼 스타일 */
-.classroom-list-container .edit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-}
-
-.classroom-list-container .edit-input,
-.classroom-list-container .edit-textarea {
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 14px;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.classroom-list-container .edit-input:focus,
-.classroom-list-container .edit-textarea:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.classroom-list-container .edit-input {
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.classroom-list-container .edit-textarea {
-  resize: vertical;
-  min-height: 60px;
-  font-size: 14px;
-}
-
-/* 액션 버튼 스타일 */
 .classroom-list-container .classroom-actions {
   display: flex;
-  align-items: center;
   gap: 8px;
 }
 
-.classroom-list-container .action-buttons {
-  display: flex;
-  gap: 8px;
-}
-
-.classroom-list-container .edit-btn,
-.classroom-list-container .delete-btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.classroom-list-container .edit-btn {
-  background: #3b82f6;
-  color: white;
-}
-
-.classroom-list-container .edit-btn:hover {
-  background: #2563eb;
-}
-
-.classroom-list-container .delete-btn {
-  background: #ef4444;
-  color: white;
-}
-
-.classroom-list-container .delete-btn:hover {
-  background: #dc2626;
-}
-
-/* 수정 모드 액션 버튼 */
-.classroom-list-container .edit-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.classroom-list-container .edit-actions .save-btn,
-.classroom-list-container .edit-actions .cancel-btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.classroom-list-container .edit-actions .save-btn {
-  background: #3b82f6;
-  color: white;
-}
-
-.classroom-list-container .edit-actions .save-btn:hover {
-  background: #2563eb;
-}
-
-.classroom-list-container .edit-actions .cancel-btn {
-  background: #6b7280;
-  color: white;
-}
-
-.classroom-list-container .edit-actions .cancel-btn:hover {
-  background: #4b5563;
-}
-
+/* 학생 섹션 스타일 */
 .classroom-list-container .students-section {
   background: #f8fafc;
   padding: 20px 32px;
   animation: slideDown 0.3s ease;
 }
 
+.classroom-list-container .students-header {
+  margin-bottom: 16px;
+}
+
 .classroom-list-container .students-header h4 {
   color: #1e293b;
   font-size: 16px;
   font-weight: 600;
-  margin: 0 0 16px 0;
+  margin: 0;
 }
 
 .classroom-list-container .students-list {
@@ -222,7 +116,7 @@
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
-  padding: 16px;
+  padding: 16px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -230,38 +124,123 @@
 }
 
 .classroom-list-container .student-item:hover {
-  border-color: #3b82f6;
-  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-color: #cbd5e1;
 }
 
 .classroom-list-container .student-info {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 16px;
   flex: 1;
 }
 
 .classroom-list-container .student-name {
   color: #1e293b;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
 }
 
 .classroom-list-container .student-status {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  gap: 8px;
 }
 
-/* 학생 상태 태그 스타일 */
+/* 버튼 스타일 */
+.classroom-list-container .btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.classroom-list-container .edit-btn,
+.classroom-list-container .delete-btn,
+.classroom-list-container .approve-btn,
+.classroom-list-container .reject-btn,
+.classroom-list-container .save-btn,
+.classroom-list-container .cancel-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 60px;
+}
+
+.classroom-list-container .edit-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+.classroom-list-container .edit-btn:hover {
+  background: #2563eb;
+  transform: translateY(-1px);
+}
+
+.classroom-list-container .delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.classroom-list-container .delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.classroom-list-container .approve-btn {
+  background: #10b981;
+  color: white;
+}
+
+.classroom-list-container .approve-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.classroom-list-container .reject-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.classroom-list-container .reject-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.classroom-list-container .save-btn {
+  background: #10b981;
+  color: white;
+}
+
+.classroom-list-container .save-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.classroom-list-container .cancel-btn {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.classroom-list-container .cancel-btn:hover {
+  background: #e5e7eb;
+  transform: translateY(-1px);
+}
+
+/* 상태 태그 스타일 */
 .classroom-list-container .status-tag {
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
   font-weight: 600;
-  text-align: center;
-  display: inline-block;
-  margin-top: 8px;
+  text-transform: uppercase;
 }
 
 .classroom-list-container .status-tag.approved {
@@ -270,8 +249,8 @@
 }
 
 .classroom-list-container .status-tag.rejected {
-  background: #fee2e2;
-  color: #991b1b;
+  background: #fef2f2;
+  color: #dc2626;
 }
 
 .classroom-list-container .status-tag.unknown {
@@ -279,67 +258,90 @@
   color: #6b7280;
 }
 
-/* 학생 액션 버튼 스타일 */
-.classroom-list-container .student-actions {
+/* 수정 폼 스타일 */
+.classroom-list-container .edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.classroom-list-container .edit-input {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.classroom-list-container .edit-textarea {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 60px;
+}
+
+.classroom-list-container .edit-actions {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
 }
 
-.classroom-list-container .student-actions .approve-btn,
-.classroom-list-container .student-actions .reject-btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s ease;
+.classroom-list-container .action-buttons {
+  display: flex;
+  gap: 8px;
 }
 
-.classroom-list-container .student-actions .approve-btn {
-  background: #10b981;
-  color: white;
+/* 로딩 및 에러 메시지 */
+.classroom-list-container .loading-message,
+.classroom-list-container .error-message {
+  padding: 40px 32px;
+  text-align: center;
+  color: #64748b;
+  font-size: 16px;
 }
 
-.classroom-list-container .student-actions .approve-btn:hover {
-  background: #059669;
+.classroom-list-container .error-message {
+  color: #ef4444;
 }
 
-.classroom-list-container .student-actions .reject-btn {
-  background: #ef4444;
-  color: white;
+.classroom-list-container .no-students {
+  padding: 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
 }
 
-.classroom-list-container .student-actions .reject-btn:hover {
-  background: #dc2626;
-}
-
+/* 애니메이션 */
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    max-height: 0;
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    max-height: 1000px;
   }
 }
 
+/* 반응형 디자인 */
 @media (max-width: 768px) {
   .classroom-list-container .classroom-list-header {
-    padding: 20px 24px;
+    padding: 16px 20px;
     flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
+    gap: 12px;
+    align-items: flex-start;
   }
 
   .classroom-list-container .classroom-header {
-    padding: 16px 24px;
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .classroom-list-container .students-section {
-    padding: 16px 24px;
+    padding: 16px 20px;
   }
 
   .classroom-list-container .student-item {
@@ -348,19 +350,13 @@
     gap: 12px;
   }
 
-  .classroom-list-container .student-status {
+  .classroom-list-container .student-info {
     width: 100%;
     justify-content: space-between;
   }
 
-  .classroom-list-container .classroom-actions {
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .classroom-list-container .action-buttons,
-  .classroom-list-container .edit-actions {
-    flex-direction: column;
-    gap: 6px;
+  .classroom-list-container .student-status {
+    width: 100%;
+    justify-content: flex-end;
   }
 }

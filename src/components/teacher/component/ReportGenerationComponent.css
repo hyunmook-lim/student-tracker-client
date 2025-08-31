@@ -1,0 +1,290 @@
+/* ReportGeneration 컴포넌트 스타일 */
+.report-generation-container {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.report-generation-container .report-generation-header {
+  padding: 24px 32px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.report-generation-container .report-generation-header h2 {
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.report-generation-container .classroom-list {
+  padding: 0;
+}
+
+.report-generation-container .classroom-item {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.report-generation-container .classroom-item:last-child {
+  border-bottom: none;
+}
+
+.report-generation-container .classroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.report-generation-container .classroom-header:hover {
+  background: #f8fafc;
+}
+
+.report-generation-container .classroom-info h3 {
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.report-generation-container .classroom-info p {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+.report-generation-container .classroom-info span {
+  color: #3b82f6;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.report-generation-container .classroom-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* 성적표 섹션 스타일 */
+.report-generation-container .reports-section {
+  background: #f8fafc;
+  padding: 20px 32px;
+  animation: slideDown 0.3s ease;
+}
+
+.report-generation-container .reports-header {
+  margin-bottom: 16px;
+}
+
+.report-generation-container .reports-header h4 {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.report-generation-container .reports-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.report-generation-container .report-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.report-generation-container .report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: #3b82f6;
+}
+
+
+.report-generation-container .report-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.report-generation-container .report-title {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+  margin-right: 12px;
+}
+
+.report-generation-container .report-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.report-generation-container .report-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.report-generation-container .report-description {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.report-generation-container .report-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.report-generation-container .report-meta span {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+  background: #f8fafc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* 버튼 스타일 */
+.report-generation-container .btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.report-generation-container .btn-generate {
+  background: #10b981;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.report-generation-container .btn-generate:hover {
+  background: #059669;
+}
+
+.report-generation-container .btn-delete {
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.report-generation-container .btn-delete:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+/* 로딩 및 에러 메시지 */
+.report-generation-container .loading-message,
+.report-generation-container .error-message {
+  padding: 40px 32px;
+  text-align: center;
+  color: #64748b;
+  font-size: 16px;
+}
+
+.report-generation-container .error-message {
+  color: #ef4444;
+}
+
+.report-generation-container .loading-reports {
+  padding: 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.report-generation-container .empty-message {
+  padding: 20px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.report-generation-container .empty-message small {
+  display: block;
+  margin-top: 8px;
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+/* 애니메이션 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .report-generation-container .report-generation-header {
+    padding: 16px 20px;
+  }
+
+  .report-generation-container .classroom-header {
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .report-generation-container .reports-section {
+    padding: 16px 20px;
+  }
+
+  .report-generation-container .report-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .report-generation-container .report-meta {
+    gap: 8px;
+  }
+
+  .report-generation-container .reports-list {
+    grid-template-columns: 1fr;
+  }
+}

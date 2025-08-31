@@ -1,15 +1,21 @@
 import React from 'react';
 import './StudentHome.css';
 import { useAuthStore, useUIStore } from '../store';
-import DashboardComponent from '../components/student/component/DashboardComponent';
 import LectureInfoComponent from '../components/student/component/LectureInfoComponent';
 import GradeReportComponent from '../components/student/component/GradeReportComponent';
 import AttendanceCheckComponent from '../components/student/component/AttendanceCheckComponent';
 import WrongPatternComponent from '../components/student/component/WrongPatternComponent';
 
 function StudentHome() {
-  const { logout } = useAuthStore();
+  const { logout, currentUser } = useAuthStore();
   const { currentView, setCurrentView } = useUIStore();
+
+  // 학생 페이지 진입 시 기본 뷰 설정
+  React.useEffect(() => {
+    if (currentView === 'dashboard' || !currentView) {
+      setCurrentView('lecture-info');
+    }
+  }, [currentView, setCurrentView]);
 
   const handleLogout = () => {
     logout();
@@ -284,16 +290,7 @@ function StudentHome() {
       case 'wrong-pattern':
         return <WrongPatternComponent />;
       default:
-        return (
-          <div className='student-dashboard'>
-            <div className='welcome-section'>
-              <h2 className='welcome-title'>내 정보</h2>
-              <p className='welcome-message'>
-                내 성적과 출석 현황을 확인할 수 있습니다.
-              </p>
-            </div>
-          </div>
-        );
+        return <LectureInfoComponent studentData={studentData} />;
     }
   };
 
@@ -306,19 +303,15 @@ function StudentHome() {
         </div>
 
         <div className='user-info'>
-          <span className='user-type'>학생 모드 - {studentData.name}</span>
+          <span className='user-type'>
+            학생 모드 - {currentUser?.name || '학생'}
+          </span>
           <button className='logout-btn' onClick={handleLogout}>
             로그아웃
           </button>
         </div>
 
         <nav className='sidebar-nav'>
-          <button
-            className={`nav-btn ${currentView === 'dashboard' ? 'active' : ''}`}
-            onClick={() => setCurrentView('dashboard')}
-          >
-            대시보드
-          </button>
           <button
             className={`nav-btn ${currentView === 'lecture-info' ? 'active' : ''}`}
             onClick={() => setCurrentView('lecture-info')}
@@ -347,13 +340,7 @@ function StudentHome() {
       </aside>
 
       {/* 메인 콘텐츠 */}
-      <main className='main-content'>
-        {currentView === 'dashboard' && (
-          <DashboardComponent studentData={studentData} />
-        )}
-
-        {currentView !== 'dashboard' && renderContent()}
-      </main>
+      <main className='main-content'>{renderContent()}</main>
     </div>
   );
 }

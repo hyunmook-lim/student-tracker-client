@@ -33,11 +33,12 @@ function ResultViewModal({ isOpen, onClose, selectedLecture }) {
         setError(null);
 
         // 학생 목록, 문제 목록, 학생 결과를 동시에 가져오기
-        const [studentsResult, questionsResult, resultsResult] = await Promise.all([
-          getClassroomStudents(classroomId),
-          getQuestionsByLecture(lectureId),
-          getStudentLectureResultsByLecture(lectureId),
-        ]);
+        const [studentsResult, questionsResult, resultsResult] =
+          await Promise.all([
+            getClassroomStudents(classroomId),
+            getQuestionsByLecture(lectureId),
+            getStudentLectureResultsByLecture(lectureId),
+          ]);
 
         if (!studentsResult.success) {
           throw new Error(studentsResult.error);
@@ -49,7 +50,11 @@ function ResultViewModal({ isOpen, onClose, selectedLecture }) {
 
         console.log('반 학생 목록 조회 성공:', studentsResult.data);
         console.log('강의 문제 목록 조회 성공:', questionsResult.data);
-        console.log('학생 결과 조회 성공:', resultsResult.success, resultsResult.data);
+        console.log(
+          '학생 결과 조회 성공:',
+          resultsResult.success,
+          resultsResult.data
+        );
 
         // 승인된 학생들만 필터링
         const approvedStudents = studentsResult.data.filter(
@@ -65,7 +70,7 @@ function ResultViewModal({ isOpen, onClose, selectedLecture }) {
           // 서버에서 받은 결과 데이터를 가공
           resultsResult.data.forEach(result => {
             const studentId = result.studentId;
-            
+
             // 문제별 답안 정리
             const answers = {};
             if (result.questionResults) {
@@ -88,7 +93,7 @@ function ResultViewModal({ isOpen, onClose, selectedLecture }) {
         approvedStudents.forEach(studentData => {
           const student = studentData.student || studentData;
           const studentId = student.uid || student.studentId || studentData.uid;
-          
+
           if (!actualResults[studentId]) {
             actualResults[studentId] = {
               attendance: '출석',
@@ -177,7 +182,8 @@ function ResultViewModal({ isOpen, onClose, selectedLecture }) {
                 <div className='student-cards-grid'>
                   {students.map(studentData => {
                     const student = studentData.student || studentData;
-                    const studentId = student.uid || student.studentId || studentData.uid;
+                    const studentId =
+                      student.uid || student.studentId || studentData.uid;
                     const isCompleted = isStudentResultCompleted(studentData);
 
                     return (
@@ -230,7 +236,8 @@ function ResultViewModal({ isOpen, onClose, selectedLecture }) {
           selectedStudent
             ? (() => {
                 const student = selectedStudent.student || selectedStudent;
-                const studentId = student.uid || student.studentId || selectedStudent.uid;
+                const studentId =
+                  student.uid || student.studentId || selectedStudent.uid;
                 return studentResults[studentId];
               })()
             : null

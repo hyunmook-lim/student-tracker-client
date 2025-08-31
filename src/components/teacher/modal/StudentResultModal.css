@@ -268,7 +268,7 @@
   text-align: center;
 }
 
-.question-row {
+.student-result-modal-overlay .question-row {
   display: grid;
   grid-template-columns: 80px 80px 80px 100px 1fr;
   gap: 16px;
@@ -279,23 +279,23 @@
   transition: background-color 0.2s ease;
 }
 
-.question-row:hover {
+.student-result-modal-overlay .question-row:hover {
   background-color: #f8fafc;
 }
 
-.question-row:last-child {
+.student-result-modal-overlay .question-row:last-child {
   border-bottom: none;
   border-radius: 0 0 6px 6px;
 }
 
-.question-number {
+.student-result-modal-overlay .question-number {
   font-weight: 600;
   color: #007bff;
   font-size: 14px;
   text-align: center;
 }
 
-.question-difficulty {
+.student-result-modal-overlay .question-difficulty {
   background-color: #fff3cd;
   color: #856404;
   padding: 4px 8px;
@@ -306,7 +306,7 @@
   text-align: center;
 }
 
-.question-score {
+.student-result-modal-overlay .question-score {
   background-color: #f8f9fa;
   color: #495057;
   padding: 4px 8px;
@@ -317,7 +317,7 @@
   text-align: center;
 }
 
-.question-answer {
+.student-result-modal-overlay .question-answer {
   background-color: #d4edda;
   color: #155724;
   padding: 4px 8px;
@@ -451,7 +451,7 @@
   }
 
   .questions-header,
-  .question-row {
+  .student-result-modal-overlay .question-row {
     grid-template-columns: 1fr;
     gap: 8px;
   }
@@ -461,10 +461,10 @@
     font-size: 12px;
   }
 
-  .question-number,
-  .question-difficulty,
-  .question-score,
-  .question-answer {
+  .student-result-modal-overlay .question-number,
+  .student-result-modal-overlay .question-difficulty,
+  .student-result-modal-overlay .question-score,
+  .student-result-modal-overlay .question-answer {
     text-align: left;
     font-size: 12px;
   }
@@ -482,4 +482,78 @@
   .student-result-btn {
     width: 100%;
   }
+}
+
+/* 숙제 컨테이너 스타일 */
+.homework-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.homework-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.homework-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.homework-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.homework-input::placeholder {
+  color: #9ca3af;
+}
+
+.homework-remove-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background-color: #ef4444;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.homework-remove-btn:hover {
+  background-color: #dc2626;
+  transform: scale(1.05);
+}
+
+.homework-add-btn {
+  padding: 10px 16px;
+  border: 2px dashed #d1d5db;
+  background-color: #f8fafc;
+  color: #6b7280;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.homework-add-btn:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+  color: #3b82f6;
 }
