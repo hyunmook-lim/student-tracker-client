@@ -1,15 +1,13 @@
 // 교사 관련 API 함수들
 import { createApiUrl } from '../utils/apiConfig';
 
-const API_BASE_URL = '/api';
-
 // 교사 회원가입 API
 export const signupTeacher = async teacherData => {
   try {
     console.log('API 요청 데이터:', teacherData);
-    console.log('API 엔드포인트:', `${API_BASE_URL}/teachers`);
+    console.log('API 엔드포인트:', '/api/teachers');
 
-    const response = await fetch(createApiUrl(`${API_BASE_URL}/teachers`), {
+    const response = await fetch(createApiUrl('/api/teachers'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,19 +45,16 @@ export const signupTeacher = async teacherData => {
 export const loginTeacher = async loginData => {
   try {
     console.log('로그인 요청 데이터:', loginData);
-    console.log('로그인 엔드포인트:', `${API_BASE_URL}/teachers/login`);
+    console.log('로그인 엔드포인트:', '/api/teachers/login');
 
-    const response = await fetch(
-      createApiUrl(`${API_BASE_URL}/teachers/login`),
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      }
-    );
+    const response = await fetch(createApiUrl('/api/teachers/login'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    });
 
     console.log('로그인 응답 상태:', response.status);
 
