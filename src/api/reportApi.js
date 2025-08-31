@@ -1,9 +1,10 @@
 // 성적표 관련 API 함수들
+import { createApiUrl } from '../utils/apiConfig';
 
 // 성적표 생성 (백엔드 CreateReportRequest 구조에 맞춤)
 export const createReport = async reportData => {
   try {
-    const response = await fetch('/api/reports', {
+    const response = await fetch(createApiUrl('/api/reports'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,12 +43,15 @@ export const createReport = async reportData => {
 // 특정 교실의 성적표 목록 조회
 export const getReportsByClassroom = async classroomId => {
   try {
-    const response = await fetch(`/api/reports/classrooms/${classroomId}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      createApiUrl(`/api/reports/classrooms/${classroomId}`),
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     const data = await response.json();
 
@@ -74,7 +78,7 @@ export const getReportsByClassroom = async classroomId => {
 // 특정 성적표 상세 조회
 export const getReportById = async reportId => {
   try {
-    const response = await fetch(`/api/reports/${reportId}`, {
+    const response = await fetch(createApiUrl(`/api/reports/${reportId}`), {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
 // 문제 관련 API 함수들
+import { createApiUrl } from '../utils/apiConfig';
 
 const API_BASE_URL = '/api';
 
@@ -7,14 +8,17 @@ export const createQuestionsBulk = async questionsData => {
   try {
     console.log('문제 일괄 생성 요청 데이터:', questionsData);
 
-    const response = await fetch(`${API_BASE_URL}/questions/bulk`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(questionsData),
-    });
+    const response = await fetch(
+      createApiUrl(`${API_BASE_URL}/questions/bulk`),
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(questionsData),
+      }
+    );
 
     console.log('문제 일괄 생성 응답 상태:', response.status);
 
@@ -41,7 +45,7 @@ export const getQuestionsByLecture = async lectureId => {
     console.log('강의 문제 목록 가져오기 요청:', lectureId);
 
     const response = await fetch(
-      `${API_BASE_URL}/questions/lecture/${lectureId}`,
+      createApiUrl(`${API_BASE_URL}/questions/lecture/${lectureId}`),
       {
         method: 'GET',
         headers: {

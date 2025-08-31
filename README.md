@@ -15,7 +15,7 @@ VITE_API_BASE_URL=http://localhost:8080
 
 Vercel 대시보드에서 환경 변수를 설정하세요:
 
-- `VITE_API_BASE_URL`: AWS Elastic Beanstalk 백엔드 URL (예: `https://your-app.elasticbeanstalk.com`)
+- `VITE_API_BASE_URL`: AWS Elastic Beanstalk 백엔드 URL (기본값: `http://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com`)
 
 ## 설치 및 실행
 

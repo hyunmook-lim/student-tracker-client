@@ -15,7 +15,8 @@ export default defineConfig({
   },
   define: {
     'process.env.VITE_API_BASE_URL': JSON.stringify(
-      process.env.VITE_API_BASE_URL
+      process.env.VITE_API_BASE_URL ||
+        'http://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com'
     ),
   },
 });

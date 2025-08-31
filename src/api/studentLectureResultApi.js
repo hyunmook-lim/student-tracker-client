@@ -1,3 +1,5 @@
+import { createApiUrl } from '../utils/apiConfig';
+
 const API_BASE_URL = '/api';
 
 export const createStudentLectureResult = async requestData => {
@@ -8,14 +10,17 @@ export const createStudentLectureResult = async requestData => {
     const token = localStorage.getItem('token');
     console.log('토큰 확인:', token ? '토큰 존재' : '토큰 없음');
 
-    const response = await fetch(`${API_BASE_URL}/student-lecture-results`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-      body: JSON.stringify(requestData),
-    });
+    const response = await fetch(
+      createApiUrl(`${API_BASE_URL}/student-lecture-results`),
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+        body: JSON.stringify(requestData),
+      }
+    );
 
     console.log('응답 상태:', response.status, response.statusText);
     console.log('응답 헤더:', [...response.headers.entries()]);
@@ -67,7 +72,9 @@ export const getStudentLectureResultsByLecture = async lectureId => {
     console.log('토큰 확인:', token ? '토큰 존재' : '토큰 없음');
 
     const response = await fetch(
-      `${API_BASE_URL}/student-lecture-results/lectures/${lectureId}`,
+      createApiUrl(
+        `${API_BASE_URL}/student-lecture-results/lectures/${lectureId}`
+      ),
       {
         method: 'GET',
         headers: {

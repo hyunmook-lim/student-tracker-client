@@ -1,4 +1,5 @@
 // 교실(반) 관련 API 함수들
+import { createApiUrl } from '../utils/apiConfig';
 
 const API_BASE_URL = '/api';
 
@@ -11,7 +12,7 @@ export const getAllClassrooms = async () => {
       `${API_BASE_URL}/classrooms`
     );
 
-    const response = await fetch(`${API_BASE_URL}/classrooms`, {
+    const response = await fetch(createApiUrl(`${API_BASE_URL}/classrooms`), {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -48,7 +49,7 @@ export const createClassroom = async classroomData => {
     console.log('반 추가 요청 데이터:', classroomData);
     console.log('반 추가 엔드포인트:', `${API_BASE_URL}/classrooms`);
 
-    const response = await fetch(`${API_BASE_URL}/classrooms`, {
+    const response = await fetch(createApiUrl(`${API_BASE_URL}/classrooms`), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -90,14 +91,17 @@ export const updateClassroom = async (classroomId, classroomData) => {
       `${API_BASE_URL}/classrooms/${classroomId}`
     );
 
-    const response = await fetch(`${API_BASE_URL}/classrooms/${classroomId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(classroomData),
-    });
+    const response = await fetch(
+      createApiUrl(`${API_BASE_URL}/classrooms/${classroomId}`),
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(classroomData),
+      }
+    );
 
     console.log('반 수정 응답 상태:', response.status);
 

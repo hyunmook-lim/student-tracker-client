@@ -1,4 +1,5 @@
 // 강의 관련 API 함수들
+import { createApiUrl } from '../utils/apiConfig';
 
 const API_BASE_URL = '/api';
 
@@ -15,7 +16,7 @@ export const createLecture = async lectureData => {
 
     console.log('강의 생성 요청 데이터:', formattedData);
 
-    const response = await fetch(`${API_BASE_URL}/lectures`, {
+    const response = await fetch(createApiUrl(`${API_BASE_URL}/lectures`), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ export const getLecturesByClassroom = async classroomId => {
     console.log('강의 목록 조회 요청 - 반 ID:', classroomId);
 
     const response = await fetch(
-      `${API_BASE_URL}/lectures/classroom/${classroomId}`,
+      createApiUrl(`${API_BASE_URL}/lectures/classroom/${classroomId}`),
       {
         method: 'GET',
         headers: {
@@ -83,13 +84,16 @@ export const deleteLecture = async lectureId => {
   try {
     console.log('강의 삭제 요청 - 강의 ID:', lectureId);
 
-    const response = await fetch(`${API_BASE_URL}/lectures/${lectureId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    });
+    const response = await fetch(
+      createApiUrl(`${API_BASE_URL}/lectures/${lectureId}`),
+      {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    );
 
     console.log('강의 삭제 응답 상태:', response.status);
 

@@ -1,4 +1,5 @@
 // 학생 수업 참여 관련 API 함수들
+import { createApiUrl } from '../utils/apiConfig';
 
 const API_BASE_URL = '/api';
 
@@ -12,7 +13,9 @@ export const enrollStudentToClassroom = async (studentId, classroomId) => {
     );
 
     const response = await fetch(
-      `${API_BASE_URL}/student-classrooms/${studentId}/classrooms/${classroomId}`,
+      createApiUrl(
+        `${API_BASE_URL}/student-classrooms/${studentId}/classrooms/${classroomId}`
+      ),
       {
         method: 'POST',
         headers: {
@@ -56,7 +59,9 @@ export const getStudentClassrooms = async studentId => {
     );
 
     const response = await fetch(
-      `${API_BASE_URL}/student-classrooms/students/${studentId}/classrooms`,
+      createApiUrl(
+        `${API_BASE_URL}/student-classrooms/students/${studentId}/classrooms`
+      ),
       {
         method: 'GET',
         headers: {

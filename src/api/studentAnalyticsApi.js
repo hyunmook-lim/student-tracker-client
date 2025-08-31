@@ -1,4 +1,5 @@
 // 학생 분석 관련 API 함수들
+import { createApiUrl } from '../utils/apiConfig';
 
 const API_BASE_URL = '/api';
 
@@ -9,7 +10,7 @@ export const getStudentAnalytics = async studentId => {
     const endpoint = `${API_BASE_URL}/students/${studentId}/analytics`;
     console.log('학생 오답 패턴 분석 엔드포인트:', endpoint);
 
-    const response = await fetch(endpoint, {
+    const response = await fetch(createApiUrl(endpoint), {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -47,7 +48,7 @@ export const getClassroomStudentAnalytics = async (studentId, classroomId) => {
     const endpoint = `${API_BASE_URL}/students/${studentId}/classrooms/${classroomId}/analytics`;
     console.log('반별 학생 오답 패턴 분석 엔드포인트:', endpoint);
 
-    const response = await fetch(endpoint, {
+    const response = await fetch(createApiUrl(endpoint), {
       method: 'GET',
       headers: {
         Accept: 'application/json',
