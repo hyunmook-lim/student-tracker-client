@@ -98,7 +98,7 @@ const useAuthStore = create((set, get) => ({
             type: 'student',
             id: 1, // 테스트용 학생 ID - 백엔드에 실제 존재하는 학생 ID로 변경 필요
             name: '김학생',
-            loginId: 'student'
+            loginId: 'student',
           },
         });
         return true;

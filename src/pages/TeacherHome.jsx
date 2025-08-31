@@ -80,9 +80,7 @@ function TeacherHome() {
       </aside>
 
       {/* 메인 콘텐츠 */}
-      <main className='main-content'>
-        {renderContent()}
-      </main>
+      <main className='main-content'>{renderContent()}</main>
     </div>
   );
 }
