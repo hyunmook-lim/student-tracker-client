@@ -1,4 +1,5 @@
 // 교사 관련 API 함수들
+import { createApiUrl } from '../utils/apiConfig';
 
 const API_BASE_URL = '/api';
 
@@ -8,7 +9,7 @@ export const signupTeacher = async teacherData => {
     console.log('API 요청 데이터:', teacherData);
     console.log('API 엔드포인트:', `${API_BASE_URL}/teachers`);
 
-    const response = await fetch(`${API_BASE_URL}/teachers`, {
+    const response = await fetch(createApiUrl(`${API_BASE_URL}/teachers`), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -48,14 +49,17 @@ export const loginTeacher = async loginData => {
     console.log('로그인 요청 데이터:', loginData);
     console.log('로그인 엔드포인트:', `${API_BASE_URL}/teachers/login`);
 
-    const response = await fetch(`${API_BASE_URL}/teachers/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(loginData),
-    });
+    const response = await fetch(
+      createApiUrl(`${API_BASE_URL}/teachers/login`),
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(loginData),
+      }
+    );
 
     console.log('로그인 응답 상태:', response.status);
 

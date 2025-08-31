@@ -117,25 +117,27 @@ function WrongPatternModal({ classData, isOpen, onClose }) {
     const originalOverflow = modal.style.overflow;
     const originalHeight = modal.style.height;
     const originalMaxHeight = modal.style.maxHeight;
-    
+
     // 스크롤 제거하고 자동 높이로 설정
     modal.style.overflow = 'visible';
     modal.style.height = 'auto';
     modal.style.maxHeight = 'none';
-    
+
     // 하위 스크롤 컨테이너들도 처리
-    const scrollContainers = modal.querySelectorAll('.heatmap-container, .assignment-stats, .top3-cards');
+    const scrollContainers = modal.querySelectorAll(
+      '.heatmap-container, .assignment-stats, .top3-cards'
+    );
     const originalStyles = [];
-    
+
     scrollContainers.forEach((container, index) => {
       originalStyles[index] = {
         overflow: container.style.overflow,
-        maxHeight: container.style.maxHeight
+        maxHeight: container.style.maxHeight,
       };
       container.style.overflow = 'visible';
       container.style.maxHeight = 'none';
     });
-    
+
     // 잠시 대기 후 PDF 생성
     setTimeout(async () => {
       try {
@@ -148,7 +150,7 @@ function WrongPatternModal({ classData, isOpen, onClose }) {
         modal.style.overflow = originalOverflow;
         modal.style.height = originalHeight;
         modal.style.maxHeight = originalMaxHeight;
-        
+
         scrollContainers.forEach((container, index) => {
           container.style.overflow = originalStyles[index].overflow;
           container.style.maxHeight = originalStyles[index].maxHeight;

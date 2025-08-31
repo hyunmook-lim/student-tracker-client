@@ -1,12 +1,52 @@
-# React + Vite
+# Student Tracker Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+학생 성적 관리 시스템의 프론트엔드 애플리케이션입니다.
 
-Currently, two official plugins are available:
+## 환경 변수 설정
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 개발 환경
 
-## Expanding the ESLint configuration
+```bash
+# .env.local 파일 생성
+VITE_API_BASE_URL=http://localhost:8080
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 프로덕션 환경 (Vercel)
+
+Vercel 대시보드에서 환경 변수를 설정하세요:
+
+- `VITE_API_BASE_URL`: AWS Elastic Beanstalk 백엔드 URL (예: `https://your-app.elasticbeanstalk.com`)
+
+## 설치 및 실행
+
+```bash
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
+npm run dev
+
+# 빌드
+npm run build
+
+# 빌드 미리보기
+npm run preview
+```
+
+## 배포
+
+### Vercel 배포
+
+```bash
+# Vercel CLI 설치
+npm install -g vercel
+
+# 배포
+vercel --prod
+```
+
+### 환경 변수 설정 후 배포
+
+1. Vercel 대시보드 → 프로젝트 → Settings → Environment Variables
+2. `VITE_API_BASE_URL` 추가: AWS EB 백엔드 URL
+3. 재배포
