@@ -16,8 +16,8 @@ export default async function handler(req, res) {
 
   const { method, url, body, headers } = req;
 
-  // API 경로에서 /api 부분 제거
-  const apiPath = url.replace('/api', '');
+  // API 경로 유지 (백엔드가 /api 경로를 요구함)
+  const apiPath = url;
   const targetUrl = `http://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com${apiPath}`;
 
   console.log(`Proxying ${method} request to: ${targetUrl}`);
