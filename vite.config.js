@@ -7,17 +7,14 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.VITE_API_BASE_URL || 'http://localhost:8080',
+        target:
+          'https://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com',
         changeOrigin: true,
-        secure: false,
+        secure: true,
       },
     },
   },
   define: {
-    'process.env.VITE_API_BASE_URL': JSON.stringify(
-      process.env.VITE_API_BASE_URL ||
-        'https://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com'
-    ),
     global: 'globalThis',
     'process.env': {},
   },

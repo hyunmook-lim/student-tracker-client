@@ -1,14 +1,7 @@
 // API 기본 URL 설정
 const getApiBaseUrl = () => {
-  // 프로덕션 환경에서는 환경 변수 사용
-  if (import.meta.env.PROD) {
-    return (
-      import.meta.env.VITE_API_BASE_URL ||
-      'https://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com'
-    );
-  }
-
-  // 개발 환경에서는 프록시 사용
+  // Vercel에서 배포된 환경에서는 프록시를 통해 API 호출
+  // vercel.json의 rewrites 설정을 통해 /api/* 요청이 백엔드로 프록시됨
   return '';
 };
 
