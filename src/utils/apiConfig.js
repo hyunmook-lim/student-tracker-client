@@ -27,7 +27,7 @@ export const apiRequest = async (endpoint, options = {}) => {
   const isVercelEnv =
     typeof window !== 'undefined' &&
     window.location.hostname.includes('vercel.app');
-  const finalUrl = isVercelEnv ? `/api${endpoint}` : url;
+  const finalUrl = isVercelEnv ? endpoint : url;
 
   const defaultOptions = {
     mode: 'cors',
