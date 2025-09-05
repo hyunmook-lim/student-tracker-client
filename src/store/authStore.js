@@ -57,6 +57,8 @@ const useAuthStore = create((set, get) => ({
           ...apiResult.data,
         };
         console.log('authStore login - currentUserData:', currentUserData);
+        console.log('authStore login - currentUserData.uid:', currentUserData.uid);
+        console.log('authStore login - currentUserData.loginId:', currentUserData.loginId);
 
         set({
           isLoggedIn: true,
@@ -79,6 +81,8 @@ const useAuthStore = create((set, get) => ({
           currentUser: {
             type: 'teacher',
             id: 'admin',
+            uid: 'admin', // 백엔드 API에서 요구하는 uid 필드
+            loginId: 'admin', // 백엔드 API에서 요구하는 loginId 필드
             name: '관리자',
           },
         });
@@ -97,6 +101,7 @@ const useAuthStore = create((set, get) => ({
           currentUser: {
             type: 'student',
             id: 1, // 테스트용 학생 ID - 백엔드에 실제 존재하는 학생 ID로 변경 필요
+            uid: 'student', // 백엔드 API에서 요구하는 uid 필드
             name: '김학생',
             loginId: 'student',
           },

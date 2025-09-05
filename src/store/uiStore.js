@@ -6,7 +6,7 @@ const useUIStore = create(set => ({
   selectedStudent: null,
   selectedClass: { grade: 1, class: 1 },
   isModalOpen: false,
-  modalType: null, // 'addStudent', 'editStudent', 'gradeInput', 'attendanceInput'
+  modalType: null, // 'addStudent', 'editStudent', 'gradeInput', 'attendanceInput', 'changePassword'
   isLoading: false,
   sidebarCollapsed: false,
 

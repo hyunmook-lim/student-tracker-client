@@ -5,10 +5,19 @@ import LectureInfoComponent from '../components/student/component/LectureInfoCom
 import GradeReportComponent from '../components/student/component/GradeReportComponent';
 import AttendanceCheckComponent from '../components/student/component/AttendanceCheckComponent';
 import WrongPatternComponent from '../components/student/component/WrongPatternComponent';
+import ChangePasswordModal from '../components/student/modal/ChangePasswordModal';
+import { changeStudentPassword } from '../api/studentApi';
 
 function StudentHome() {
   const { logout, currentUser } = useAuthStore();
-  const { currentView, setCurrentView } = useUIStore();
+  const {
+    currentView,
+    setCurrentView,
+    isModalOpen,
+    modalType,
+    openModal,
+    closeModal,
+  } = useUIStore();
 
   // 학생 페이지 진입 시 기본 뷰 설정
   React.useEffect(() => {
@@ -19,6 +28,34 @@ function StudentHome() {
 
   const handleLogout = () => {
     logout();
+  };
+
+  const handleChangePassword = async passwordData => {
+    try {
+      console.log('Current user:', currentUser);
+      console.log('Password data:', {
+        uid: currentUser?.uid,
+        loginId: currentUser?.loginId,
+        password: passwordData.password,
+        newPassword: passwordData.newPassword,
+      });
+      
+      const result = await changeStudentPassword({
+        uid: currentUser?.uid,
+        loginId: currentUser?.loginId,
+        password: passwordData.password,
+        newPassword: passwordData.newPassword,
+      });
+
+      if (result.success) {
+        alert('비밀번호가 성공적으로 변경되었습니다.');
+      } else {
+        alert(`비밀번호 변경에 실패했습니다: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('비밀번호 변경 오류:', error);
+      alert('비밀번호 변경 중 오류가 발생했습니다.');
+    }
   };
 
   // 학생 데이터 (실제로는 서버에서 가져올 데이터)
@@ -306,9 +343,17 @@ function StudentHome() {
           <span className='user-type'>
             학생 모드 - {currentUser?.name || '학생'}
           </span>
-          <button className='logout-btn' onClick={handleLogout}>
-            로그아웃
-          </button>
+          <div className='user-actions'>
+            <button
+              className='change-password-btn'
+              onClick={() => openModal('changePassword')}
+            >
+              비밀번호 변경
+            </button>
+            <button className='logout-btn' onClick={handleLogout}>
+              로그아웃
+            </button>
+          </div>
         </div>
 
         <nav className='sidebar-nav'>
@@ -341,6 +386,13 @@ function StudentHome() {
 
       {/* 메인 콘텐츠 */}
       <main className='main-content'>{renderContent()}</main>
+
+      {/* 비밀번호 변경 모달 */}
+      <ChangePasswordModal
+        isOpen={isModalOpen && modalType === 'changePassword'}
+        onClose={closeModal}
+        onChangePassword={handleChangePassword}
+      />
     </div>
   );
 }

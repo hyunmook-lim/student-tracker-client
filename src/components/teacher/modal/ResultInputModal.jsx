@@ -146,7 +146,7 @@ function ResultInputModal({ isOpen, onClose, selectedLecture, onSave }) {
     setHomework(prev => [...prev, '']);
   };
 
-  const removeHomeworkField = (index) => {
+  const removeHomeworkField = index => {
     if (homework.length > 1) {
       setHomework(prev => prev.filter((_, i) => i !== index));
     }
@@ -400,7 +400,9 @@ function ResultInputModal({ isOpen, onClose, selectedLecture, onSave }) {
                           className='homework-input'
                           placeholder={`숙제 ${index + 1} 입력...`}
                           value={homeworkItem}
-                          onChange={e => handleHomeworkChange(index, e.target.value)}
+                          onChange={e =>
+                            handleHomeworkChange(index, e.target.value)
+                          }
                         />
                         {homework.length > 1 && (
                           <button
