@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
   // API 경로 유지 (백엔드가 /api 경로를 요구함)
   const apiPath = url;
-  const targetUrl = `http://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com${apiPath}`;
+  const targetUrl = `http://student-tracker-new.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com${apiPath}`;
 
   console.log(`Proxying ${method} request to: ${targetUrl}`);
   console.log('Request headers:', headers);

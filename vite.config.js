@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target:
-          'http://fit-math-prod-java.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com',
+          'http://student-tracker-new.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com',
         changeOrigin: true,
         secure: true,
       },
