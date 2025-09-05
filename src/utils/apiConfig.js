@@ -1,6 +1,14 @@
 // API 기본 URL 설정
 const getApiBaseUrl = () => {
-  // 모든 환경에서 직접 백엔드 API 호출
+  // Vercel 배포 환경에서는 프록시를 통해 요청
+  if (
+    typeof window !== 'undefined' &&
+    window.location.hostname.includes('vercel.app')
+  ) {
+    return ''; // 상대 경로로 프록시 사용
+  }
+
+  // 로컬 개발 환경에서는 직접 백엔드 API 호출
   return 'http://student-tracker-new.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com';
 };
 
@@ -15,6 +23,12 @@ export const createApiUrl = endpoint => {
 export const apiRequest = async (endpoint, options = {}) => {
   const url = createApiUrl(endpoint);
 
+  // Vercel 환경에서는 프록시를 통해 요청하므로 상대 경로 사용
+  const isVercelEnv =
+    typeof window !== 'undefined' &&
+    window.location.hostname.includes('vercel.app');
+  const finalUrl = isVercelEnv ? `/api${endpoint}` : url;
+
   const defaultOptions = {
     mode: 'cors',
     credentials: 'include', // 쿠키 포함
@@ -28,7 +42,8 @@ export const apiRequest = async (endpoint, options = {}) => {
   };
 
   try {
-    const response = await fetch(url, defaultOptions);
+    console.log(`API Request to: ${finalUrl}`);
+    const response = await fetch(finalUrl, defaultOptions);
 
     // 응답이 성공적이지 않은 경우 에러 처리
     if (!response.ok) {
