@@ -51,27 +51,29 @@ export default async function handler(req, res) {
 
     const response = await fetch(targetUrl, fetchOptions);
 
-    // 응답 데이터 가져오기
+    // 응답 데이터 가져오기 (body를 한 번만 읽기)
     let data;
     const contentType = response.headers.get('content-type');
 
+    // 응답 body를 텍스트로 먼저 읽기
+    const responseText = await response.text();
+
     try {
       if (contentType && contentType.includes('application/json')) {
-        data = await response.json();
+        // JSON 응답인 경우 파싱 시도
+        data = JSON.parse(responseText);
       } else {
-        const textData = await response.text();
         // JSON이 아닌 텍스트 응답인 경우 JSON 형태로 래핑
         data = {
-          message: textData,
+          message: responseText,
           success: response.ok,
         };
       }
     } catch (parseError) {
       console.error('Response parsing error:', parseError);
-      // 파싱 에러가 발생한 경우 텍스트로 처리
-      const textData = await response.text();
+      // JSON 파싱 실패 시 텍스트로 처리
       data = {
-        message: textData,
+        message: responseText,
         success: response.ok,
         error: 'Response parsing failed',
       };
