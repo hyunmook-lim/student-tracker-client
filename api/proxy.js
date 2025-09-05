@@ -1,15 +1,19 @@
 export default async function handler(req, res) {
+  // CORS 헤더를 모든 요청에 대해 먼저 설정
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Accept, X-Requested-With'
+  );
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Max-Age', '86400'); // 24시간
+
   // OPTIONS 요청 처리 (CORS preflight)
   if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-      'Access-Control-Allow-Methods',
-      'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-    );
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Authorization, Accept'
-    );
     res.status(200).end();
     return;
   }
@@ -31,15 +35,18 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         'User-Agent': 'Vercel-Proxy/1.0',
+        // 'Origin': 'https://your-frontend-domain.vercel.app', // 필요시 실제 도메인으로 변경
       },
       // 타임아웃 설정
-      signal: AbortSignal.timeout(10000), // 10초 타임아웃
+      signal: AbortSignal.timeout(30000), // 30초 타임아웃으로 증가
     };
 
     // GET 요청이 아닌 경우에만 body 추가
     if (method !== 'GET' && body) {
       fetchOptions.body = JSON.stringify(body);
     }
+
+    console.log('Fetch options:', fetchOptions);
 
     const response = await fetch(targetUrl, fetchOptions);
 
@@ -52,16 +59,7 @@ export default async function handler(req, res) {
       data = await response.text();
     }
 
-    // CORS 헤더 설정
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader(
-      'Access-Control-Allow-Methods',
-      'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-    );
-    res.setHeader(
-      'Access-Control-Allow-Headers',
-      'Content-Type, Authorization, Accept'
-    );
+    // CORS 헤더는 이미 위에서 설정됨
 
     console.log(`Response status: ${response.status}`);
     console.log(
@@ -73,13 +71,31 @@ export default async function handler(req, res) {
     res.status(response.status).json(data);
   } catch (error) {
     console.error('Proxy error:', error);
+    console.error('Error name:', error.name);
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
 
     // 타임아웃 에러 처리
     if (error.name === 'AbortError') {
+      console.error('Request timeout for URL:', targetUrl);
       res.status(504).json({
         error: 'Gateway Timeout',
-        message: 'Request timeout',
+        message: 'Request timeout after 30 seconds',
         url: targetUrl,
+        timestamp: new Date().toISOString(),
+      });
+      return;
+    }
+
+    // 네트워크 에러 처리
+    if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+      console.error('Network error:', error.code);
+      res.status(502).json({
+        error: 'Bad Gateway',
+        message: 'Cannot connect to backend server',
+        url: targetUrl,
+        errorCode: error.code,
+        timestamp: new Date().toISOString(),
       });
       return;
     }
@@ -88,6 +104,8 @@ export default async function handler(req, res) {
       error: 'Internal Server Error',
       message: error.message,
       url: targetUrl,
+      errorName: error.name,
+      timestamp: new Date().toISOString(),
     });
   }
 }

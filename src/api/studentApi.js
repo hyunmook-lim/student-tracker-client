@@ -1,20 +1,14 @@
 // 학생 관련 API 함수들
-import { createApiUrl } from '../utils/apiConfig';
-
-const API_BASE_URL = '/api';
+import { apiRequest } from '../utils/apiConfig';
 
 // 학생 회원가입 API
 export const signupStudent = async studentData => {
   try {
     console.log('학생 회원가입 API 요청 데이터:', studentData);
-    console.log('학생 회원가입 API 엔드포인트:', `${API_BASE_URL}/students`);
+    console.log('학생 회원가입 API 엔드포인트:', '/api/students');
 
-    const response = await fetch(createApiUrl(`${API_BASE_URL}/students`), {
+    const response = await apiRequest('/api/students', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
       body: JSON.stringify(studentData),
     });
 
@@ -47,19 +41,12 @@ export const signupStudent = async studentData => {
 export const loginStudent = async loginData => {
   try {
     console.log('학생 로그인 요청 데이터:', loginData);
-    console.log('학생 로그인 엔드포인트:', `${API_BASE_URL}/students/login`);
+    console.log('학생 로그인 엔드포인트:', '/api/students/login');
 
-    const response = await fetch(
-      createApiUrl(`${API_BASE_URL}/students/login`),
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(loginData),
-      }
-    );
+    const response = await apiRequest('/api/students/login', {
+      method: 'POST',
+      body: JSON.stringify(loginData),
+    });
 
     console.log('학생 로그인 응답 상태:', response.status);
 
@@ -203,22 +190,12 @@ export const getStudentDashboard = async studentId => {
 export const changeStudentPassword = async passwordData => {
   try {
     console.log('학생 비밀번호 변경 요청 데이터:', passwordData);
-    console.log(
-      '학생 비밀번호 변경 엔드포인트:',
-      `${API_BASE_URL}/students/change-password`
-    );
+    console.log('학생 비밀번호 변경 엔드포인트:', '/api/students/change-password');
 
-    const response = await fetch(
-      createApiUrl(`${API_BASE_URL}/students/change-password`),
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(passwordData),
-      }
-    );
+    const response = await apiRequest('/api/students/change-password', {
+      method: 'POST',
+      body: JSON.stringify(passwordData),
+    });
 
     console.log('학생 비밀번호 변경 응답 상태:', response.status);
 

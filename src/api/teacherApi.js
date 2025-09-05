@@ -1,5 +1,5 @@
 // 교사 관련 API 함수들
-import { createApiUrl } from '../utils/apiConfig';
+import { apiRequest } from '../utils/apiConfig';
 
 // 교사 회원가입 API
 export const signupTeacher = async teacherData => {
@@ -7,12 +7,8 @@ export const signupTeacher = async teacherData => {
     console.log('API 요청 데이터:', teacherData);
     console.log('API 엔드포인트:', '/api/teachers');
 
-    const response = await fetch(createApiUrl('/api/teachers'), {
+    const response = await apiRequest('/api/teachers', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
       body: JSON.stringify(teacherData),
     });
 
@@ -47,12 +43,8 @@ export const loginTeacher = async loginData => {
     console.log('로그인 요청 데이터:', loginData);
     console.log('로그인 엔드포인트:', '/api/teachers/login');
 
-    const response = await fetch(createApiUrl('/api/teachers/login'), {
+    const response = await apiRequest('/api/teachers/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
       body: JSON.stringify(loginData),
     });
 
@@ -86,17 +78,10 @@ export const changeTeacherPassword = async passwordData => {
     console.log('비밀번호 변경 요청 데이터:', passwordData);
     console.log('비밀번호 변경 엔드포인트:', '/api/teachers/change-password');
 
-    const response = await fetch(
-      createApiUrl('/api/teachers/change-password'),
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(passwordData),
-      }
-    );
+    const response = await apiRequest('/api/teachers/change-password', {
+      method: 'POST',
+      body: JSON.stringify(passwordData),
+    });
 
     console.log('비밀번호 변경 응답 상태:', response.status);
 
