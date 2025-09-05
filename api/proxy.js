@@ -35,10 +35,11 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
         Accept: 'application/json',
         'User-Agent': 'Vercel-Proxy/1.0',
-        // 'Origin': 'https://your-frontend-domain.vercel.app', // 필요시 실제 도메인으로 변경
+        // Authorization 헤더가 있으면 전달
+        ...(headers.authorization && { Authorization: headers.authorization }),
       },
       // 타임아웃 설정
-      signal: AbortSignal.timeout(30000), // 30초 타임아웃으로 증가
+      signal: AbortSignal.timeout(30000), // 30초 타임아웃
     };
 
     // GET 요청이 아닌 경우에만 body 추가
@@ -58,8 +59,6 @@ export default async function handler(req, res) {
     } else {
       data = await response.text();
     }
-
-    // CORS 헤더는 이미 위에서 설정됨
 
     console.log(`Response status: ${response.status}`);
     console.log(
