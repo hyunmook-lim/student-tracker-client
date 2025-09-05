@@ -47,9 +47,14 @@ export const apiRequest = async (endpoint, options = {}) => {
 
     // 응답이 성공적이지 않은 경우 에러 처리
     if (!response.ok) {
-      const errorData = await response
-        .json()
-        .catch(() => ({ message: 'Unknown error' }));
+      let errorData;
+      try {
+        errorData = await response.json();
+      } catch {
+        // JSON 파싱 실패 시 텍스트로 처리
+        const textData = await response.text();
+        errorData = { message: textData || 'Unknown error' };
+      }
       throw new Error(
         errorData.message || `HTTP ${response.status}: ${response.statusText}`
       );

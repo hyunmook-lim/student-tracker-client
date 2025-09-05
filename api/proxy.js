@@ -54,10 +54,27 @@ export default async function handler(req, res) {
     // 응답 데이터 가져오기
     let data;
     const contentType = response.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      data = await response.json();
-    } else {
-      data = await response.text();
+
+    try {
+      if (contentType && contentType.includes('application/json')) {
+        data = await response.json();
+      } else {
+        const textData = await response.text();
+        // JSON이 아닌 텍스트 응답인 경우 JSON 형태로 래핑
+        data = {
+          message: textData,
+          success: response.ok,
+        };
+      }
+    } catch (parseError) {
+      console.error('Response parsing error:', parseError);
+      // 파싱 에러가 발생한 경우 텍스트로 처리
+      const textData = await response.text();
+      data = {
+        message: textData,
+        success: response.ok,
+        error: 'Response parsing failed',
+      };
     }
 
     console.log(`Response status: ${response.status}`);
