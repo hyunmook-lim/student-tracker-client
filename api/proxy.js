@@ -22,7 +22,10 @@ export default async function handler(req, res) {
 
   // API 경로를 그대로 백엔드로 전달 (백엔드가 /api 경로를 요구함)
   const apiPath = url;
-  const targetUrl = `http://student-tracker-new.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com${apiPath}`;
+  const backendUrl =
+    process.env.BACKEND_URL ||
+    'http://student-tracker-new.eba-3ezakhau.ap-northeast-2.elasticbeanstalk.com';
+  const targetUrl = `${backendUrl}${apiPath}`;
 
   console.log(`Proxying ${method} request to: ${targetUrl}`);
   console.log('Request headers:', headers);
